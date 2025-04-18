@@ -67,8 +67,8 @@
   
   /* PURPLE */
   
-  --purple-dark-1: #020818;
-  --purple-dark-2: #0a1227cd;
+  --purple-dark-1: #1C0522;
+  --purple-dark-2: #26082F;
   
   --purple-light-1: #771F6F;
   --purple-light-2: #465fa44d;
@@ -103,7 +103,7 @@
 
   /* Components */
 
-  --card: #ffffff;
+  --card: #f1e6d0;
   --card-foreground: #242424;
   --popover: #ffffff;
   --popover-foreground: #242424;

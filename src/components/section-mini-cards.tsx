@@ -50,7 +50,7 @@ export default function SectionMiniCards() {
         return (
           <Card 
             key={index}
-            className={`${cardStyle} hover:bg-[#172d6640] transition-all duration-300`}
+            className={`${cardStyle} hover:bg-primary hover:text-white transition-all duration-300`}
           >
             <div className="flex items-start justify-between">
               <div className="flex flex-col gap-1">

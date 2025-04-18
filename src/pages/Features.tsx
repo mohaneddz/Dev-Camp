@@ -164,10 +164,10 @@ const networkData = generateNetworkData();
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-background dark:bg-[#020818] border border-border dark:border-[#172d662c] shadow-xl px-3 py-2 rounded-lg">
-        <p className="text-foreground dark:text-[#f9f9f9] text-sm font-medium mb-1">{label}</p>
+      <div className="bg-background dark:bg-[var(--purple-dark-1)] border border-border dark:border-[var(--purple-dark-2)] shadow-xl px-3 py-2 rounded-lg">
+        <p className="text-foreground dark:text-[var(--text-light)] text-sm font-medium mb-1">{label}</p>
         {payload.map((entry: any, index: number) => (
-          <p key={index} className="text-[#b9992f] text-sm font-bold">
+          <p key={index} className="text-[var(--orange)] text-sm font-bold">
             {entry.name}: {entry.value}
           </p>
         ))}
@@ -207,74 +207,74 @@ export default function Server() {
           --card-gradient-from: #ffffff10;
           --card-gradient-via: #ffffff05;
           --card-gradient-to: transparent;
-          --card-bg-from: #FEAE5020;
-          --card-bg-to: #02081400;
-          --text-color: #000000;
-          --axis-color: #000000;
-          --grid-color: #172d662c;
+          --card-bg-from: var(--orange)20;
+          --card-bg-to: var(--purple-dark-1)00;
+          --text-color: var(--foreground);
+          --axis-color: var(--foreground);
+          --grid-color: var(--purple-dark-2);
         }
 
         .dark {
           --card-gradient-from: #ffffff05;
           --card-gradient-via: #ffffff02;
           --card-gradient-to: transparent;
-          --card-bg-from: #FEAE5010;
-          --card-bg-to: #02081400;
-          --text-color: #f9f9f9;
-          --axis-color: #f9f9f9;
-          --grid-color: #172d662c;
+          --card-bg-from: var(--orange)10;
+          --card-bg-to: var(--purple-dark-1)00;
+          --text-color: var(--text-light);
+          --axis-color: var(--text-light);
+          --grid-color: var(--purple-dark-2);
         }
       `}</style>
       {/* Top Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[#020818] dark:to-[#12031b]`}>
+        <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[var(--purple-dark-1)] dark:to-[var(--purple-dark-2)]`}>
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <ServerIcon className="text-[#b9992f]" />
-              <h3 className="text-xs font-medium text-foreground/70 dark:text-[#b3b3b3] uppercase tracking-wider">Total Requests</h3>
+              <ServerIcon className="text-[var(--orange)]" />
+              <h3 className="text-xs font-medium text-foreground/70 dark:text-[var(--text-muted)] uppercase tracking-wider">Total Requests</h3>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-2xl font-bold text-foreground dark:text-[#f9f9f9]">{totalRequests.toLocaleString()}</span>
-              <span className="text-sm font-medium text-[#b9992f]">
+              <span className="text-2xl font-bold text-foreground dark:text-[var(--text-light)]">{totalRequests.toLocaleString()}</span>
+              <span className="text-sm font-medium text-[var(--orange)]">
                 <TrendingUp className="inline-block mr-1" />
                 +12.5%
               </span>
             </div>
-            <p className="text-muted-foreground dark:text-[#b3b3b3] text-sm">Last 90 days</p>
+            <p className="text-muted-foreground dark:text-[var(--text-muted)] text-sm">Last 90 days</p>
           </div>
         </Card>
 
-        <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[#020818] dark:to-[#12031b]`}>
+        <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[var(--purple-dark-1)] dark:to-[var(--purple-dark-2)]`}>
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <Thermometer className="text-[#b9992f]" />
-              <h3 className="text-xs font-medium text-foreground/70 dark:text-[#b3b3b3] uppercase tracking-wider">Temperature</h3>
+              <Thermometer className="text-[var(--orange)]" />
+              <h3 className="text-xs font-medium text-foreground/70 dark:text-[var(--text-muted)] uppercase tracking-wider">Temperature</h3>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-2xl font-bold text-foreground dark:text-[#f9f9f9]">45°C</span>
-              <span className="text-sm font-medium text-[#b9992f]">
+              <span className="text-2xl font-bold text-foreground dark:text-[var(--text-light)]">45°C</span>
+              <span className="text-sm font-medium text-[var(--orange)]">
                 <TrendingDown className="inline-block mr-1" />
                 -2.1%
               </span>
             </div>
-            <p className="text-muted-foreground dark:text-[#b3b3b3] text-sm">CPU temperature</p>
+            <p className="text-muted-foreground dark:text-[var(--text-muted)] text-sm">CPU temperature</p>
           </div>
         </Card>
 
-        <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[#020818] dark:to-[#12031b]`}>
+        <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[var(--purple-dark-1)] dark:to-[var(--purple-dark-2)]`}>
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <Zap className="text-[#b9992f]" />
-              <h3 className="text-xs font-medium text-foreground/70 dark:text-[#b3b3b3] uppercase tracking-wider">Power Draw</h3>
+              <Zap className="text-[var(--orange)]" />
+              <h3 className="text-xs font-medium text-foreground/70 dark:text-[var(--text-muted)] uppercase tracking-wider">Power Draw</h3>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-2xl font-bold text-foreground dark:text-[#f9f9f9]">1.2kW</span>
-              <span className="text-sm font-medium text-[#b9992f]">
+              <span className="text-2xl font-bold text-foreground dark:text-[var(--text-light)]">1.2kW</span>
+              <span className="text-sm font-medium text-[var(--orange)]">
                 <TrendingDown className="inline-block mr-1" />
                 -3.5%
               </span>
             </div>
-            <p className="text-muted-foreground dark:text-[#b3b3b3] text-sm">Current consumption</p>
+            <p className="text-muted-foreground dark:text-[var(--text-muted)] text-sm">Current consumption</p>
           </div>
         </Card>
       </div>
@@ -299,32 +299,32 @@ export default function Server() {
           {/* Memory Usage */}
 
 
-          <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[#020818] dark:to-[#12031b]`}>
+          <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[var(--purple-dark-1)] dark:to-[var(--purple-dark-2)]`}>
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
-                <Zap className="text-[#b9992f]" />
-                <h3 className="text-xs font-medium text-slate-700 dark:text-[#b3b3b3] uppercase tracking-wider">
+                <Zap className="text-[var(--orange)]" />
+                <h3 className="text-xs font-medium text-foreground/70 dark:text-[var(--text-muted)] uppercase tracking-wider">
                   AI-Powered Suggestion
                 </h3>
               </div>
-              <div className="text-lg font-bold text-foreground dark:text-[#f9f9f9]">
+              <div className="text-lg font-bold text-foreground dark:text-[var(--text-light)]">
                 "Upgrade to Pro for 2x Speed"
               </div>
-              <p className="text-sm text-muted-foreground dark:text-[#b3b3b3]">
+              <p className="text-sm text-muted-foreground dark:text-[var(--text-muted)]">
                 Recommended based on your recent usage trends.
               </p>
-              <button className="text-[#b9992f] underline text-sm mt-1 hover:text-[#d9b94f] transition-colors">Learn more</button>
+              <button className="text-[var(--orange)] underline text-sm mt-1 hover:text-[var(--orange-light)] transition-colors">Learn more</button>
             </div>
           </Card>
 
           {/* Top Picks */}
-          <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[#020818] dark:to-[#12031b]`}>
-            <h3 className="text-xs font-medium text-foreground/70 dark:text-[#b3b3b3] uppercase tracking-wider mb-2">Top Picks</h3>
+          <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[var(--purple-dark-1)] dark:to-[var(--purple-dark-2)]`}>
+            <h3 className="text-xs font-medium text-foreground/70 dark:text-[var(--text-muted)] uppercase tracking-wider mb-2">Top Picks</h3>
             <ul className="space-y-2">
               {["Cloud Sync", "Server Boost", "24/7 Uptime", "AI Tuner"].map((item, index) => (
-                <li key={index} className="flex justify-between text-sm text-foreground dark:text-[#f9f9f9]">
+                <li key={index} className="flex justify-between text-sm text-foreground dark:text-[var(--text-light)]">
                   <span>{index + 1}. {item}</span>
-                  <span className="text-[#b9992f] font-medium">{(Math.random() * 100).toFixed(1)}%</span>
+                  <span className="text-[var(--orange)] font-medium">{(Math.random() * 100).toFixed(1)}%</span>
                 </li>
               ))}
             </ul>
@@ -341,8 +341,8 @@ export default function Server() {
           {/* Server Response Time */}
 
           {/* Request History */}
-          <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[#020818] dark:to-[#12031b]`}>
-            <h3 className="text-xs font-medium text-foreground/70 dark:text-[#b3b3b3] uppercase tracking-wider mb-4">Request History</h3>
+          <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[var(--purple-dark-1)] dark:to-[var(--purple-dark-2)]`}>
+            <h3 className="text-xs font-medium text-foreground/70 dark:text-[var(--text-muted)] uppercase tracking-wider mb-4">Request History</h3>
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={requestData}>
@@ -351,15 +351,15 @@ export default function Server() {
                   <YAxis stroke={chartTheme.axisColor} fontSize={11} axisLine={{ stroke: 'var(--border)' }} tickLine={false} />
                   <Tooltip content={<CustomTooltip />} />
                   <Legend />
-                  <Bar dataKey="requests" fill="#FEAE50" name="Requests" />
-                  <Bar dataKey="errors" fill="#972b2b" name="Errors" />
+                  <Bar dataKey="requests" fill="var(--orange)" name="Requests" />
+                  <Bar dataKey="errors" fill="var(--bad)" name="Errors" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
           </Card>
           {/* Weekly Comparison */}
-          <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[#020818] dark:to-[#12031b]`}>
-            <h3 className="text-xs font-medium text-foreground/70 dark:text-[#b3b3b3] uppercase tracking-wider mb-4">Weekly Comparison</h3>
+          <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[var(--purple-dark-1)] dark:to-[var(--purple-dark-2)]`}>
+            <h3 className="text-xs font-medium text-foreground/70 dark:text-[var(--text-muted)] uppercase tracking-wider mb-4">Weekly Comparison</h3>
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={weeklyData}>
@@ -368,9 +368,9 @@ export default function Server() {
                   <YAxis stroke={chartTheme.axisColor} fontSize={11} axisLine={{ stroke: 'var(--border)' }} tickLine={false} />
                   <Tooltip content={<CustomTooltip />} />
                   <Legend />
-                  <Bar dataKey="requests" fill="#FEAE50" name="Requests" />
-                  <Bar dataKey="power" fill="#465fa4" name="Power" />
-                  <Bar dataKey="temperature" fill="#972b2b" name="Temperature" />
+                  <Bar dataKey="requests" fill="var(--orange)" name="Requests" />
+                  <Bar dataKey="power" fill="var(--purple-light-1)" name="Power" />
+                  <Bar dataKey="temperature" fill="var(--bad)" name="Temperature" />
                 </BarChart>
               </ResponsiveContainer>
             </div>

@@ -126,10 +126,7 @@ export default function Home() {
           {cardData.map((item, index) => (
             <Card
               key={index}
-              className={`${cardStyle} ${index === 0
-                ? 'bg-gradient-to-br from-[#2fb96c20] to-[#02081800]'
-                : 'hover:bg-[#172d6640] transition-all duration-300'
-              }`}
+              className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}
             >
               <div className="flex flex-col gap-2">
                 <h3 className="text-xs font-medium text-[#b3b3b3] uppercase tracking-wider">{item.name}</h3>
@@ -155,13 +152,13 @@ export default function Home() {
 
         <div className="grid grid-cols-1 gap-4">
           {/* Charts Section */}
-          <Card className={cardStyle}>
+          <Card className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}>
             <SectionCharts />
           </Card>
         </div>
 
         {/* Mini Cards Section */}
-        <Card className={`${cardStyle} bg-gradient-to-br from-[#172d662c] to-[#02081800]`}>
+        <Card className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}>
           <SectionMiniCards />
         </Card>
 

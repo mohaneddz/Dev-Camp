@@ -11,7 +11,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+const cardStyle = "p-3 bg-[#020818] border-0 shadow-lg relative before:absolute before:inset-0 before:p-[1px] before:bg-gradient-to-br before:from-[#ffffff10] before:via-[#ffffff05] before:to-transparent before:rounded-lg before:-z-10 before:pointer-events-none backdrop-blur-sm";
+
+
 const generatePredictionData = () => {
+
+
+
     const data: Array<{
         hour: string;
         'Air Conditioning': number;
@@ -54,7 +60,7 @@ const predictionData = generatePredictionData();
 const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
         return (
-            <div className="bg-[#020818] border border-[#172d662c] shadow-xl px-3 py-2 rounded-lg">
+            <div className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}>
                 <p className="text-[#f9f9f9] text-sm font-medium mb-1">{label}</p>
                 {payload.map((entry: any, index: number) => (
                     <p key={index} className="text-sm" style={{ color: entry.color }}>

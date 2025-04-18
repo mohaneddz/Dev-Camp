@@ -121,13 +121,12 @@ const yearlyData = Array.from({ length: 12 }, (_, i) => {
     };
 });
 
-// Updated color scheme to match the image
 const COLORS = [
-    'rgb(47, 185, 108)',     // Main green
-    'rgb(47, 185, 108, 0.8)',
-    'rgb(47, 185, 108, 0.6)',
-    'rgb(47, 185, 108, 0.4)',
-    'rgb(47, 185, 108, 0.3)'
+    'rgb(160, 32, 240)',     // Main purple
+    'rgba(160, 32, 240, 0.8)',
+    'rgba(160, 32, 240, 0.6)',
+    'rgba(160, 32, 240, 0.4)',
+    'rgba(160, 32, 240, 0.3)'
 ];
 
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -135,7 +134,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
         return (
             <div className="bg-[#020818] border border-[#172d662c] shadow-xl px-3 py-2 rounded-lg">
                 <p className="text-[#f9f9f9] text-sm font-medium mb-1">{payload[0].name}</p>
-                <p className="text-[#2fb96c] text-sm font-bold">{payload[0].value} kWh</p>
+                <p className="text-[#2fb96c] text-sm font-bold">{payload[0].value} $</p>
             </div>
         );
     }
@@ -249,15 +248,15 @@ export default function Power() {
         <div className="flex flex-1 flex-col p-4 gap-4">
             {/* Top Section - Current Power Status */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Card className={`${cardStyle} bg-gradient-to-br from-[#2fb96c20] to-[#02081800]`}>
+                <Card className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}>
                     <div className="flex items-center justify-between">
                         <div>
-                            <h2 className="text-xs font-medium text-[#b3b3b3] uppercase tracking-wider">Current Power Status</h2>
+                            <h2 className="text-xs font-medium text-[#b3b3b3] uppercase tracking-wider">Current Month Revenue</h2>
                             <div className="mt-4 flex items-center gap-4">
-                                <IconBolt size={24} className="text-[#2fb96c]" />
+                                <IconBolt size={24} className="text-[#b9a62f]" />
                                 <div>
                                     <span className="text-4xl font-bold dark:text-[#f9f9f9]">{currentMonthEstimate}</span>
-                                    <span className="text-[#b3b3b3] ml-2">kWh</span>
+                                    <span className="text-[#a020f0] text-sm font-bold">$</span>
                                 </div>
                             </div>
                             <p className="text-[#b3b3b3] mt-2">
@@ -267,31 +266,31 @@ export default function Power() {
                     </div>
                 </Card>
 
-                <Card className={cardStyle}>
+                <Card className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}>
                     <h2 className="text-xs font-medium text-[#b3b3b3] uppercase tracking-wider">Power Distribution</h2>
                     <div className="grid grid-cols-3 gap-4 mt-4">
                         <div className="flex flex-col items-center p-2 rounded-lg bg-[#172d662c]">
-                            <IconChartPie size={20} className="text-[#2fb96c]" />
+                            <IconChartPie size={20} className="text-[#e0c721]" />
                             <span className="text-[#b3b3b3] text-xs mt-1">Total</span>
-                            <span className="text-[#f9f9f9] font-bold">{totalConsumption}kWh</span>
+                            <span className="text-[#f9f9f9] font-bold">{totalConsumption} $</span>
                         </div>
                         <div className="flex flex-col items-center p-2 rounded-lg bg-[#172d662c]">
-                            <IconTrendingUp size={20} className="text-[#2fb96c]" />
+                            <IconTrendingUp size={20} className="text-[#b9a62f]" />
                             <span className="text-[#b3b3b3] text-xs mt-1">Peak</span>
-                            <span className="text-[#f9f9f9] font-bold">1.2kW</span>
+                            <span className="text-[#f9f9f9] font-bold">1.2 $</span>
                         </div>
                         <div className="flex flex-col items-center p-2 rounded-lg bg-[#172d662c]">
-                            <IconTrendingDown size={20} className="text-[#2fb96c]" />
+                            <IconTrendingDown size={20} className="text-[#b9a62f]" />
                             <span className="text-[#b3b3b3] text-xs mt-1">Base</span>
-                            <span className="text-[#f9f9f9] font-bold">0.8kW</span>
+                            <span className="text-[#f9f9f9] font-bold">0.8 $</span>
                         </div>
                     </div>
                 </Card>
             </div>
 
             {/* Power Consumption Chart */}
-            <Card className={cardStyle}>
-                <h2 className="text-xs font-medium px-1 text-[#b3b3b3] uppercase tracking-wider">Power Consumption</h2>
+            <Card className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}>
+                <h2 className="text-xs font-medium px-1 text-[#b3b3b3] uppercase tracking-wider">Sales Prediction</h2>
                 <div className="h-[260px] mt-4">
                     <ResponsiveContainer width="100%" height="100%">
                         <LineChart data={dailyData}>
@@ -317,7 +316,7 @@ export default function Power() {
                             <Line
                                 type="monotone"
                                 dataKey="Consumption"
-                                stroke="#2fb96c"
+                                stroke="#b9a62f"
                                 strokeWidth={2}
                                 dot={false}
                                 activeDot={{ r: 6, fill: '#2fb96c', stroke: '#f9f9f9' }}
@@ -336,35 +335,10 @@ export default function Power() {
 
             {/* Bottom Section - Now in 2 rows */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Power Sources */}
-                <Card className={cardStyle}>
-                    <h2 className="text-xs font-medium px-1 text-[#b3b3b3] uppercase tracking-wider">Power Sources</h2>
-                    <div className="h-[200px]">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <PieChart>
-                                <Pie
-                                    data={sourcesData}
-                                    cx="50%"
-                                    cy="50%"
-                                    innerRadius={60}
-                                    outerRadius={80}
-                                    paddingAngle={5}
-                                    dataKey="value"
-                                    activeIndex={activeIndex}
-                                    activeShape={renderActiveShape}
-                                >
-                                    {sourcesData.map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} stroke="none" />
-                                    ))}
-                                </Pie>
-                                <Tooltip content={<CustomTooltip />} />
-                            </PieChart>
-                        </ResponsiveContainer>
-                    </div>
-                </Card>
+                
 
                 {/* Efficiency Metrics */}
-                <Card className={cardStyle}>
+                <Card className={`${cardStyle} bg-gradient-to-br from-[#fcf88430] to-[#12031b]`}>
                     <h2 className="text-xs font-medium px-1 text-[#b3b3b3] uppercase tracking-wider">Efficiency Metrics</h2>
                     <div className="h-[200px]">
                         <ResponsiveContainer width="100%" height="100%">
@@ -372,13 +346,13 @@ export default function Power() {
                                 <PolarGrid 
                                     gridType="circle"
                                     radialLines={false}
-                                    stroke="#172d662c"
+                                    stroke="#b9a62f"
                                 />
                                 <PolarAngleAxis
                                     dataKey="subject"
                                     stroke="#f9f9f9"
                                     fontSize={11}
-                                    tick={{ fill: '#f9f9f9' }}
+                                    tick={{ fill: "#b9a62f" }}
                                 />
                                 <Radar
                                     name="Efficiency"
@@ -398,7 +372,7 @@ export default function Power() {
                 </Card>
 
                 {/* Weekly Overview */}
-                <Card className={cardStyle}>
+                <Card className={`${cardStyle} bg-gradient-to-br from-[#fcf88430] to-[#12031b]`}>
                     <h2 className="text-xs font-medium px-1 text-[#b3b3b3] uppercase tracking-wider">Weekly Overview</h2>
                     <div className="h-[200px]">
                         <ResponsiveContainer width="100%" height="100%">
@@ -421,7 +395,7 @@ export default function Power() {
                                 <Tooltip content={<CustomTooltip />} />
                                 <Bar
                                     dataKey="Consumption"
-                                    fill="#2fb96c"
+                                    fill="#b9a62f"
                                     radius={[4, 4, 0, 0]}
                                 />
                             </BarChart>
@@ -430,7 +404,7 @@ export default function Power() {
                 </Card>
 
                 {/* Yearly Trend */}
-                <Card className={cardStyle}>
+                <Card className={`${cardStyle} bg-gradient-to-br from-[#fcf88430] to-[#12031b]`}>
                     <h2 className="text-xs font-medium px-1 dark:text-[#b3b3b3] uppercase tracking-wider">Yearly Trend</h2>
                     <div className="h-[200px]">
                         <ResponsiveContainer width="100%" height="100%">
@@ -454,7 +428,7 @@ export default function Power() {
                                 <Line
                                     type="monotone"
                                     dataKey="Consumption"
-                                    stroke="#2fb96c"
+                                    stroke="#b9a62f"
                                     strokeWidth={2}
                                     dot={false}
                                 />
@@ -465,7 +439,7 @@ export default function Power() {
             </div>
 
             {/* Prediction Chart */}
-            <Card className={cardStyle}>
+            <Card className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}>
                 <h2 className="text-xs font-medium px-1 text-[#b3b3b3] uppercase tracking-wider">Power Consumption Prediction</h2>
                 <div className="h-[260px] mt-4">
                     <ResponsiveContainer width="100%" height="100%">
@@ -492,7 +466,7 @@ export default function Power() {
                             <Line
                                 type="monotone"
                                 dataKey="Prediction"
-                                stroke="#2fb96c"
+                                stroke="#b9a62f"
                                 strokeWidth={2}
                                 dot={false}
                                 activeDot={{ r: 6, fill: '#2fb96c', stroke: '#f9f9f9' }}

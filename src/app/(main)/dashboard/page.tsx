@@ -5,18 +5,11 @@ import dynamic from "next/dynamic";
 import { usePageContext } from "./layout";
 import { IconLoader } from "@tabler/icons-react";
 
-const Home = dynamic(() => import("@/pages/Home"));
-const Access = dynamic(() => import("@/pages/Access"));
-const Health = dynamic(() => import("@/pages/Health"));
-const Logs = dynamic(() => import("@/pages/Logs"));
-const Simulation = dynamic(() => import("@/pages/Simulation"));
+const Home = dynamic(() => import("@/pages/Posts"));
+const Logs = dynamic(() => import("@/pages/MediaPlan"));
 const Settings = dynamic(() => import("@/pages/Settings"));
-const Control = dynamic(() => import("@/pages/Control"));
-const Map = dynamic(() => import("@/pages/Map"));
-const Power = dynamic(() => import("@/pages/Power"));
-const Wheather = dynamic(() => import("@/pages/Wheather"));
-const Server = dynamic(() => import("@/pages/Server"));
-const Surveillance = dynamic(() => import("@/pages/Surveillance"));
+const Power = dynamic(() => import("@/pages/Sales"));
+const Server = dynamic(() => import("@/pages/Features"));
 
 export default function Page() {
 
@@ -24,17 +17,11 @@ export default function Page() {
 
     const pages: any = {
         dashboard: Home,
-        access: Access,
-        Health: Health,
         logs: Logs,
-        simulation: Simulation,
         settings: Settings,
-        control: Control,
         map: Map,
         power: Power,
-        weather: Wheather,
         server: Server,
-        surveillance: Surveillance,
     };
 
     const PageComponent: React.ComponentType = pages[page] || Home;

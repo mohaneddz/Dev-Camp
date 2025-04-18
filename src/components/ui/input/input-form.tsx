@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { cn } from "@/utils/cn";
+import { cn } from "@/lib/utils/cn";
 import { Control, FieldValues } from "react-hook-form";
 import { Input } from ".";
 import {

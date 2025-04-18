@@ -31,14 +31,14 @@ import {
 
 const data = {
   user: {
-    name: "Mobilisa Admin",
+    name: "user",
     email: "mobilis126-74@gmail.com",
     avatar: "/mobilis.jpg",
     link: "/profile",
   },
   navMain: [
     {
-      title: "Map",
+      title: "Guide",
       url: "#",
       icon: IconMap,
       id: "map",
@@ -72,64 +72,31 @@ const data = {
   ],
   documents: [
     {
-      name: "Dashboard",
+      name: "Posts",
       url: "#",
       icon: IconDashboard,
       id: "dashboard",
     },
+
     {
-      name: "Access Control",
-      url: "#",
-      icon: IconShieldHalfFilled,
-      id: "access",
-    },
-    {
-      name: "Health",
-      url: "#",
-      icon: IconBrandAppleArcade,
-      id: "Health",
-    },
-    {
-      name: "Logs",
+      name: "Media Plan",
       url: "#",
       icon: IconReport,
       id: "logs",
     },
+
     {
-      name: "Control",
-      url: "#",
-      icon: IconEye,
-      id: "control",
-    },
-    {
-      name: "Power Draw",
+      name: "Sales",
       url: "#",
       icon: IconBoltFilled,
       id: "power",
     },
+
     {
-      name: "Weather Forecast",
-      url: "#",
-      icon: IconCloudFilled,
-      id: "weather",
-    },
-    {
-      name: "Server",
+      name: "Features",
       url: "#",
       icon: IconCloudComputingFilled,
       id: "server",
-    },
-    {
-      name: "Surveillance",
-      url: "#",
-      icon: IconEyeFilled,
-      id: "surveillance",
-    },
-    {
-      name: "Simulation",
-      url: "#",
-      icon: IconIkosaedr,
-      id: "simulation",
     },
   ],
 }

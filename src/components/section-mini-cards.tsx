@@ -54,7 +54,7 @@ export default function SectionMiniCards() {
           >
             <div className="flex items-start justify-between">
               <div className="flex flex-col gap-1">
-                <h3 className="text-xs font-medium text-[#b3b3b3] uppercase tracking-wider">
+                <h3 className="text-xs font-medium text-[#b3b3b3] hover:text-black uppercase tracking-wider">
                   {card.title}
                 </h3>
                 <div className="flex items-baseline gap-2">
@@ -63,10 +63,10 @@ export default function SectionMiniCards() {
                   </span>
                   <span className={`text-sm font-medium ${
                     card.status === 'active' || card.status === 'present' 
-                      ? 'text-[#FEAE50]' 
+                      ? 'text-[#ee1253]' 
                       : card.status === 'partial'
                       ? 'text-[#465fa4]'
-                      : 'text-[#972b2b]'
+                      : 'text-[#c532b8]'
                   }`}>
                     {card.change}
                   </span>
@@ -76,10 +76,10 @@ export default function SectionMiniCards() {
                 size={24} 
                 className={`${
                   card.status === 'active' || card.status === 'present'
-                    ? 'text-[#FEAE50]'
+                    ? 'text-[#ee1253]'
                     : card.status === 'partial'
                     ? 'text-[#465fa4]'
-                    : 'text-[#972b2b]'
+                    : 'text-[#c532b8]'
                 }`}
               />
             </div>

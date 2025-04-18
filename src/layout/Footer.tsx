@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="w-full">
       <div className=" relative p-4 sm:p-6 flex flex-col items-center justify-center gap-1 w-screen">
         <h3 className="font-bold">
-          Mobilis - Smart Temperature and Security System for call centers
+          Command
         </h3>
 
         <p className="text-sm">

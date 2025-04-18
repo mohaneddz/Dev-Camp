@@ -31,9 +31,9 @@ import {
 
 const data = {
   user: {
-    name: "user",
-    email: "mobilis126-74@gmail.com",
-    avatar: "/mobilis.jpg",
+    name: "Lara Croft",
+    email: "Command@gmail.com",
+    avatar: "/profile.png",
     link: "/profile",
   },
   navMain: [
@@ -41,7 +41,7 @@ const data = {
       title: "Guide",
       url: "#",
       icon: IconMap,
-      id: "map",
+      id: "home",
     },
   ],
   // navClouds: [

@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { InputForm } from "@/components/ui/input/input-form";
+import { AnimatedInputForm } from "@/components/ui/input/animated-input-form";
 import { createClient } from "@/lib/utils/supabase/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -11,10 +11,8 @@ import toast from "react-hot-toast";
 import { z } from "zod";
 
 export const loginFormSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8, {
-    message: "Password must be at least 8 characters.",
-  }),
+  email: z.string().email("Invalid email"),
+  password: z.string().min(8, "Min 8 characters"),
 });
 
 type LoginValuesType = z.infer<typeof loginFormSchema>;
@@ -24,7 +22,11 @@ const defaultValues: LoginValuesType = {
   password: "",
 };
 
-const LoginForm = () => {
+type LoginFormProps = {
+  onSuccess?: () => void;
+};
+
+const LoginForm = ({ onSuccess }: LoginFormProps) => {
   const router = useRouter();
   const supabase = createClient();
 
@@ -39,6 +41,7 @@ const LoginForm = () => {
     if (error) return toast.error(error.message);
 
     toast.success("Successfully signed in!");
+    console.log("Successfully signed in!");
     router.replace("/dashboard");
   }
 
@@ -46,33 +49,32 @@ const LoginForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleLogin)}
-        className="w-full space-y-4"
+        className="w-full space-y-8 justify-center itmes-center content-center"
       >
-        <InputForm
-          label=""
+        <AnimatedInputForm
           name="email"
-          placeholder="e-mail"
-          description=""
+          placeholder="Email"
           required
-          className="bg-white/10 backdrop-blur-sm rounded-lg border-0 px-4 py-2.5 text-sm text-white placeholder:text-gray-300 focus:ring-1 focus:ring-white/50"
         />
 
-        <InputForm
+        <AnimatedInputForm
           type="password"
-          label=""
           name="password"
-          placeholder="password"
-          description=""
+          placeholder="Password"
           required
-          className="bg-white/10 backdrop-blur-sm rounded-lg border-0 px-4 py-2.5 text-sm text-white placeholder:text-gray-300 focus:ring-1 focus:ring-white/50"
         />
-
-        <Button 
-          type="submit"
-          className="w-full bg-white hover:bg-gray-100 text-[#1E0E2F] rounded-lg py-2.5 text-sm font-semibold transition-colors mt-2"
-        >
-          Login
-        </Button>
+        <div className="flex justify-center items-center content-center">
+          <div className="flex justify-center items-center">
+            <Button
+              type="submit"
+              color1="#FF6B6B"
+              color2="#FF8E8E"
+              className="w-max rounded-full text-sm font-semibold transition-all duration-200 mt-2 px-6 py-4"
+            >
+              Sign In
+            </Button>
+          </div>
+        </div>
       </form>
     </Form>
   );

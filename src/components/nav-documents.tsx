@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/sidebar"
 
 export function NavDocuments({
-  items, changePage
+  items, changePage, page
 }: {
   items: {
     name: string
@@ -33,7 +33,8 @@ export function NavDocuments({
     icon: Icon,
     id: string
   }[],
-  changePage: (page: string) => void
+  changePage: (page: string) => void,
+  page: string
 }) {
   const { isMobile } = useSidebar()
 

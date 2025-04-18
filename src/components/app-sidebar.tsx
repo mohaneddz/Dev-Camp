@@ -75,28 +75,28 @@ const data = {
       name: "Posts",
       url: "#",
       icon: IconDashboard,
-      id: "dashboard",
+      id: "posts",
     },
 
     {
       name: "Media Plan",
       url: "#",
       icon: IconReport,
-      id: "logs",
+      id: "mediaplan",
     },
 
     {
       name: "Sales",
       url: "#",
       icon: IconBoltFilled,
-      id: "power",
+      id: "sales",
     },
 
     {
       name: "Features",
       url: "#",
       icon: IconCloudComputingFilled,
-      id: "server",
+      id: "features",
     },
   ],
 }

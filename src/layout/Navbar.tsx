@@ -26,7 +26,7 @@ const Navbar = async () => {
       <div className=" p-4 sm:px-6 flex items-center justify-between w-screen overflow-hidden">
         <Link href="/" className="flex items-center gap-2">
           <Lock />
-          <h5 className="mt-0.5">Mobilis</h5>
+          <h5 className="mt-0.5">Command</h5>
         </Link>
 
         <div className="flex items-center gap-3">

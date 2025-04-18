@@ -18,11 +18,11 @@ export default function Page() {
     const pages: any = {
         dashboard: Home,
         
-        logs: Logs,
+        mediaplan: Logs,
         settings: Settings,
         map: Map,
-        power: Power,
-        server: Server,
+        sales: Power,
+        features: Server,
     };
 
     const PageComponent: React.ComponentType = pages[page] || Home;

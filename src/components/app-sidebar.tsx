@@ -28,6 +28,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import Link from 'next/link';
 
 const data = {
   user: {
@@ -101,7 +102,7 @@ const data = {
   ],
 }
 
-export function AppSidebar({page, changePage, ...props }: React.ComponentProps<typeof Sidebar> & { page: string, changePage: (page: string) => void }) {
+export function AppSidebar({ page, changePage, ...props }: React.ComponentProps<typeof Sidebar> & { page: string, changePage: (page: string) => void }) {
 
   return (
     <Sidebar collapsible="offcanvas" {...props}>
@@ -112,17 +113,17 @@ export function AppSidebar({page, changePage, ...props }: React.ComponentProps<t
               asChild
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
-              <a href="#">
+              <Link href="/">
                 <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">Mobilis Admin</span>
-              </a>
+                <span className="text-base font-semibold">Return To Home</span>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} changePage={changePage} page={page}/>
-        <NavDocuments items={data.documents} changePage={changePage} page={page}/>
+        <NavMain items={data.navMain} changePage={changePage} page={page} />
+        <NavDocuments items={data.documents} changePage={changePage} page={page} />
         <NavSecondary items={data.navSecondary} className="mt-auto" changePage={changePage} />
       </SidebarContent>
       <SidebarFooter>

@@ -3,6 +3,11 @@ import Link from "next/link";
 import { createClient } from "@/lib/utils/supabase/server"
 import Image from 'next/image';
 
+import Hero from '@/sections/Hero';
+import MidSection from '@/sections/MidSection';
+import MacbookScroll from '@/sections/Laptop'
+import DashboardCTA from '@/sections/DashboardCTA'
+
 // This is a Server Component. It fetches the user data on the server and renders the entire page.
 export default async function HomePage() {
   const supabase = createClient();
@@ -17,7 +22,12 @@ export default async function HomePage() {
   }
 
   return (
-    <div className="w-full min-h-screen overflow-x-hidden">
+    <div className="w-full overflow-x-hidden">
+
+      <Hero />
+      <MidSection />
+      <MacbookScroll />
+      <DashboardCTA />
 
     </div>
   );

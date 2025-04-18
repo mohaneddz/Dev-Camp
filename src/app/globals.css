@@ -4,431 +4,182 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* Base Radius Variables */
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  /* Primary (Cyan) */
+  --color-primary: #8fd1d8;
+  --color-primary-light-1: #a2dbe1;
+  --color-primary-light-2: #b5e4e9;
+  --color-primary-light-3: #c8eef1;
+  --color-primary-dark-1: #6badb3;
+  --color-primary-dark-2: #4d8a8f;
+  --color-primary-dark-3: #30686c;
 
-  /* Theme Color Mapping */
-  --color-background: var(--background);
-  --color-background-dark: var(--background-dark);
-  --color-background-light: var(--background-light);
+  /* Secondary (Purple) */
+  --color-secondary: #a143fd;
+  --color-secondary-light-1: #b167fd;
+  --color-secondary-light-2: #c28bfd;
+  --color-secondary-light-3: #d3affd;
+  --color-secondary-dark-1: #8436d4;
+  --color-secondary-dark-2: #6829ab;
+  --color-secondary-dark-3: #4d1c82;
 
-  --color-foreground: var(--foreground);
+  /* Tertiary (Dark Blue) */
+  --color-tertiary: #011133;
+  --color-tertiary-light-1: #021a4d;
+  --color-tertiary-light-2: #042367;
+  --color-tertiary-light-3: #062c81;
+  --color-tertiary-dark-1: #010c29;
+  --color-tertiary-dark-2: #01071f;
+  --color-tertiary-dark-3: #000314;
 
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-card-light: var(--card-light);
-  --color-card-dark: var(--card-dark);  
+  /* Background (Light Mode) */
+  --color-background: #f8f9fc;
+  --color-background-light-1: #fafbfd;
+  --color-background-light-2: #fcfdfe;
+  --color-background-light-3: #ffffff;
+  --color-background-dark-1: #e6e8f0;
+  --color-background-dark-2: #d4d7e3;
+  --color-background-dark-3: #c2c6d7;
 
+  /* Card (Light Mode) */
+  --color-card: #ffffff;
+  --color-card-foreground: #011133;
+  --color-card-light-1: #ffffff;
+  --color-card-light-2: #ffffff;
+  --color-card-light-3: #ffffff;
+  --color-card-dark-1: #f2f3f7;
+  --color-card-dark-2: #e6e8f0;
+  --color-card-dark-3: #d9dcea;
 
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
+  /* Status Colors */
+  --color-destructive: #ff5a5f;
+  --color-destructive-light: #ff8b8f;
+  --color-destructive-dark: #e32f35;
+  --color-destructive-foreground: #ffffff;
 
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
+  --color-success: #10b981;
+  --color-success-light: #34d399;
+  --color-success-dark: #059669;
+  --color-success-foreground: #ffffff;
 
-  --color-secondary: var(--secondary);
-  --color-secondary-light: var(--secondary-light);
-  --color-secondary-dark: var(--secondary-dark);
-
-  --color-tertiary: var(--tertiary);
-  --color-tertiary-light: var(--tertiary-light);
-  --color-tertiary-dark: var(--tertiary-dark);
-
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-checkbox: var(--checkbox);
-  --color-ring: var(--ring);
-
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-
-  --color-bad: var(--bad);
-  --color-good: var(--good);
-  --color-neutral: var(--neutral);
-
-  --color-pink: var(--text-pink);
-}
-
-:root {
-  /* ===== Base Colors ===== */
-
-  /* Orange Palette */
-  --orange: #FEAE50;
-  --orange-light: #ffde59;
-  --orange-dark: #F35A4E;
-
-  /* Purple Palette */
-  --purple: #771F6F;
-  --purple-light: #7E2F77;
-  --purple-dark: #1C0522;
-  --purple-dark-2: #26082F;
-  --purple-dark-3: #3B1138;
-
-  /* Text Colors */
-  --text-light: #f9f9f9;
-  --text-dark: #242424;
-  --text-muted: #b3b3b3;
-  --text-pink: #ee1253;
-  --text-primary: #FEAE50;
-
-  /* Feedback Colors */
-  --bad: #EF1B53;
-  --bad-light: #ff6b8b;
-  --bad-dark: #d41543;
-
-  --good: #598d59;
-  --good-light: #6ba76b;
-  --good-dark: #4a734a;
-
-  --neutral: #4b4b4e;
-  --neutral-light: #6b6b6e;
-  --neutral-dark: #2b2b2e;
-
-  /* ===== Theme Variables ===== */
-
-  /* Border Radius */
-  --radius: 0.625rem;
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-
-  /* Background Colors */
-  --background: #fef8e8;
-  --background-light: #fdfaf0;
-  --background-dark: #cfcabd;
-
-  /* Foreground Colors */
-  --foreground: var(--text-dark);
-  --foreground-light: var(--text-muted);
-  --foreground-dark: #000000;
-
-  /* Card Colors */
-  --card: #f1e6d0;
-  --card-light: #f8f0e0;
-  --card-dark: #fdead0;
-  --card-foreground: var(--text-dark);
-  --card-foreground-light: var(--text-muted);
-  --card-foreground-dark: #000000;
-
-  /* Popover Colors */
-  --popover: #ffffff;
-  --popover-light: #fafafa;
-  --popover-dark: #f0f0f0;
-  --popover-foreground: var(--text-dark);
-  --popover-foreground-light: var(--text-muted);
-  --popover-foreground-dark: #000000;
-
-  /* Primary Colors */
-  --primary: var(--orange);
-  --primary-light: var(--orange-light);
-  --primary-dark: var(--orange-dark);
-  --primary-foreground: var(--text-light);
-  --primary-foreground-light: #ffffff;
-  --primary-foreground-dark: #f0f0f0;
-
-  /* Secondary Colors */
-  --secondary: var(--purple);
-  --secondary-light: var(--purple-light);
-  --secondary-dark: var(--purple-dark-3);
-  --secondary-foreground: var(--text-light);
-  --secondary-foreground-light: var(--text-muted);
-  --secondary-foreground-dark: #000000;
-
-  /* tertiary */
-  --tertiary: #f1594d;
-  --tertiary-light: #ff7552;
-  --tertiary-dark: #f1594d;
-
-  /* Muted Colors */
-  --muted: #f1f1f1;
-  --muted-light: #f8f8f8;
-  --muted-dark: #e4e4e4;
-  --muted-foreground: #737373;
-  --muted-foreground-light: #8a8a8a;
-  --muted-foreground-dark: #5c5c5c;
-
-  /* Accent Colors */
-  --accent: var(--orange);
-  --accent-light: var(--orange-light);
-  --accent-dark: var(--orange-dark);
-  --accent-foreground: var(--text-light);
-  --accent-foreground-light: #ffffff;
-  --accent-foreground-dark: #f0f0f0;
-
-  /* Destructive Colors */
-  --destructive: var(--bad);
-  --destructive-light: var(--bad-light);
-  --destructive-dark: var(--bad-dark);
-
-  /* Border Colors */
-  --border: #e4e4e7;
-  --border-light: #f0f0f0;
-  --border-dark: #d8d8db;
-
-  /* Input Colors */
-  --input: #f4efe5;
-  --input-light: var(--orange-light);
-  --input-dark: var(--orange-dark);
-
-  /* Checkbox Colors */
-  --checkbox: var(--purple);
-  --checkbox-light: var(--purple-light);
-  --checkbox-dark: var(--purple-dark);
-
-  /* Ring Colors */
-  --ring: var(--orange);
-  --ring-light: var(--orange-light);
-  --ring-dark: var(--orange-dark);
+  /* Neutral Colors */
+  --color-neutral: #64748b;
+  --color-neutral-light-1: #94a3b8;
+  --color-neutral-light-2: #cbd5e1;
+  --color-neutral-light-3: #f1f5f9;
+  --color-neutral-dark-1: #475569;
+  --color-neutral-dark-2: #334155;
+  --color-neutral-dark-3: #1e293b;
 
   /* Chart Colors */
-  --chart-1: var(--orange);
-  --chart-2: #d1d5db;
-  --chart-3: #9ca3af;
-  --chart-4: var(--purple);
-  --chart-5: #6b7280;
-
-  /* Sidebar Colors */
-  --sidebar: #f4efe5;
-  --sidebar-light: #faf6f0;
-  --sidebar-dark: #e8e4da;
-
-  --sidebar-foreground: var(--text-dark);
-  --sidebar-foreground-light: var(--text-muted);
-  --sidebar-foreground-dark: #000000;
-
-  --sidebar-primary: var(--orange);
-  --sidebar-primary-light: var(--orange-light);
-  --sidebar-primary-dark: var(--orange-dark);
-  --sidebar-primary-foreground: var(--text-light);
-  --sidebar-primary-foreground-light: #ffffff;
-  --sidebar-primary-foreground-dark: #f0f0f0;
-
-  --sidebar-accent: var(--purple);
-  --sidebar-accent-light: var(--purple-light);
-  --sidebar-accent-dark: var(--purple-dark);
-  --sidebar-accent-foreground: var(--text-light);
-  --sidebar-accent-foreground-light: #ffffff;
-  --sidebar-accent-foreground-dark: #f0f0f0;
-
-  --sidebar-border: var(--border);
-  --sidebar-border-light: var(--border-light);
-  --sidebar-border-dark: var(--border-dark);
-
-  --sidebar-ring: var(--ring);
-  --sidebar-ring-light: var(--ring-light);
-  --sidebar-ring-dark: var(--ring-dark);
+  --chart-shade-1: #8fd1d8;
+  --chart-shade-2: #a143fd;
+  --chart-shade-3: #011133;
+  --chart-shade-4: #55c2cb;
+  --chart-shade-5: #c287ff;
+  --chart-shade-6: #2a3a5a;
 }
 
 .dark {
-  /* Background Colors */
-  --background: var(--purple-dark);
-  --background-light: var(--purple-dark-2);
-  --background-dark: var(--purple-dark-3);
+  /* Background (Dark Mode) */
+  --color-background: #0a1022;
+  --color-background-light-1: #111936;
+  --color-background-light-2: #192249;
+  --color-background-light-3: #212c5d;
+  --color-background-dark-1: #070c1a;
+  --color-background-dark-2: #040813;
+  --color-background-dark-3: #02040d;
 
-  /* Foreground Colors */
-  --foreground: var(--text-light);
-  --foreground-light: var(--text-muted);
-  --foreground-dark: #ffffff;
+  /* Card (Dark Mode) */
+  --color-card: #111936;
+  --color-card-foreground: #f8f9fc;
+  --color-card-light-1: #192249;
+  --color-card-light-2: #212c5d;
+  --color-card-light-3: #293770;
+  --color-card-dark-1: #0c122a;
+  --color-card-dark-2: #080c1d;
+  --color-card-dark-3: #040611;
 
-  /* Card Colors */
-  --card: var(--purple-dark-2);
-  --card-light: var(--purple-light);
-  --card-dark: var(--purple-dark-3);
-  --card-foreground: var(--text-light);
-  --card-foreground-light: var(--text-muted);
-  --card-foreground-dark: #ffffff;
+  /* Adjust primary colors for dark mode */
+  --color-primary: #8fd1d8;
+  --color-primary-light-1: #a2dbe1;
+  --color-primary-light-2: #b5e4e9;
+  --color-primary-light-3: #c8eef1;
+  --color-primary-dark-1: #75b4bb;
+  --color-primary-dark-2: #5a989e;
+  --color-primary-dark-3: #407b80;
 
-  /* Popover Colors */
-  --popover: var(--purple-dark-2);
-  --popover-light: var(--purple-dark);
-  --popover-dark: var(--purple-dark-3);
-  --popover-foreground: var(--text-light);
-  --popover-foreground-light: var(--text-muted);
-  --popover-foreground-dark: #ffffff;
+  /* Adjust secondary colors for dark mode */
+  --color-secondary: #a143fd;
+  --color-secondary-light-1: #b167fd;
+  --color-secondary-light-2: #c28bfd;
+  --color-secondary-light-3: #d3affd;
+  --color-secondary-dark-1: #8c3ad9;
+  --color-secondary-dark-2: #7730b8;
+  --color-secondary-dark-3: #622697;
 
-  /* Primary Colors */
-  --primary: var(--orange);
-  --primary-light: var(--orange-light);
-  --primary-dark: var(--orange-dark);
-  --primary-foreground: var(--text-light);
-  --primary-foreground-light: #ffffff;
-  --primary-foreground-dark: #f0f0f0;
+  /* Adjust tertiary colors for dark mode */
+  --color-tertiary: #1d2d5b;
+  --color-tertiary-light-1: #2a3a6e;
+  --color-tertiary-light-2: #364782;
+  --color-tertiary-light-3: #435595;
+  --color-tertiary-dark-1: #162048;
+  --color-tertiary-dark-2: #0e1435;
+  --color-tertiary-dark-3: #070a22;
 
-  /* Secondary Colors */
-  --secondary: var(--purple);
-  --secondary-light: var(--purple-light);
-  --secondary-dark: var(--purple-dark);
-  --secondary-foreground: var(--text-light);
-  --secondary-foreground-light: var(--text-muted);
-  --secondary-foreground-dark: #ffffff;
+  /* Adjust neutral colors for dark mode */
+  --color-neutral: #94a3b8;
+  --color-neutral-light-1: #cbd5e1;
+  --color-neutral-light-2: #e2e8f0;
+  --color-neutral-light-3: #f8fafc;
+  --color-neutral-dark-1: #64748b;
+  --color-neutral-dark-2: #475569;
+  --color-neutral-dark-3: #334155;
 
-  /* Muted Colors */
-  --muted: var(--purple-dark-2);
-  --muted-light: var(--purple-dark);
-  --muted-dark: var(--purple-dark-3);
-  --muted-foreground: var(--text-muted);
-  --muted-foreground-light: #d1d1d1;
-  --muted-foreground-dark: #959595;
-
-  /* Accent Colors */
-  --accent: var(--orange);
-  --accent-light: var(--orange-light);
-  --accent-dark: var(--orange-dark);
-  --accent-foreground: var(--text-light);
-  --accent-foreground-light: #ffffff;
-  --accent-foreground-dark: #f0f0f0;
-
-  /* Destructive Colors */
-  --destructive: var(--orange);
-  --destructive-light: var(--orange-light);
-  --destructive-dark: var(--orange-dark);
-
-  /* Border Colors */
-  --border: var(--purple-dark-2);
-  --border-light: var(--purple-dark);
-  --border-dark: var(--purple-dark-3);
-
-  /* Input Colors */
-  --input: var(--purple-dark-2);
-  --input-light: var(--purple-light);
-  --input-dark: var(--purple-dark-3);
-
-  /* Checkbox Colors */
-  --checkbox: var(--purple-dark-3);
-  --checkbox-light: var(--purple-dark-2);
-  --checkbox-dark: var(--purple-dark);
-
-  /* Ring Colors */
-  --ring: var(--orange);
-  --ring-light: var(--orange-light);
-  --ring-dark: var(--orange-dark);
-
-  /* Sidebar Colors */
-  --sidebar: var(--purple-dark-2);
-  --sidebar-light: var(--purple-dark);
-  --sidebar-dark: var(--purple-dark-3);
-  --sidebar-foreground: var(--text-light);
-  --sidebar-foreground-light: var(--text-muted);
-  --sidebar-foreground-dark: #ffffff;
-  --sidebar-primary: var(--orange);
-  --sidebar-primary-light: var(--orange-light);
-  --sidebar-primary-dark: var(--orange-dark);
-  --sidebar-primary-foreground: var(--text-light);
-  --sidebar-primary-foreground-light: #ffffff;
-  --sidebar-primary-foreground-dark: #f0f0f0;
-  --sidebar-accent: var(--purple-dark);
-  --sidebar-accent-light: var(--purple-dark-2);
-  --sidebar-accent-dark: var(--purple-dark-3);
-  --sidebar-accent-foreground: var(--text-light);
-  --sidebar-accent-foreground-light: var(--text-muted);
-  --sidebar-accent-foreground-dark: #ffffff;
-  --sidebar-border: var(--purple-dark);
-  --sidebar-border-light: var(--purple-dark-2);
-  --sidebar-border-dark: var(--purple-dark-3);
-  --sidebar-ring: var(--orange);
-  --sidebar-ring-light: var(--orange-light);
-  --sidebar-ring-dark: var(--orange-dark);
+  /* Adjust chart colors for dark mode */
+  --chart-shade-1: #8fd1d8;
+  --chart-shade-2: #a143fd;
+  --chart-shade-3: #1d2d5b;
+  --chart-shade-4: #55c2cb;
+  --chart-shade-5: #c287ff;
+  --chart-shade-6: #3a4d82;
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply text-base bg-background text-foreground lg:text-xl;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)'/%3E%3C/svg%3E");
-    opacity: 0.05;
-    mix-blend-mode: multiply;
-    z-index: 9999;
-    animation: grainShift 1s steps(2) infinite;
-  }
-
-  @keyframes grainShift {
-
-    0%,
-    100% {
-      transform: translate(0, 0);
-    }
-
-    25% {
-      transform: translate(1px, -1px);
-    }
-
-    50% {
-      transform: translate(-1px, 1px);
-    }
-
-    75% {
-      transform: translate(1px, 1px);
-    }
-  }
-}
-
+/* Selection styling */
 ::selection {
-  background-color: var(--orange);
-  color: var(--text-light);
+  background-color: var(--color-secondary);
+  color: #ffffff;
 }
 
+/* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--purple-dark-1);
+  background: var(--color-tertiary-light-1);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--orange);
+  background: var(--color-primary);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--orange-dark);
+  background: var(--color-primary-dark-1);
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--orange) var(--purple-dark-1);
+  scrollbar-color: var(--color-primary) var(--color-tertiary-light-1);
 }
 
+/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  @apply bg-background;
 }
 
+/* Gradient background */
 .bg-radial-gradient {
   background: radial-gradient(circle at center,
       var(--tw-gradient-from) 0%,
@@ -436,6 +187,7 @@ html {
       var(--tw-gradient-to) 100%);
 }
 
+/* Dropdown menu animations */
 .dropdown-menu-content {
   animation: fadeIn 0.2s ease-out;
 }
@@ -452,6 +204,7 @@ html {
   }
 }
 
+/* Transitions and hover effects */
 .sun-moon-transition {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -461,7 +214,7 @@ html {
 }
 
 .dropdown-menu-item:hover {
-  background-color: var(--purple-light-1);
+  background-color: var(--color-primary-light-2);
 }
 
 .theme-toggle-btn {
@@ -471,14 +224,15 @@ html {
 }
 
 .theme-toggle-btn:hover {
-  border-color: var(--orange);
+  border-color: var(--color-secondary);
 }
 
 .theme-toggle-btn:focus-visible {
-  outline: 2px solid var(--orange);
+  outline: 2px solid var(--color-secondary);
   outline-offset: 2px;
 }
 
+/* Navbar styling */
 .navbar::before {
   content: none;
 }
@@ -491,9 +245,10 @@ html {
   @apply bg-card;
 }
 
+/* Dark mode specific styles */
 .dark .dropdown-menu-item:hover {
-  background-color: var(--orange);
-  color: var(--text-light);
+  background-color: var(--color-secondary-dark-1);
+  color: #ffffff;
 }
 
 /* Hide Next.js development server button */
@@ -505,6 +260,7 @@ html {
   display: none !important;
 }
 
+/* Animation keyframes */
 @keyframes shake {
 
   0%,

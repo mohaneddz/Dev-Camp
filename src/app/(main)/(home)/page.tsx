@@ -7,6 +7,7 @@ import Hero from '@/sections/Hero';
 import MidSection from '@/sections/MidSection';
 import MacbookScroll from '@/sections/Laptop'
 import DashboardCTA from '@/sections/DashboardCTA'
+import Globe from '@/sections/Globe'
 
 // This is a Server Component. It fetches the user data on the server and renders the entire page.
 export default async function HomePage() {
@@ -27,6 +28,23 @@ export default async function HomePage() {
       <Hero />
       <MidSection />
       <MacbookScroll />
+      <Globe 
+        globeConfig={{
+          globeColor: "#1d072e",
+          atmosphereColor: "#ffffff",
+        }}
+        data={[
+          {
+            order: 1,
+            startLat: 40.7128,
+            startLng: -74.0060,
+            endLat: 51.5074,
+            endLng: -0.1278,
+            arcAlt: 0.3,
+            color: "#ff0000"
+          }
+        ]}
+      />
       <DashboardCTA />
 
     </div>

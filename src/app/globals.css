@@ -77,11 +77,23 @@
   --chart-shade-4: #55c2cb;
   --chart-shade-5: #c287ff;
   --chart-shade-6: #2a3a5a;
+
+  /* sidebar */
+  --color-sidebar: #eaebef;
+  --color-sidebar-foreground: #011133;
+  --color-sidebar-primary: #8fd1d8;
+  --color-sidebar-primary-foreground: #ffffff;
+  --color-sidebar-accent: #a143fd;
+  --color-sidebar-accent-foreground: #ffffff;
+  --color-sidebar-border: #e6e8f0;
+  --color-sidebar-ring: #a143fd;
+
+  --color-sidebar-background-dark  : #121a2c;
 }
 
 .dark {
   /* Background (Dark Mode) */
-  --color-background: #0a1022;
+  --color-background: #101828;
   --color-background-light-1: #111936;
   --color-background-light-2: #192249;
   --color-background-light-3: #212c5d;

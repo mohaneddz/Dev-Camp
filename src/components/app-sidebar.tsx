@@ -106,12 +106,12 @@ export function AppSidebar({ page, changePage, ...props }: React.ComponentProps<
 
   return (
     <Sidebar collapsible="offcanvas" {...props}>
-      <SidebarHeader>
+      <SidebarHeader className="bg-background dark:bg-background-dark">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
+              className="data-[slot=sidebar-menu-button]:!p-1.5 text-foreground dark:text-foreground-dark"
             >
               <Link href="/">
                 <IconInnerShadowTop className="!size-5" />
@@ -121,12 +121,12 @@ export function AppSidebar({ page, changePage, ...props }: React.ComponentProps<
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="bg-background dark:bg-background-dark">
         <NavMain items={data.navMain} changePage={changePage} page={page} />
         <NavDocuments items={data.documents} changePage={changePage} page={page} />
         <NavSecondary items={data.navSecondary} className="mt-auto" changePage={changePage} />
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="bg-background dark:bg-background-dark">
         <NavUser user={data.user} />
       </SidebarFooter>
     </Sidebar>

@@ -38,7 +38,8 @@ export function NavMain({
                   tooltip={item.title}
                   data-active={page === item.id}
                   className={cn(
-                    page === item.id && "bg-sidebar-accent text-sidebar-accent-foreground ring-1 ring-sidebar-accent font-medium"
+                    page === item.id && "bg-sidebar-accent text-sidebar-accent-foreground ring-1 ring-sidebar-accent font-medium",
+                    "text-foreground dark:text-foreground-dark hover:bg-background dark:hover:bg-background-dark"
                   )}
                 >
                   {item.icon && <item.icon />}

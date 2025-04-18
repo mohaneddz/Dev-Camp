@@ -11,7 +11,7 @@ const Footer = () => {
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 1000 100"
                         preserveAspectRatio="none"
-                        className="fill-[--color-secondary-dark-3]"
+                        className="fill-[--color-background]"
                     >
                         <path d="M0,0 L0,100 C150,80 350,20 500,20 C650,20 850,80 1000,100 L1000,0 Z" />
                     </svg>

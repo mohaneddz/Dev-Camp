@@ -119,7 +119,7 @@ export default function Home() {
     };
 
     return (
-        <div className="bg-background overflow-y-auto">
+        <div className="bg-background dark:bg-gray-900 overflow-y-auto">
             <Head>
                 <title>AI - foreseen</title>
                 <meta name="description" content="Professional AI Forecasting Service" />
@@ -128,44 +128,44 @@ export default function Home() {
 
             <main className="relative w-full">
                 {/* Hero Section */}
-                <section className="relative px-4 md:px-12 lg:px-24 min-h-[80vh] mt-32">
+                <section className="relative px-4 md:px-12 lg:px-24 min-h-[80vh] mt-32 ">
                     {/* Floating shapes */}
                     <div
                         ref={triangleRef}
-                        className="absolute left-20 top-40 text-secondary-light-2 opacity-70 z-10 will-change-transform"
-                        style={{ willChange: 'transform' }} // Improve performance
+                        className="absolute left-20 top-40 text-secondary-light-2 dark:text-secondary-dark-2 opacity-70 z-10 will-change-transform"
+                        style={{ willChange: 'transform' }}
                     >
                         <IconTriangle size={30} stroke={1.5} />
                     </div>
 
                     <div
                         ref={square1Ref}
-                        className="absolute right-1/3 top-12 text-primary opacity-70 z-10 will-change-transform"
-                        style={{ willChange: 'transform' }} // Improve performance
+                        className="absolute right-1/3 top-12 text-primary dark:text-primary-dark opacity-70 z-10 will-change-transform"
+                        style={{ willChange: 'transform' }}
                     >
                         <IconSquare size={24} stroke={1.5} />
                     </div>
 
                     <div
                         ref={diamond1Ref}
-                        className="absolute right-1/4 bottom-1/3 text-primary-light-1 opacity-70 z-10 will-change-transform"
-                        style={{ willChange: 'transform' }} // Improve performance
+                        className="absolute right-1/4 bottom-1/3 text-primary-light-1 dark:text-primary-dark-1 opacity-70 z-10 will-change-transform"
+                        style={{ willChange: 'transform' }}
                     >
                         <IconDiamond size={20} stroke={1.5} />
                     </div>
 
                     <div
                         ref={square2Ref}
-                        className="absolute bottom-1/4 left-1/2 text-secondary opacity-70 z-10 will-change-transform"
-                        style={{ willChange: 'transform' }} // Improve performance
+                        className="absolute bottom-1/4 left-1/2 text-secondary dark:text-secondary-dark opacity-70 z-10 will-change-transform"
+                        style={{ willChange: 'transform' }}
                     >
                         <IconSquare size={18} stroke={1.5} transform="rotate(45)" />
                     </div>
 
                     <div
                         ref={diamond2Ref}
-                        className="absolute bottom-24 left-24 text-tertiary-light-1 opacity-70 z-10 will-change-transform"
-                        style={{ willChange: 'transform' }} // Improve performance
+                        className="absolute bottom-24 left-24 text-tertiary-light-1 dark:text-tertiary-dark-1 opacity-70 z-10 will-change-transform"
+                        style={{ willChange: 'transform' }}
                     >
                         <IconDiamond size={24} stroke={1.5} />
                     </div>
@@ -187,15 +187,15 @@ export default function Home() {
 
                             <motion.h2
                                 variants={itemVariants}
-                                className="text-black text-6xl md:text-7xl lg:text-8xl font-black text-tertiary leading-tight"
+                                className="text-black dark:text-white text-6xl md:text-7xl lg:text-8xl font-black text-tertiary dark:text-tertiary-dark leading-tight"
                             >
-                                FORSEEN<br />
-                                AI<span className="text-primary">.</span>
+                                FORSEEN<br className="mb-4" />
+                                AI<span className="text-primary dark:text-primary-dark">.</span>
                             </motion.h2>
 
                             <motion.p
                                 variants={itemVariants}
-                                className="text-neutral-dark-1 dark:text-neutral-light-1 mt-6 mb-8 max-w-lg"
+                                className="text-neutral-dark-1 dark:text-neutral-light-1 mt-6 mb-8 max-w-lg leading-relaxed"
                             >
                                 Stop relying on intuition, start predicting success. FORSEEN - AI empowers modern DTC brands with cutting-edge AI, transforming data into actionable intelligence. Optimize everything from inventory to marketing, unlock customer insights, and gain a decisive edge. Ready to foresee your future?
                             </motion.p>
@@ -203,7 +203,7 @@ export default function Home() {
                             <motion.button
                                 variants={itemVariants}
                                 onClick={handleScrollToNextSection}
-                                className="inline-block bg-secondary hover:bg-secondary-dark-1 text-white w-max rounded-md px-8 py-3 font-medium transition-colors duration-300"
+                                className="inline-block bg-secondary dark:bg-secondary-dark hover:bg-secondary-dark-1 dark:hover:bg-secondary-dark-2 text-white w-max rounded-md px-8 py-3 font-medium transition-colors duration-300"
                             >
                                 READ MORE
                             </motion.button>

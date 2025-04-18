@@ -41,14 +41,14 @@ const Navbar = async () => {
         </div>
 
         <nav className="hidden md:flex items-center space-x-8">
-          <Link href="/services" className="text-sm text-tertiary dark:text-white hover:text-primary dark:hover:text-primary-light transition-colors">
-            Services
+          <Link href="/" className="text-sm text-tertiary dark:text-white hover:text-primary dark:hover:text-primary-light transition-colors">
+            Home
           </Link>
           <Link href="/about" className="text-sm text-tertiary dark:text-white hover:text-primary dark:hover:text-primary-light transition-colors">
             About
           </Link>
-          <Link href="/features" className="text-sm text-tertiary dark:text-white hover:text-primary dark:hover:text-primary-light transition-colors">
-            Features
+          <Link href="/princing" className="text-sm text-tertiary dark:text-white hover:text-primary dark:hover:text-primary-light transition-colors">
+            Pricings
           </Link>
         </nav>
 

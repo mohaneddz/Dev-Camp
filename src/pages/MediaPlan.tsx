@@ -149,7 +149,7 @@ export default function MediaPlan() {
                                 : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
                             }`}>
                               {validatedPosts.some(p => p.id === post.id) ? 'Validated' : 'Scheduled'}
-                            </span>
+                </span>
                           </td>
                         </tr>
                       ))}

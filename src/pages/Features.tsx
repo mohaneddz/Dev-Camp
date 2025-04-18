@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from 'react'
-import { Bar } from 'react-chartjs-2'
+import { useState, useEffect, FormEvent, useRef } from 'react'
+import { Bar, Line } from 'react-chartjs-2'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,7 +10,11 @@ import {
   Title,
   Tooltip,
   Legend,
+  PointElement,
+  LineElement,
 } from 'chart.js'
+import axios from 'axios'
+import { createClient } from '@supabase/supabase-js'
 
 ChartJS.register(
   CategoryScale,
@@ -18,7 +22,15 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  PointElement,
+  LineElement
+)
+
+// Initialize Supabase client
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 )
 
 // Sample data for feature importance
@@ -41,6 +53,27 @@ const featureData = {
   }]
 }
 
+// Add interfaces
+interface Message {
+  text: string;
+  sender: 'user' | 'bot';
+}
+
+interface ChatInterfaceProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+// Update the recommendations interface
+interface Recommendation {
+  title: string;
+  description: string;
+  impact: string;
+  priority: number;
+  icon: string;
+}
+
+// Update chart options type
 const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
@@ -55,7 +88,7 @@ const chartOptions = {
         size: 16,
         weight: 'bold' as const,
       },
-      color: 'rgb(17, 24, 39)', // gray-900
+      color: 'rgb(17, 24, 39)',
       padding: {
         top: 20,
         bottom: 20
@@ -85,10 +118,10 @@ const chartOptions = {
       title: {
         display: true,
         text: 'Importance Score',
-        color: 'rgb(75, 85, 99)', // gray-600
+        color: 'rgb(75, 85, 99)',
         font: {
           size: 12,
-          weight: '500'
+          weight: 'bold' as const
         }
       },
       grid: {
@@ -96,7 +129,7 @@ const chartOptions = {
         drawBorder: false,
       },
       ticks: {
-        color: 'rgb(107, 114, 128)', // gray-500
+        color: 'rgb(107, 114, 128)',
         font: {
           size: 12
         }
@@ -107,7 +140,7 @@ const chartOptions = {
         display: false,
       },
       ticks: {
-        color: 'rgb(107, 114, 128)', // gray-500
+        color: 'rgb(107, 114, 128)',
         font: {
           size: 12
         }
@@ -116,33 +149,311 @@ const chartOptions = {
   },
 }
 
-// Sample recommendations
-const recommendations = [
-  {
-    title: "Increase Post Frequency",
-    description: "Posting 3-4 times per week shows optimal engagement",
-    impact: "High",
-    priority: 1,
-    icon: "📅",
-  },
-  {
-    title: "Optimize Posting Times",
-    description: "Best engagement between 2-4 PM on weekdays",
-    impact: "Medium",
-    priority: 2,
-    icon: "⏰",
-  },
-  {
-    title: "Diversify Content Types",
-    description: "Mix of images, videos, and carousels performs best",
-    impact: "High",
-    priority: 1,
-    icon: "🎨",
-  },
-]
+// Add interfaces for chatbot response
+interface ForecastData {
+  date: string;
+  forecast: number;
+  forecast_lower: number;
+  forecast_upper: number;
+}
+
+interface ChatResponse {
+  answer: string;
+  forecast: ForecastData[];
+  status: string;
+}
+
+// Add ChatInterface component with proper typing
+const ChatInterface: React.FC<ChatInterfaceProps> = ({ isOpen, onClose }) => {
+  const [message, setMessage] = useState('')
+  const [messages, setMessages] = useState<Message[]>([])
+  const [loading, setLoading] = useState(false)
+  const [forecastData, setForecastData] = useState<ForecastData[]>([])
+  const [analysis, setAnalysis] = useState<string>('')
+  const [file, setFile] = useState<File | null>(null)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages, analysis, forecastData])
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const uploadedFile = e.target.files?.[0];
+    if (!uploadedFile) return;
+
+    const reader = new FileReader();
+    reader.onload = (event: ProgressEvent<FileReader>) => {
+      const text = event.target?.result;
+      if (typeof text === 'string') {
+        console.log('CSV Content:', text);
+      }
+    };
+    reader.readAsText(uploadedFile);
+    setFile(uploadedFile);
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    if (!message.trim()) return
+
+    const userMessage: Message = { text: message, sender: 'user' }
+    setMessages(prev => [...prev, userMessage])
+    setMessage('')
+    setLoading(true)
+
+    try {
+      const formData = new FormData()
+      formData.append('question', message)
+      formData.append('sku_id', '2')
+      
+      if (!file) {
+        alert("Please upload a file first.");
+        return;
+      }
+
+      if (file) {
+        formData.append('file', file, file.name);
+      }
+
+      const response = await axios.post<ChatResponse>('http://127.0.0.1:5000/api/chat/ask', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      
+      const botMessage: Message = { text: response.data.answer, sender: 'bot' }
+      setMessages(prev => [...prev, botMessage])
+      setForecastData(response.data.forecast)
+      setAnalysis(response.data.answer)
+    } catch (error) {
+      console.error('Error:', error)
+      const errorMessage: Message = { text: 'Sorry, there was an error processing your request.', sender: 'bot' }
+      setMessages(prev => [...prev, errorMessage])
+    }
+    
+    setLoading(false)
+  }
+
+  if (!isOpen) return null
+
+  return (
+    <div className="fixed bottom-20 right-6 w-[400px] bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 flex flex-col max-h-[80vh]">
+      <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 flex-shrink-0">
+        <div className="flex justify-between items-center">
+          <h3 className="text-lg font-semibold text-white">AI Assistant</h3>
+          <button
+            onClick={onClose}
+            className="text-white hover:text-gray-200 transition-colors"
+            title="Close chat"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-200 dark:scrollbar-thumb-blue-600 dark:scrollbar-track-gray-700">
+        {messages.map((msg, index) => (
+          <div
+            key={index}
+            className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} mb-2`}
+          >
+            <div
+              className={`max-w-[85%] rounded-2xl p-4 shadow-sm ${
+                msg.sender === 'user'
+                  ? 'bg-blue-600 text-white rounded-br-none'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-bl-none'
+              }`}
+            >
+              <div className="whitespace-pre-wrap break-words overflow-x-hidden text-sm leading-relaxed">{msg.text}</div>
+            </div>
+          </div>
+        ))}
+        {loading && (
+          <div className="flex justify-start">
+            <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-3 shadow-sm">
+              <div className="flex space-x-2">
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></div>
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+              </div>
+            </div>
+          </div>
+        )}
+        <div ref={messagesEndRef} />
+      </div>
+
+
+      <form onSubmit={handleSubmit} className="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 flex-shrink-0">
+        <div className="flex flex-col space-y-3">
+          <div className="flex items-center">
+            <label className="flex-1 relative group">
+              <div className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm text-gray-500 dark:text-gray-400 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors">
+                <span className="flex items-center">
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                  {file ? file.name : 'Upload CSV file'}
+                </span>
+              </div>
+              <input
+                id="file-upload"
+                type="file"
+                accept=".csv"
+                onChange={handleFileChange}
+                className="hidden"
+              />
+              {file && (
+                <span className="absolute right-2 top-1/2 transform -translate-y-1/2 text-xs text-green-500 flex items-center">
+                  <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Selected
+                </span>
+              )}
+            </label>
+          </div>
+          <div className="flex space-x-2">
+            <input
+              id="message-input"
+              type="text"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Type your message..."
+              className="flex-1 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            />
+            <button
+              type="submit"
+              disabled={loading || !file}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+              title={!file ? "Please upload a file first" : "Send message"}
+            >
+              {loading ? (
+                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
+              )}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  )
+}
+
+// Add interfaces for the API response
+interface Idea {
+  id: number;
+  media: string;
+  media_mode: string;
+  media_type: string;
+  niche_id: number;
+}
+
+interface MediaPlan {
+  id: number;
+  date: string;
+  title: string;
+  description: string;
+  niche_id: number;
+}
+
+interface Peak {
+  id: number;
+  date: string;
+  title: string;
+  description: string;
+  niche_id: number;
+}
+
+interface Product {
+  id: number;
+  name: string;
+  category: string;
+  number_of_sales: number | null;
+  niche_id: number;
+}
+
+interface Niche {
+  id: number;
+  niche_name: string;
+  backend_use: string;
+  example_products: string;
+}
+
+interface ApiResponse {
+  ideas: Idea[];
+  media_plan: MediaPlan[];
+  niche: Niche;
+  peaks: Peak[];
+  top_products: Product[];
+}
 
 export default function Features() {
   const [isChatOpen, setIsChatOpen] = useState(false)
+  const [recommendations, setRecommendations] = useState<Recommendation[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [apiData, setApiData] = useState<ApiResponse | null>(null)
+  const [topProducts, setTopProducts] = useState<Product[]>([])
+
+  useEffect(() => {
+    const fetchRecommendations = async () => {
+      try {
+        const response = await axios.get<ApiResponse>('http://localhost:5000/api/recommendations?niche=Personal%20Care')
+        const { ideas, media_plan, niche, peaks, top_products } = response.data
+        
+        // Transform the API response into the expected format
+        const transformedRecommendations: Recommendation[] = [
+          {
+            title: 'Content Ideas',
+            description: `Get ${ideas.length} AI-generated content ideas tailored to your niche`,
+            impact: 'High',
+            priority: 1,
+            icon: '💡'
+          },
+          {
+            title: 'Media Plan',
+            description: `Optimized posting schedule with ${media_plan.length} planned posts`,
+            impact: 'High',
+            priority: 2,
+            icon: '📅'
+          },
+          {
+            title: 'Peak Times',
+            description: `Identified ${peaks.length} peak engagement periods for your niche`,
+            impact: 'Medium',
+            priority: 3,
+            icon: '⏰'
+          },
+          {
+            title: 'Top Products',
+            description: `Analyzed ${top_products.length} top-performing products in your niche`,
+            impact: 'Medium',
+            priority: 4,
+            icon: '📊'
+          }
+        ]
+        
+        setRecommendations(transformedRecommendations)
+      } catch (error) {
+        console.error('Error fetching recommendations:', error)
+        setRecommendations([])
+      }
+    }
+
+    fetchRecommendations()
+  }, [])
 
   return (
     <div className="h-screen overflow-hidden bg-gray-50 dark:bg-gray-900">
@@ -193,42 +504,106 @@ export default function Features() {
             {/* Recommendations */}
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Top Recommendations</h2>
-                <span className="px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-full">
-                  {recommendations.length} suggestions
-                </span>
+                <div>
+                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Top Recommendations</h2>
+                  {apiData && (
+                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                      For {apiData.niche.niche_name} niche
+                    </p>
+                  )}
+                </div>
+                {loading ? (
+                  <div className="flex items-center space-x-2">
+                    <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                    <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+                  </div>
+                ) : (
+                  <span className="px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-full">
+                    {recommendations.length} suggestions
+                  </span>
+                )}
               </div>
-              <div className="space-y-6">
-                {recommendations.map((rec, index) => (
-                  <div 
-                    key={index}
-                    className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 hover:shadow-md transition-shadow"
+              
+              {error ? (
+                <div className="text-center py-8">
+                  <p className="text-red-500 dark:text-red-400">{error}</p>
+                  <button
+                    onClick={() => window.location.reload()}
+                    className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                   >
-                    <div className="flex items-start space-x-4">
-                      <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white dark:bg-gray-600 flex items-center justify-center text-xl">
-                        {rec.icon}
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-start justify-between">
-                          <h3 className="text-lg font-medium text-gray-900 dark:text-white">{rec.title}</h3>
-                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                            rec.impact === 'High' 
-                              ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                              : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
-                          }`}>
-                            {rec.impact} Impact
-                          </span>
+                    Retry
+                  </button>
+                </div>
+              ) : (
+                <div className="space-y-6">
+                  {recommendations.map((rec, index) => (
+                    <div 
+                      key={index}
+                      className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 hover:shadow-md transition-shadow"
+                    >
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white dark:bg-gray-600 flex items-center justify-center text-xl">
+                          {rec.icon}
                         </div>
-                        <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">{rec.description}</p>
+                        <div className="flex-1">
+                          <div className="flex items-start justify-between">
+                            <h3 className="text-lg font-medium text-gray-900 dark:text-white">{rec.title}</h3>
+                            <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                              rec.impact === 'High' 
+                                ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                                : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                            }`}>
+                              {rec.impact} Impact
+                            </span>
+                          </div>
+                          <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">{rec.description}</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
-          {/* Floating Chat Button */}
+          {/* Add Top Products Section */}
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 mt-8">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Top Products</h2>
+              <span className="px-3 py-1 text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-full">
+                {topProducts.length} products
+              </span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {topProducts.map((product) => (
+                <div 
+                  key={product.id}
+                  className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 hover:shadow-md transition-shadow"
+                >
+                  <div className="flex items-start space-x-4">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white dark:bg-gray-600 flex items-center justify-center text-xl">
+                      {product.category === 'Essential' ? '⭐' : '🆕'}
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-medium text-gray-900 dark:text-white">{product.name}</h3>
+                      <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                        Category: {product.category}
+                      </p>
+                      {product.number_of_sales !== null && (
+                        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                          Sales: {product.number_of_sales}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Replace the existing chat button with the new ChatInterface */}
+          <ChatInterface isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
           <button
             className={`fixed bottom-6 right-6 p-4 rounded-full shadow-lg transition-all duration-300 ${
               isChatOpen 
@@ -251,103 +626,6 @@ export default function Features() {
               )}
             </svg>
           </button>
-
-          {/* Chat Window */}
-          {isChatOpen && (
-            <div className="fixed bottom-24 right-6 w-96 bg-white dark:bg-gray-800 rounded-lg shadow-xl">
-              <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">AI Assistant</h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Ask me anything about your features</p>
-                  </div>
-                </div>
-              </div>
-              <div className="h-96 overflow-y-auto p-4 space-y-4">
-                {/* Welcome Message */}
-                <div className="flex items-start space-x-2">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    <div className="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-3">
-                      <p className="text-sm text-gray-900 dark:text-gray-100">
-                        Hello! I'm your AI assistant. I can help you understand your feature analysis and provide recommendations. What would you like to know?
-                      </p>
-                    </div>
-                    <div className="mt-2 flex space-x-2">
-                      <button className="px-3 py-1 text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors">
-                        Explain chart
-                      </button>
-                      <button className="px-3 py-1 text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors">
-                        Show recommendations
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* User Message Example */}
-                <div className="flex items-start justify-end space-x-2">
-                  <div className="flex-1 max-w-[80%]">
-                    <div className="bg-blue-600 dark:bg-blue-500 rounded-lg p-3">
-                      <p className="text-sm text-white">
-                        Can you explain the engagement rate feature?
-                      </p>
-                    </div>
-                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 text-right">
-                      2:30 PM
-                    </p>
-                  </div>
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                  </div>
-                </div>
-
-                {/* AI Response Example */}
-                <div className="flex items-start space-x-2">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
-                    <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                    </svg>
-                  </div>
-                  <div className="flex-1">
-                    <div className="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-3">
-                      <p className="text-sm text-gray-900 dark:text-gray-100">
-                        The engagement rate feature measures how actively your audience interacts with your content. It's calculated based on likes, comments, shares, and saves. A higher engagement rate indicates more meaningful connections with your audience.
-                      </p>
-                    </div>
-                    <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                      2:31 PM
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-                <div className="flex space-x-2">
-                  <input
-                    type="text"
-                    placeholder="Type your message..."
-                    className="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400 dark:placeholder-gray-500"
-                  />
-                  <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition-colors flex items-center space-x-2">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                    </svg>
-                    <span>Send</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>

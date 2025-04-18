@@ -10,7 +10,7 @@ const miniCards = [
     change: "Cooling",
     trend: "active",
     icon: IconAirConditioning,
-    color: "#2fb96c",
+    color: "#FEAE50",
     status: "active"
   },
   {
@@ -63,7 +63,7 @@ export default function SectionMiniCards() {
                   </span>
                   <span className={`text-sm font-medium ${
                     card.status === 'active' || card.status === 'present' 
-                      ? 'text-[#2fb96c]' 
+                      ? 'text-[#FEAE50]' 
                       : card.status === 'partial'
                       ? 'text-[#465fa4]'
                       : 'text-[#972b2b]'
@@ -76,7 +76,7 @@ export default function SectionMiniCards() {
                 size={24} 
                 className={`${
                   card.status === 'active' || card.status === 'present'
-                    ? 'text-[#2fb96c]'
+                    ? 'text-[#FEAE50]'
                     : card.status === 'partial'
                     ? 'text-[#465fa4]'
                     : 'text-[#972b2b]'

@@ -134,7 +134,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
         return (
             <div className="bg-[#020818] border border-[#172d662c] shadow-xl px-3 py-2 rounded-lg">
                 <p className="text-[#f9f9f9] text-sm font-medium mb-1">{payload[0].name}</p>
-                <p className="text-[#2fb96c] text-sm font-bold">{payload[0].value} $</p>
+                <p className="text-[#FEAE50] text-sm font-bold">{payload[0].value} $</p>
             </div>
         );
     }
@@ -248,7 +248,7 @@ export default function Power() {
         <div className="flex flex-1 flex-col p-4 gap-4">
             {/* Top Section - Current Power Status */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Card className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}>
+                <Card className={`${cardStyle} bg-gradient-to-br from-[#020818] to-[#12031b]`}>
                     <div className="flex items-center justify-between">
                         <div>
                             <h2 className="text-xs font-medium text-[#b3b3b3] uppercase tracking-wider">Current Month Revenue</h2>
@@ -266,7 +266,7 @@ export default function Power() {
                     </div>
                 </Card>
 
-                <Card className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}>
+                <Card className={`${cardStyle} bg-gradient-to-br from-[#020818] to-[#12031b]`}>
                     <h2 className="text-xs font-medium text-[#b3b3b3] uppercase tracking-wider">Power Distribution</h2>
                     <div className="grid grid-cols-3 gap-4 mt-4">
                         <div className="flex flex-col items-center p-2 rounded-lg bg-[#172d662c]">
@@ -289,7 +289,7 @@ export default function Power() {
             </div>
 
             {/* Power Consumption Chart */}
-            <Card className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}>
+            <Card className={`${cardStyle} bg-gradient-to-br from-[#020818] to-[#12031b]`}>
                 <h2 className="text-xs font-medium px-1 text-[#b3b3b3] uppercase tracking-wider">Sales Prediction</h2>
                 <div className="h-[260px] mt-4">
                     <ResponsiveContainer width="100%" height="100%">
@@ -299,14 +299,14 @@ export default function Power() {
                                 dataKey="date"
                                 stroke="var(--text-light)"
                                 fontSize={11}
-                                axisLine={{ stroke: 'var(--light-blue-1)' }}
+                                axisLine={{ stroke: 'var(--purple-light-1)' }}
                                 tickLine={false}
                                 tick={{ fill: 'var(--foreground, #000000)', className: 'dark:fill-[var(--text-light)]' }}
                             />
                             <YAxis
                                 stroke="var(--text-light)"
                                 fontSize={11}
-                                axisLine={{ stroke: 'var(--light-blue-1)' }}
+                                axisLine={{ stroke: 'var(--purple-light-1)' }}
                                 tickLine={false}
                                 tick={{ fill: 'var(--foreground, #000000)', className: 'dark:fill-[var(--text-light)]' }}
                                 unit="kWh"
@@ -319,7 +319,7 @@ export default function Power() {
                                 stroke="#b9a62f"
                                 strokeWidth={2}
                                 dot={false}
-                                activeDot={{ r: 6, fill: '#2fb96c', stroke: '#f9f9f9' }}
+                                activeDot={{ r: 6, fill: '#FEAE50', stroke: '#f9f9f9' }}
                             />
                             <Line
                                 type="monotone"
@@ -357,13 +357,13 @@ export default function Power() {
                                 <Radar
                                     name="Efficiency"
                                     dataKey="A"
-                                    stroke="#2fb96c"
-                                    fill="#2fb96c"
+                                    stroke="#FEAE50"
+                                    fill="#FEAE50"
                                     fillOpacity={0.3}
                                     dot={{
                                         r: 4,
                                         fillOpacity: 1,
-                                        fill: "#2fb96c"
+                                        fill: "#FEAE50"
                                     }}
                                 />
                             </RadarChart>
@@ -439,7 +439,7 @@ export default function Power() {
             </div>
 
             {/* Prediction Chart */}
-            <Card className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}>
+            <Card className={`${cardStyle} bg-gradient-to-br from-[#020818] to-[#12031b]`}>
                 <h2 className="text-xs font-medium px-1 text-[#b3b3b3] uppercase tracking-wider">Power Consumption Prediction</h2>
                 <div className="h-[260px] mt-4">
                     <ResponsiveContainer width="100%" height="100%">
@@ -449,14 +449,14 @@ export default function Power() {
                                 dataKey="hour"
                                 stroke="var(--text-light)"
                                 fontSize={11}
-                                axisLine={{ stroke: 'var(--light-blue-1)' }}
+                                axisLine={{ stroke: 'var(--purple-light-1)' }}
                                 tickLine={false}
                                 tick={{ fill: 'var(--foreground, #000000)', className: 'dark:fill-[var(--text-light)]' }}
                             />
                             <YAxis
                                 stroke="var(--text-light)"
                                 fontSize={11}
-                                axisLine={{ stroke: 'var(--light-blue-1)' }}
+                                axisLine={{ stroke: 'var(--purple-light-1)' }}
                                 tickLine={false}
                                 tick={{ fill: 'var(--foreground, #000000)', className: 'dark:fill-[var(--text-light)]' }}
                                 unit="kWh"
@@ -469,7 +469,7 @@ export default function Power() {
                                 stroke="#b9a62f"
                                 strokeWidth={2}
                                 dot={false}
-                                activeDot={{ r: 6, fill: '#2fb96c', stroke: '#f9f9f9' }}
+                                activeDot={{ r: 6, fill: '#FEAE50', stroke: '#f9f9f9' }}
                             />
                             <Line
                                 type="monotone"
@@ -484,7 +484,7 @@ export default function Power() {
                 <div className="flex w-full items-start gap-2 text-sm mt-4">
                     <div className="grid gap-2">
                         <div className="flex items-center gap-2 font-medium leading-none dark:text-[#f9f9f9]">
-                            Trending up by 5.2% this hour <IconTrendingUp className="h-4 w-4 text-[#2fb96c]" />
+                            Trending up by 5.2% this hour <IconTrendingUp className="h-4 w-4 text-[#FEAE50]" />
                         </div>
                         <div className="flex items-center gap-2 leading-none text-[#b3b3b3]">
                             Showing predicted vs historical consumption for the next 24 hours

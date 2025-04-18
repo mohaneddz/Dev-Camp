@@ -20,8 +20,8 @@ const data = Array.from({ length: 90 }, (_, i) => {
 });
 
 const dataTypes = {
-  Temperature: { unit: '°', color: 'var(--principal-green)' },
-  Humidity: { unit: '%', color: 'var(--light-blue-2)' },
+  Temperature: { unit: '°', color: 'var(--orange)' },
+  Humidity: { unit: '%', color: 'var(--purple-light-2)' },
   CO2: { unit: 'ppm', color: 'var(--bad)' }
 };
 
@@ -29,7 +29,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     const unit = dataTypes[payload[0].dataKey as keyof typeof dataTypes]?.unit || '';
     return (
-      <div className="bg-[var(--dark-blue-1)] border border-[var(--light-blue-1)] p-3 rounded-lg shadow-lg backdrop-blur-sm">
+      <div className="bg-[var(--purple-dark-1)] border border-[var(--purple-light-1)] p-3 rounded-lg shadow-lg backdrop-blur-sm">
         <p className="text-xs font-medium text-[var(--text-muted)] mb-2">{label}</p>
         {payload.map((item: any, index: number) => (
           <div key={index} className="flex items-center gap-2">
@@ -61,15 +61,15 @@ export default function SectionCharts() {
   };
 
   const buttonBaseClass = "px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300 relative overflow-hidden";
-  const buttonActiveClass = "bg-[var(--principal-green)] text-[var(--text-light)] shadow-lg shadow-[var(--principal-green)]/20";
-  const buttonInactiveClass = "text-[var(--text-muted)] hover:bg-[var(--light-blue-1)] before:absolute before:inset-0 before:p-[1px] before:bg-gradient-to-br before:from-[#ffffff10] before:via-[#ffffff05] before:to-transparent before:rounded-lg before:-z-10";
+  const buttonActiveClass = "bg-[var(--orange)] text-[var(--text-light)] shadow-lg shadow-[var(--orange)]/20";
+  const buttonInactiveClass = "text-[var(--text-muted)] hover:bg-[var(--purple-light-1)] before:absolute before:inset-0 before:p-[1px] before:bg-gradient-to-br before:from-[#ffffff10] before:via-[#ffffff05] before:to-transparent before:rounded-lg before:-z-10";
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <h2 className="text-xs font-medium text-[var(--text-muted)] uppercase tracking-wider">{dataType}</h2>
-          <div className="flex gap-2 p-1 rounded-lg dark:bg-[var(--dark-blue-1)]/50 backdrop-blur-sm">
+          <div className="flex gap-2 p-1 rounded-lg dark:bg-[var(--purple-dark-1)]/50 backdrop-blur-sm">
             {Object.keys(dataTypes).map((type) => (
               <button
                 key={type}
@@ -83,7 +83,7 @@ export default function SectionCharts() {
             ))}
           </div>
         </div>
-        <div className="flex gap-2 p-1 rounded-lg dark:bg-[var(--dark-blue-1)]/50 backdrop-blur-sm">
+        <div className="flex gap-2 p-1 rounded-lg dark:bg-[var(--purple-dark-1)]/50 backdrop-blur-sm">
           {[
             { label: 'Last 3 months', value: '3m' },
             { label: 'Last 30 days', value: '30d' },
@@ -114,13 +114,13 @@ export default function SectionCharts() {
             <CartesianGrid 
               strokeDasharray="3 3" 
               vertical={false} 
-              stroke="var(--light-blue-1)" 
+              stroke="var(--purple-light-1)" 
             />
             <XAxis 
               dataKey="date" 
               stroke="var(--text-light)" 
               fontSize={11}
-              axisLine={{ stroke: 'var(--light-blue-1)' }}
+              axisLine={{ stroke: 'var(--purple-light-1)' }}
               tickLine={false}
               dy={10}
               interval={4}
@@ -142,7 +142,7 @@ export default function SectionCharts() {
             <YAxis 
               stroke="var(--text-light)" 
               fontSize={11}
-              axisLine={{ stroke: 'var(--light-blue-1)' }}
+              axisLine={{ stroke: 'var(--purple-light-1)' }}
               tickLine={false}
               dx={-10}
               unit={dataTypes[dataType].unit}
@@ -160,10 +160,10 @@ export default function SectionCharts() {
             <Line
               type="monotone"
               dataKey={`Previous ${dataType}`}
-              stroke="var(--light-blue-2)"
+              stroke="var(--purple-light-2)"
               strokeWidth={2}
               dot={false}
-              activeDot={{ r: 4, fill: "var(--light-blue-2)" }}
+              activeDot={{ r: 4, fill: "var(--purple-light-2)" }}
             />
           </LineChart>
         </ResponsiveContainer>

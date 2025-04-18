@@ -18,7 +18,6 @@ export default async function HomePage() {
 
   return (
     <div className="w-full min-h-screen overflow-x-hidden">
-    
 
     </div>
   );

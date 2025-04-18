@@ -60,7 +60,7 @@ const predictionData = generatePredictionData();
 const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
         return (
-            <div className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}>
+            <div className={`${cardStyle} bg-gradient-to-br from-[#F35A4E] to-[#12031b]`}>
                 <p className="text-[#f9f9f9] text-sm font-medium mb-1">{label}</p>
                 {payload.map((entry: any, index: number) => (
                     <p key={index} className="text-sm" style={{ color: entry.color }}>
@@ -114,10 +114,10 @@ export default function SectionPredictionChart() {
                             <Line
                                 type="monotone"
                                 dataKey="Air Conditioning"
-                                stroke="#2fb96c"
+                                stroke="#FEAE50"
                                 strokeWidth={2}
                                 dot={false}
-                                activeDot={{ r: 6, fill: '#2fb96c', stroke: '#f9f9f9' }}
+                                activeDot={{ r: 6, fill: '#FEAE50', stroke: '#f9f9f9' }}
                             />
                             <Line
                                 type="monotone"
@@ -151,7 +151,7 @@ export default function SectionPredictionChart() {
                 <div className="flex w-full items-start gap-2 text-sm">
                     <div className="grid gap-2">
                         <div className="flex items-center gap-2 font-medium leading-none dark:text-[#f9f9f9]">
-                            System operating normally <TrendingUp className="h-4 w-4 text-[#2fb96c]" />
+                            System operating normally <TrendingUp className="h-4 w-4 text-[#FEAE50]" />
                         </div>
                         <div className="flex items-center gap-2 leading-none text-[#b3b3b3]">
                             Showing predicted system states for the next 24 hours

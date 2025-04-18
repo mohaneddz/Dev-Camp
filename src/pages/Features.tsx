@@ -6,13 +6,13 @@ import { useState, useMemo } from 'react';
 import { TrendingUp, TrendingDown, Server as ServerIcon, Cpu, Thermometer, Zap } from 'lucide-react';
 
 // Define CSS variables for styling, including color schemes for both light and dark modes
-const cardStyle = "p-3 bg-[#020818] border-0 shadow-lg relative before:absolute before:inset-0 before:p-[1px] before:bg-gradient-to-br before:from-[#ffffff10] before:via-[#ffffff05] before:to-transparent before:rounded-lg before:-z-10 before:pointer-events-none backdrop-blur-sm";
+const cardStyle = "p-3 border-0 shadow-lg relative before:absolute before:inset-0 before:p-[1px] before:bg-gradient-to-br before:from-[#ffffff10] before:via-[#ffffff05] before:to-transparent before:rounded-lg before:-z-10 before:pointer-events-none backdrop-blur-sm transition-colors duration-300";
 
 // Define chart theme colors
 const chartTheme = {
   axisColor: "var(--axis-color)",
   textColor: "var(--text-color)",
-  gridColor: "#172d662c",
+  gridColor: "var(--grid-color)",
 };
 
 // Type definitions
@@ -164,14 +164,14 @@ const networkData = generateNetworkData();
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-[#020818] border border-[#172d662c] shadow-xl px-3 py-2 rounded-lg">
-        <p className="text-[#f9f9f9] text-sm font-medium mb-1">{label}</p>
+      <div className="bg-background dark:bg-[#020818] border border-border dark:border-[#172d662c] shadow-xl px-3 py-2 rounded-lg">
+        <p className="text-foreground dark:text-[#f9f9f9] text-sm font-medium mb-1">{label}</p>
         {payload.map((entry: any, index: number) => (
-          <p key={index} className="text-[#a9b92f] text-sm font-bold">
+          <p key={index} className="text-[#b9992f] text-sm font-bold">
             {entry.name}: {entry.value}
           </p>
         ))}
-        </div>
+      </div>
     );
   }
   return null;
@@ -180,87 +180,101 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 export default function Server() {
   const [activeMetric, setActiveMetric] = useState('requests');
 
-  const totalRequests = useMemo(() => 
-    requestData.reduce((acc, curr) => acc + curr.requests, 0), 
+  const totalRequests = useMemo(() =>
+    requestData.reduce((acc, curr) => acc + curr.requests, 0),
     [requestData]
   );
 
-  const totalErrors = useMemo(() => 
-    requestData.reduce((acc, curr) => acc + curr.errors, 0), 
+  const totalErrors = useMemo(() =>
+    requestData.reduce((acc, curr) => acc + curr.errors, 0),
     [requestData]
   );
 
   return (
     <div className="flex flex-1 flex-col p-4 gap-4"
-         style={{
-           '--card-gradient-from': '#ffffff10',
-           '--card-gradient-via': '#ffffff05',
-           '--card-gradient-to': 'transparent',
-           '--card-bg-from': '#2fb96c20',
-           
-           '--card-bg-to': '#02081400',
-           '--text-color': '#000000',
-           '--axis-color': '#000000',
-         } as React.CSSProperties}
-         data-theme={typeof window !== 'undefined' && window.document.documentElement.classList.contains('dark') ? 'dark' : 'light'}>
+      style={{
+        '--card-gradient-from': 'var(--card-gradient-from)',
+        '--card-gradient-via': 'var(--card-gradient-via)',
+        '--card-gradient-to': 'var(--card-gradient-to)',
+        '--card-bg-from': 'var(--card-bg-from)',
+        '--card-bg-to': 'var(--card-bg-to)',
+        '--text-color': 'var(--text-color)',
+        '--axis-color': 'var(--axis-color)',
+        '--grid-color': 'var(--grid-color)',
+      } as React.CSSProperties}>
       <style jsx global>{`
-        .dark [data-theme="light"],
-        [data-theme="dark"] {
+        :root {
+          --card-gradient-from: #ffffff10;
+          --card-gradient-via: #ffffff05;
+          --card-gradient-to: transparent;
+          --card-bg-from: #FEAE5020;
+          --card-bg-to: #02081400;
+          --text-color: #000000;
+          --axis-color: #000000;
+          --grid-color: #172d662c;
+        }
+
+        .dark {
+          --card-gradient-from: #ffffff05;
+          --card-gradient-via: #ffffff02;
+          --card-gradient-to: transparent;
+          --card-bg-from: #FEAE5010;
+          --card-bg-to: #02081400;
           --text-color: #f9f9f9;
           --axis-color: #f9f9f9;
+          --grid-color: #172d662c;
         }
       `}</style>
       {/* Top Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}>
+        <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[#020818] dark:to-[#12031b]`}>
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
               <ServerIcon className="text-[#b9992f]" />
-              <h3 className="text-xs font-medium text-slate-700 dark:text-[#b3b3b3] uppercase tracking-wider">Total Requests</h3>
+              <h3 className="text-xs font-medium text-foreground/70 dark:text-[#b3b3b3] uppercase tracking-wider">Total Requests</h3>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-2xl font-bold dark:text-[#f9f9f9]">{totalRequests.toLocaleString()}</span>
+              <span className="text-2xl font-bold text-foreground dark:text-[#f9f9f9]">{totalRequests.toLocaleString()}</span>
               <span className="text-sm font-medium text-[#b9992f]">
                 <TrendingUp className="inline-block mr-1" />
                 +12.5%
               </span>
             </div>
-            <p className="text-[#b3b3b3] text-sm">Last 90 days</p>
+            <p className="text-muted-foreground dark:text-[#b3b3b3] text-sm">Last 90 days</p>
           </div>
         </Card>
 
-        
-        <Card className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}>
+        <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[#020818] dark:to-[#12031b]`}>
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <Thermometer className= "text-[#b9992f]" />
-              <h3 className="text-xs font-medium text-slate-700  dark:text-[#b3b3b3] uppercase tracking-wider">Temperature</h3>
+              <Thermometer className="text-[#b9992f]" />
+              <h3 className="text-xs font-medium text-foreground/70 dark:text-[#b3b3b3] uppercase tracking-wider">Temperature</h3>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-2xl font-bold dark:text-[#f9f9f9]">45°C</span>
-              <span className="text-sm font-medium  text-[#b9992f]">
+              <span className="text-2xl font-bold text-foreground dark:text-[#f9f9f9]">45°C</span>
+              <span className="text-sm font-medium text-[#b9992f]">
                 <TrendingDown className="inline-block mr-1" />
                 -2.1%
               </span>
             </div>
-            <p className="text-[#b3b3b3] text-sm">CPU temperature</p>
+            <p className="text-muted-foreground dark:text-[#b3b3b3] text-sm">CPU temperature</p>
           </div>
         </Card>
 
-        <Card className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}>
+        <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[#020818] dark:to-[#12031b]`}>
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
               <Zap className="text-[#b9992f]" />
-              <h3 className="text-xs font-medium text-slate-700 dark:text-[#b3b3b3] uppercase tracking-wider">Power Draw</h3>
+              <h3 className="text-xs font-medium text-foreground/70 dark:text-[#b3b3b3] uppercase tracking-wider">Power Draw</h3>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-2xl font-bold dark:text-[#f9f9f9]">1.2kW</span>
+              <span className="text-2xl font-bold text-foreground dark:text-[#f9f9f9]">1.2kW</span>
               <span className="text-sm font-medium text-[#b9992f]">
                 <TrendingDown className="inline-block mr-1" />
                 -3.5%
               </span>
             </div>
-            <p className="text-[#b3b3b3] text-sm">Current consumption</p>
+            <p className="text-muted-foreground dark:text-[#b3b3b3] text-sm">Current consumption</p>
           </div>
         </Card>
       </div>
@@ -278,42 +292,43 @@ export default function Server() {
 
         </div>
 
-        
+
 
         {/* Third Row - Three Columns */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {/* Memory Usage */}
 
 
-          <Card className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}>
-  <div className="flex flex-col gap-2">
-    <div className="flex items-center gap-2">
-      <Zap className="text-[#b9992f]" />
-      <h3 className="text-xs font-medium text-slate-700 dark:text-[#b3b3b3] uppercase tracking-wider">
-        AI-Powered Suggestion
-      </h3>
-    </div>
-    <div className="text-lg font-bold dark:text-[#f9f9f9]">
-      "Upgrade to Pro for 2x Speed"
-    </div>
-    <p className="text-sm text-[#b3b3b3]">
-      Recommended based on your recent usage trends.
-    </p>
-    <button className="text-[#b9992f] underline text-sm mt-1">Learn more</button>
-  </div>
-</Card>
+          <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[#020818] dark:to-[#12031b]`}>
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <Zap className="text-[#b9992f]" />
+                <h3 className="text-xs font-medium text-slate-700 dark:text-[#b3b3b3] uppercase tracking-wider">
+                  AI-Powered Suggestion
+                </h3>
+              </div>
+              <div className="text-lg font-bold text-foreground dark:text-[#f9f9f9]">
+                "Upgrade to Pro for 2x Speed"
+              </div>
+              <p className="text-sm text-muted-foreground dark:text-[#b3b3b3]">
+                Recommended based on your recent usage trends.
+              </p>
+              <button className="text-[#b9992f] underline text-sm mt-1 hover:text-[#d9b94f] transition-colors">Learn more</button>
+            </div>
+          </Card>
 
-<Card className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}>
-  <h3 className="text-xs font-medium text-[#b3b3b3] uppercase tracking-wider mb-2">Top Picks</h3>
-  <ul className="space-y-2">
-    {["Cloud Sync", "Server Boost", "24/7 Uptime", "AI Tuner"].map((item, index) => (
-      <li key={index} className="flex justify-between text-sm text-[#f9f9f9]">
-        <span>{index + 1}. {item}</span>
-        <span className="text-[#b9992f] font-medium">{(Math.random() * 100).toFixed(1)}%</span>
-      </li>
-    ))}
-  </ul>
-</Card>
+          {/* Top Picks */}
+          <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[#020818] dark:to-[#12031b]`}>
+            <h3 className="text-xs font-medium text-foreground/70 dark:text-[#b3b3b3] uppercase tracking-wider mb-2">Top Picks</h3>
+            <ul className="space-y-2">
+              {["Cloud Sync", "Server Boost", "24/7 Uptime", "AI Tuner"].map((item, index) => (
+                <li key={index} className="flex justify-between text-sm text-foreground dark:text-[#f9f9f9]">
+                  <span>{index + 1}. {item}</span>
+                  <span className="text-[#b9992f] font-medium">{(Math.random() * 100).toFixed(1)}%</span>
+                </li>
+              ))}
+            </ul>
+          </Card>
 
 
 
@@ -326,34 +341,34 @@ export default function Server() {
           {/* Server Response Time */}
 
           {/* Request History */}
-          <Card className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}>
-          <h3 className="text-xs font-medium text-[#b3b3b3] uppercase tracking-wider mb-4">Request History</h3>
+          <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[#020818] dark:to-[#12031b]`}>
+            <h3 className="text-xs font-medium text-foreground/70 dark:text-[#b3b3b3] uppercase tracking-wider mb-4">Request History</h3>
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={requestData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke={chartTheme.gridColor} />
-                  <XAxis dataKey="date" stroke={chartTheme.axisColor} fontSize={11} axisLine={{ stroke: '#f9f9f940' }} tickLine={false} />
-                  <YAxis stroke={chartTheme.axisColor} fontSize={11} axisLine={{ stroke: '#f9f9f940' }} tickLine={false} />
+                  <CartesianGrid stroke={chartTheme.gridColor} />
+                  <XAxis dataKey="date" stroke={chartTheme.axisColor} fontSize={11} axisLine={{ stroke: 'var(--border)' }} tickLine={false} />
+                  <YAxis stroke={chartTheme.axisColor} fontSize={11} axisLine={{ stroke: 'var(--border)' }} tickLine={false} />
                   <Tooltip content={<CustomTooltip />} />
                   <Legend />
-                  <Bar dataKey="requests" fill="#2fb96c" name="Requests" />
+                  <Bar dataKey="requests" fill="#FEAE50" name="Requests" />
                   <Bar dataKey="errors" fill="#972b2b" name="Errors" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
           </Card>
-                    {/* Weekly Comparison */}
-                    <Card className={`${cardStyle} bg-gradient-to-br from-[#c084fc30] to-[#12031b]`}>
-          <h3 className="text-xs font-medium text-[#b3b3b3] uppercase tracking-wider mb-4">Weekly Comparison</h3>
+          {/* Weekly Comparison */}
+          <Card className={`${cardStyle} bg-gradient-to-br from-background to-background/80 dark:from-[#020818] dark:to-[#12031b]`}>
+            <h3 className="text-xs font-medium text-foreground/70 dark:text-[#b3b3b3] uppercase tracking-wider mb-4">Weekly Comparison</h3>
             <div className="h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={weeklyData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke={chartTheme.gridColor} />
-                  <XAxis dataKey="day" stroke={chartTheme.axisColor} fontSize={11} axisLine={{ stroke: '#f9f9f940' }} tickLine={false} />
-                  <YAxis stroke={chartTheme.axisColor} fontSize={11} axisLine={{ stroke: '#f9f9f940' }} tickLine={false} />
+                  <CartesianGrid stroke={chartTheme.gridColor} />
+                  <XAxis dataKey="day" stroke={chartTheme.axisColor} fontSize={11} axisLine={{ stroke: 'var(--border)' }} tickLine={false} />
+                  <YAxis stroke={chartTheme.axisColor} fontSize={11} axisLine={{ stroke: 'var(--border)' }} tickLine={false} />
                   <Tooltip content={<CustomTooltip />} />
                   <Legend />
-                  <Bar dataKey="requests" fill="#2fb96c" name="Requests" />
+                  <Bar dataKey="requests" fill="#FEAE50" name="Requests" />
                   <Bar dataKey="power" fill="#465fa4" name="Power" />
                   <Bar dataKey="temperature" fill="#972b2b" name="Temperature" />
                 </BarChart>

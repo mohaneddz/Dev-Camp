@@ -14,7 +14,7 @@ interface PageContextType {
   setPage: Dispatch<SetStateAction<string>>;
 }
 
-const PageContext = createContext<PageContextType>({ page: "Dashboard", setPage: () => {} });
+const PageContext = createContext<PageContextType>({ page: "Dashboard", setPage: () => { } });
 
 export function usePageContext() {
   return useContext(PageContext);
@@ -45,14 +45,16 @@ export default function layout({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <PageContext.Provider value={{ page, setPage }}>
-      <SidebarProvider>
-        <AppSidebar variant="inset" changePage={changePage} page={page} />
-        <SidebarInset>
-          <SiteHeader page={page} />
-          {children}
-        </SidebarInset>
-      </SidebarProvider>
-    </PageContext.Provider>
+    <div className="overflow-y-hidden">
+      <PageContext.Provider value={{ page, setPage }}>
+        <SidebarProvider>
+          <AppSidebar variant="inset" changePage={changePage} page={page} />
+          <SidebarInset>
+            <SiteHeader page={page} />
+            {children}
+          </SidebarInset>
+        </SidebarProvider>
+      </PageContext.Provider>
+    </div>
   );
 }

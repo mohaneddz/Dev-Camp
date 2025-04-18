@@ -24,7 +24,11 @@ const defaultValues: LoginValuesType = {
   password: "",
 };
 
-const LoginForm = () => {
+type LoginFormProps = {
+  onSuccess?: () => void;
+};
+
+const LoginForm = ({ onSuccess }: LoginFormProps) => {
   const router = useRouter();
   const supabase = createClient();
 
@@ -34,19 +38,21 @@ const LoginForm = () => {
   });
 
   async function handleLogin(values: LoginValuesType) {
-    const { error } = await supabase.auth.signInWithPassword(values);
+    // const { error } = await supabase.auth.signInWithPassword(values);
 
-    if (error) return toast.error(error.message);
+    // if (error) return toast.error(error.message);
 
     toast.success("Successfully signed in!");
-    router.replace("/dashboard");
+    onSuccess && onSuccess();
+    console.log("Successfully signed in!");
+    // router.replace("/dashboard");
   }
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleLogin)}
-        className="w-full space-y-4"
+        className="w-full space-y-4 justify-center itmes-center content-center"
       >
         <InputForm
           label=""
@@ -66,13 +72,15 @@ const LoginForm = () => {
           required
           className="bg-white/10 backdrop-blur-sm rounded-lg border-0 px-4 py-2.5 text-sm text-white placeholder:text-gray-300 focus:ring-1 focus:ring-white/50"
         />
-
-        <Button 
-          type="submit"
-          className="w-full bg-white hover:bg-gray-100 text-[#1E0E2F] rounded-lg py-2.5 text-sm font-semibold transition-colors mt-2"
-        >
-          Login
-        </Button>
+        <div className="flex justify-center items-center content-center">
+          <Button
+            type="submit"
+            className="w-max bg-primary hover:bg-primary-light hover:scale-105 duration text-white rounded-lg py-2.5 text-sm font-semibold transition mt-2 px-6 py-4 hover:shadow-lg hover:shadow-primary-light hover:shadow-md
+            active:shadow-primary-light active:shadow-md active:scale-95 duration-100"
+          >
+            Login
+          </Button>
+        </div>
       </form>
     </Form>
   );

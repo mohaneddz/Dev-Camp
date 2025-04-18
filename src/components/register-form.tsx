@@ -42,7 +42,11 @@ const nicheOptions = [
   { value: "food", label: "Food & Beverage" },
 ];
 
-const RegisterForm = () => {
+type LoginFormProps = {
+  onSuccess?: () => void;
+};
+
+const RegisterForm = ({ onSuccess }: LoginFormProps) => {
   const router = useRouter();
   const supabase = createClient();
 
@@ -52,22 +56,23 @@ const RegisterForm = () => {
   });
 
   async function handleRegister(values: RegisterValuesType) {
-    const { error } = await supabase.auth.signUp({
-      email: values.email,
-      password: "temporary-password", // This should be handled properly in a real app
-      options: {
-        emailRedirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/callback`,
-        data: {
-          name: values.name,
-          phone_number: values.phone_number,
-          niche: values.niche,
-        },
-      },
-    });
+    // const { error } = await supabase.auth.signUp({
+    //   email: values.email,
+    //   password: "temporary-password", // This should be handled properly in a real app
+    //   options: {
+    //     emailRedirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/callback`,
+    //     data: {
+    //       name: values.name,
+    //       phone_number: values.phone_number,
+    //       niche: values.niche,
+    //     },
+    //   },
+    // });
 
-    if (error) return toast.error(error.message);
+    // if (error) return toast.error(error.message);
     toast.success("Account created successfully!");
-    router.replace("/dashboard");
+    // router.replace("/dashboard");
+    onSuccess && onSuccess();
   }
 
   return (
@@ -76,22 +81,22 @@ const RegisterForm = () => {
         onSubmit={form.handleSubmit(handleRegister)}
         className="w-full space-y-4"
       >
-        <div className="space-y-4">
+        {/* <div className="space-y-4"> */}
           <InputForm
             label=""
             name="email"
-            placeholder="e-mail"
+            // placeholder="e-mail"
             description=""
-            required
+            // required
             className="bg-white rounded-lg shadow-sm border-0 px-4 py-2.5 text-sm focus:ring-1 focus:ring-[#FF6B6B] transition-all"
           />
 
-          <InputForm
+          {/* <InputForm
             label=""
             name="phone_number"
             placeholder="phone number"
             description=""
-            required
+            // required
             className="bg-white rounded-lg shadow-sm border-0 px-4 py-2.5 text-sm focus:ring-1 focus:ring-[#FF6B6B] transition-all"
           />
 
@@ -100,7 +105,7 @@ const RegisterForm = () => {
             name="name"
             placeholder="User Name"
             description=""
-            required
+            // required
             className="bg-white rounded-lg shadow-sm border-0 px-4 py-2.5 text-sm focus:ring-1 focus:ring-[#FF6B6B] transition-all"
           />
 
@@ -131,25 +136,26 @@ const RegisterForm = () => {
           >
             Connect to your meta account
           </Button>
-        </div>
+        </div> */}
 
         <div className="pt-2">
-          <Button 
-            type="submit"
+          <Button
+            // type="submit"
+            onClick={onSuccess}
             className="w-full bg-[#1E0E2F] hover:bg-[#2D1646] text-white rounded-lg py-2.5 text-sm font-semibold transition-colors"
           >
             Sign Up
           </Button>
         </div>
 
-        <div className="text-center pt-1">
+        {/* <div className="text-center pt-1">
           <p className="text-xs text-gray-400">
             You already have an account?{" "}
             <Link href="/login" className="text-[#1E0E2F] font-medium hover:underline">
               log in to your account
             </Link>
           </p>
-        </div>
+        </div> */}
       </form>
     </Form>
   );

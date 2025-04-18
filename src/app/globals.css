@@ -27,6 +27,13 @@
   --color-primary-foreground: var(--primary-foreground);
 
   --color-secondary: var(--secondary);
+  --color-secondary-light: var(--secondary-light);
+  --color-secondary-dark: var(--secondary-dark);
+
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-light: var(--tertiary-light);
+  --color-tertiary-dark: var(--tertiary-dark);
+
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
@@ -37,13 +44,13 @@
   --color-input: var(--input);
   --color-checkbox: var(--checkbox);
   --color-ring: var(--ring);
-  
+
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  
+
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -56,39 +63,41 @@
   --color-bad: var(--bad);
   --color-good: var(--good);
   --color-neutral: var(--neutral);
+
+  --color-pink: var(--text-pink);
 }
 
 :root {
   /* ===== Base Colors ===== */
-  
+
   /* Orange Palette */
   --orange: #FEAE50;
-  --orange-light: #FFDE59;
+  --orange-light: #ffde59;
   --orange-dark: #F35A4E;
-  
+
   /* Purple Palette */
   --purple: #771F6F;
-  --purple-light: #7e2f77;
+  --purple-light: #7E2F77;
   --purple-dark: #1C0522;
   --purple-dark-2: #26082F;
-  --purple-dark-3: #3b1138;
+  --purple-dark-3: #3B1138;
 
   /* Text Colors */
   --text-light: #f9f9f9;
   --text-dark: #242424;
   --text-muted: #b3b3b3;
-  --text-colored: #ee1253;
+  --text-pink: #ee1253;
   --text-primary: #FEAE50;
 
   /* Feedback Colors */
   --bad: #EF1B53;
   --bad-light: #ff6b8b;
   --bad-dark: #d41543;
-  
+
   --good: #598d59;
   --good-light: #6ba76b;
   --good-dark: #4a734a;
-  
+
   --neutral: #4b4b4e;
   --neutral-light: #6b6b6e;
   --neutral-dark: #2b2b2e;
@@ -137,12 +146,17 @@
   --primary-foreground-dark: #f0f0f0;
 
   /* Secondary Colors */
-  --secondary: #f1f1f1;
-  --secondary-light: #f8f8f8;
-  --secondary-dark: #e4e4e4;
-  --secondary-foreground: var(--text-dark);
+  --secondary: var(--purple);
+  --secondary-light: var(--purple-light);
+  --secondary-dark: var(--purple-dark-3);
+  --secondary-foreground: var(--text-light);
   --secondary-foreground-light: var(--text-muted);
   --secondary-foreground-dark: #000000;
+
+  /* tertiary */
+  --tertiary: #f1594d;
+  --tertiary-light: #ff7552;
+  --tertiary-dark: #f1594d;
 
   /* Muted Colors */
   --muted: #f1f1f1;
@@ -171,7 +185,7 @@
   --border-dark: #d8d8db;
 
   /* Input Colors */
-  --input: var(--orange);
+  --input: #f4efe5;
   --input-light: var(--orange-light);
   --input-dark: var(--orange-dark);
 
@@ -187,6 +201,7 @@
 
   /* Chart Colors */
   --chart-1: var(--orange);
+
   --chart-2: #d1d5db;
   --chart-3: #9ca3af;
   --chart-4: var(--purple);
@@ -196,24 +211,31 @@
   --sidebar: #f4efe5;
   --sidebar-light: #faf6f0;
   --sidebar-dark: #e8e4da;
+
   --sidebar-foreground: var(--text-dark);
   --sidebar-foreground-light: var(--text-muted);
   --sidebar-foreground-dark: #000000;
+
   --sidebar-primary: var(--orange);
   --sidebar-primary-light: var(--orange-light);
   --sidebar-primary-dark: var(--orange-dark);
+
   --sidebar-primary-foreground: var(--text-light);
   --sidebar-primary-foreground-light: #ffffff;
   --sidebar-primary-foreground-dark: #f0f0f0;
+
   --sidebar-accent: var(--purple);
   --sidebar-accent-light: var(--purple-light);
   --sidebar-accent-dark: var(--purple-dark);
+
   --sidebar-accent-foreground: var(--text-light);
   --sidebar-accent-foreground-light: #ffffff;
   --sidebar-accent-foreground-dark: #f0f0f0;
+
   --sidebar-border: var(--border);
   --sidebar-border-light: var(--border-light);
   --sidebar-border-dark: var(--border-dark);
+
   --sidebar-ring: var(--ring);
   --sidebar-ring-light: var(--ring-light);
   --sidebar-ring-dark: var(--ring-dark);
@@ -255,9 +277,9 @@
   --primary-foreground-dark: #f0f0f0;
 
   /* Secondary Colors */
-  --secondary: var(--purple-dark-2);
-  --secondary-light: var(--purple-dark);
-  --secondary-dark: var(--purple-dark-3);
+  --secondary: var(--purple);
+  --secondary-light: var(--purple-light);
+  --secondary-dark: var(--purple-dark);
   --secondary-foreground: var(--text-light);
   --secondary-foreground-light: var(--text-muted);
   --secondary-foreground-dark: #ffffff;
@@ -289,9 +311,9 @@
   --border-dark: var(--purple-dark-3);
 
   /* Input Colors */
-  --input: var(--orange-light);
-  --input-light: var(--orange);
-  --input-dark: var(--orange-dark);
+  --input: var(--purple-dark-2);
+  --input-light: var(--purple-light);
+  --input-dark: var(--purple-dark-3);
 
   /* Checkbox Colors */
   --checkbox: var(--purple-dark-3);
@@ -339,6 +361,41 @@
     @apply text-base bg-background text-foreground lg:text-xl;
     -webkit-font-smoothing: antialiased;
   }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    mix-blend-mode: multiply;
+    z-index: 9999;
+    animation: grainShift 1s steps(2) infinite;
+  }
+
+  @keyframes grainShift {
+
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+
+    25% {
+      transform: translate(1px, -1px);
+    }
+
+    50% {
+      transform: translate(-1px, 1px);
+    }
+
+    75% {
+      transform: translate(1px, 1px);
+    }
+  }
 }
 
 ::selection {
@@ -373,12 +430,10 @@ html {
 }
 
 .bg-radial-gradient {
-  background: radial-gradient(
-    circle at center,
-    var(--tw-gradient-from) 0%,
-    var(--tw-gradient-via) 50%,
-    var(--tw-gradient-to) 100%
-  );
+  background: radial-gradient(circle at center,
+      var(--tw-gradient-from) 0%,
+      var(--tw-gradient-via) 50%,
+      var(--tw-gradient-to) 100%);
 }
 
 .dropdown-menu-content {
@@ -390,6 +445,7 @@ html {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -447,4 +503,31 @@ html {
 
 [data-next-badge] {
   display: none !important;
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-5px);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+.animate-shake {
+  animation: shake 0.6s cubic-bezier(.36, .07, .19, .97) both;
 }

@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { InputForm } from "@/components/ui/input/input-form";
+import { AnimatedInputForm } from "@/components/ui/input/animated-input-form";
 import { createClient } from "@/lib/utils/supabase/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -11,10 +11,8 @@ import toast from "react-hot-toast";
 import { z } from "zod";
 
 export const loginFormSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8, {
-    message: "Password must be at least 8 characters.",
-  }),
+  email: z.string().email("Invalid email"),
+  password: z.string().min(8, "Min 8 characters"),
 });
 
 type LoginValuesType = z.infer<typeof loginFormSchema>;
@@ -38,48 +36,44 @@ const LoginForm = ({ onSuccess }: LoginFormProps) => {
   });
 
   async function handleLogin(values: LoginValuesType) {
-    // const { error } = await supabase.auth.signInWithPassword(values);
+    const { error } = await supabase.auth.signInWithPassword(values);
 
-    // if (error) return toast.error(error.message);
+    if (error) return toast.error(error.message);
 
     toast.success("Successfully signed in!");
-    onSuccess && onSuccess();
     console.log("Successfully signed in!");
-    // router.replace("/dashboard");
+    router.replace("/dashboard");
   }
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleLogin)}
-        className="w-full space-y-4 justify-center itmes-center content-center"
+        className="w-full space-y-8 justify-center itmes-center content-center"
       >
-        <InputForm
-          label=""
+        <AnimatedInputForm
           name="email"
-          placeholder="e-mail"
-          description=""
+          placeholder="Email"
           required
-          className="bg-white/10 backdrop-blur-sm rounded-lg border-0 px-4 py-2.5 text-sm text-white placeholder:text-gray-300 focus:ring-1 focus:ring-white/50"
         />
 
-        <InputForm
+        <AnimatedInputForm
           type="password"
-          label=""
           name="password"
-          placeholder="password"
-          description=""
+          placeholder="Password"
           required
-          className="bg-white/10 backdrop-blur-sm rounded-lg border-0 px-4 py-2.5 text-sm text-white placeholder:text-gray-300 focus:ring-1 focus:ring-white/50"
         />
         <div className="flex justify-center items-center content-center">
-          <Button
-            type="submit"
-            className="w-max bg-primary hover:bg-primary-light hover:scale-105 duration text-white rounded-lg py-2.5 text-sm font-semibold transition mt-2 px-6 py-4 hover:shadow-lg hover:shadow-primary-light hover:shadow-md
-            active:shadow-primary-light active:shadow-md active:scale-95 duration-100"
-          >
-            Login
-          </Button>
+          <div className="flex justify-center items-center">
+            <Button
+              type="submit"
+              color1="#FF6B6B"
+              color2="#FF8E8E"
+              className="w-max rounded-full text-sm font-semibold transition-all duration-200 mt-2 px-6 py-4"
+            >
+              Sign In
+            </Button>
+          </div>
         </div>
       </form>
     </Form>

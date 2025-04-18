@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { InputForm } from "@/components/ui/input/input-form";
+import { AnimatedInputForm } from "@/components/ui/input/animated-input-form";
 import { createClient } from "@/lib/utils/supabase/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -56,106 +56,89 @@ const RegisterForm = ({ onSuccess }: LoginFormProps) => {
   });
 
   async function handleRegister(values: RegisterValuesType) {
-    // const { error } = await supabase.auth.signUp({
-    //   email: values.email,
-    //   password: "temporary-password", // This should be handled properly in a real app
-    //   options: {
-    //     emailRedirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/callback`,
-    //     data: {
-    //       name: values.name,
-    //       phone_number: values.phone_number,
-    //       niche: values.niche,
-    //     },
-    //   },
-    // });
+    const { error } = await supabase.auth.signUp({
+      email: values.email,
+      password: "temporary-password", // This should be handled properly in a real app
+      options: {
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/callback`,
+        data: {
+          name: values.name,
+          phone_number: values.phone_number,
+          niche: values.niche,
+        },
+      },
+    });
 
-    // if (error) return toast.error(error.message);
+    if (error) return toast.error(error.message);
     toast.success("Account created successfully!");
-    // router.replace("/dashboard");
-    onSuccess && onSuccess();
+    router.replace("/dashboard");
+    // onSuccess && onSuccess();
   }
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleRegister)}
-        className="w-full space-y-4"
+        className="w-full space-y-6 "
       >
-        {/* <div className="space-y-4"> */}
-          <InputForm
-            label=""
-            name="email"
-            // placeholder="e-mail"
-            description=""
-            // required
-            className="bg-white rounded-lg shadow-sm border-0 px-4 py-2.5 text-sm focus:ring-1 focus:ring-[#FF6B6B] transition-all"
-          />
+        <AnimatedInputForm
+          name="email"
+          placeholder="Email"
+        />
 
-          {/* <InputForm
-            label=""
-            name="phone_number"
-            placeholder="phone number"
-            description=""
-            // required
-            className="bg-white rounded-lg shadow-sm border-0 px-4 py-2.5 text-sm focus:ring-1 focus:ring-[#FF6B6B] transition-all"
-          />
+        <AnimatedInputForm
+          name="phone_number"
+          placeholder="Phone Number"
+        />
 
-          <InputForm
-            label=""
-            name="name"
-            placeholder="User Name"
-            description=""
-            // required
-            className="bg-white rounded-lg shadow-sm border-0 px-4 py-2.5 text-sm focus:ring-1 focus:ring-[#FF6B6B] transition-all"
-          />
+        <AnimatedInputForm
+          name="name"
+          placeholder="User Name"
+        />
 
-          <select
-            {...form.register("niche")}
-            className="w-full bg-white rounded-lg shadow-sm border-0 px-4 py-2.5 text-sm focus:ring-1 focus:ring-[#FF6B6B] transition-all text-gray-500"
-          >
-            <option value="">Products type</option>
-            {nicheOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+        <select
+          {...form.register("niche")}
+          className="w-full bg-input rounded-lg shadow-sm border-0 px-4 py-2.5 text-sm focus:ring-1 focus:ring-[#FF6B6B] transition-all text-gray-500"
+        >
+          <option value="">Products type</option>
+          {nicheOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
 
-          <Button
-            type="button"
-            variant="outline"
-            className="w-full bg-white text-gray-600 rounded-lg py-2.5 text-sm font-normal border-0 shadow-sm hover:bg-gray-50"
-          >
-            Connect to your shop
-          </Button>
+        <Button
+          type="button"
+          variant="outline"
+          className="font-bold py-4 w-full cursor-pointer text-white bg-secondary-dark dark:bg-tertiary rounded-lg py-2.5 text-sm font-normal border-0 shadow-sm hover:bg-secondary-dark/90 dark:hover:bg-tertiary/90 hover:scale-105 active:scale-95 hover:shadow-lg dark:hover:shadow-tertiary/20 transition-all duration-200"
+        >
+          Connect to your shop
+        </Button>
 
-          <Button
-            type="button"
-            variant="outline"
-            className="w-full bg-white text-gray-600 rounded-lg py-2.5 text-sm font-normal border-0 shadow-sm hover:bg-gray-50"
-          >
-            Connect to your meta account
-          </Button>
-        </div> */}
-
-        <div className="pt-2">
-          <Button
-            // type="submit"
-            onClick={onSuccess}
-            className="w-full bg-[#1E0E2F] hover:bg-[#2D1646] text-white rounded-lg py-2.5 text-sm font-semibold transition-colors"
-          >
-            Sign Up
-          </Button>
+        <Button
+          type="button"
+          variant="outline"
+          className="font-bold py-4 w-full cursor-pointer text-white bg-secondary-dark dark:bg-tertiary rounded-lg py-2.5 text-sm font-normal border-0 shadow-sm hover:bg-secondary-dark/90 dark:hover:bg-tertiary/90 hover:scale-105 active:scale-95 hover:shadow-lg dark:hover:shadow-tertiary/20 transition-all duration-200"
+        >
+          Connect to your meta account
+        </Button>
+        <div className="flex justify-center items-center">
+        <Button
+          type="submit"
+          className="w-max bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-semibold transition-all duration-200 mt-2 px-6 py-4 hover:scale-105 active:scale-95 hover:shadow-lg dark:hover:shadow-primary/20"
+        >
+          Sign Up
+        </Button>
         </div>
-
-        {/* <div className="text-center pt-1">
+        <div className="text-center pt-1">
           <p className="text-xs text-gray-400">
             You already have an account?{" "}
-            <Link href="/login" className="text-[#1E0E2F] font-medium hover:underline">
+            <button onClick={onSuccess} className="text-primary font-medium hover:underline">
               log in to your account
-            </Link>
+            </button>
           </p>
-        </div> */}
+        </div>
       </form>
     </Form>
   );

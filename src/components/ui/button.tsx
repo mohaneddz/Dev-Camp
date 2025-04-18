@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils/cn"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "select-none relative overflow-hidden inline-flex items-center justify-center hover:cursor-pointer hover:drop-shadow-lg hover:brightness-110 active:brightness-90 text-white transition-all duration-100 ease-in-out transform hover:scale-105 active:scale-100 before:content-[''] before:absolute before:top-0 before:left-[-100%] before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/30 before:to-transparent before:transition-all before:duration-500 hover:before:left-[100%] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
       variant: {
@@ -42,17 +42,28 @@ function Button({
   variant,
   size,
   asChild = false,
+  color1,
+  color2,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean
+    color1?: string
+    color2?: string
   }) {
   const Comp = asChild ? Slot : "button"
+
+  const buttonStyle = {
+    background: color1 && color2 ? `linear-gradient(to bottom right, ${color1}, ${color2})` : color1 ? color1 : color2,
+    ...(color1 && color2 === undefined && { background: color1 }),
+    ...(color2 && color1 === undefined && { background: color2 })
+  }
 
   return (
     <Comp
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
+      style={buttonStyle}
       {...props}
     />
   )

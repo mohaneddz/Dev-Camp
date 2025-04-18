@@ -1,44 +1,44 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils/cn";
-import { ChevronLeftCircle } from "lucide-react";
 import Link from "next/link";
 import LoginForm from "./_components/login-form";
+import { motion } from "framer-motion";
 
-const LoginPage = () => {
+export default function LoginPage() {
   return (
-    <section className=" flex h-screen w-screen items-center justify-center bg-gray-50 dark:bg-gray-900 transition-colors duration-300 p-4">
-      <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-lg pt-12 p-6 space-y-6 transform transition-transform duration-300 hover:scale-105">
-        <Button variant="outline" asChild>
-          <Link href="/" className={cn("absolute left-4 top-4 flex items-center text-gray-600 dark:text-gray-200")}>
-            <ChevronLeftCircle className="mr-2 h-5 w-5" />
-            Back
-          </Link>
-        </Button>
-
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 transition-colors duration-300">
-            Welcome Back
-          </h1>
-          <p className="text-sm text-gray-600 dark:text-gray-300">
-            Enter your email and password to sign in to your account
-          </p>
-        </div>
+    <div className="w-full h-full flex items-center justify-center p-8">
+      <div className="w-full max-w-md">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-center mb-8"
+        >
+          <h2 className="text-2xl font-semibold text-white mb-2">
+            WELCOME BACK TO COMMAND
+          </h2>
+        </motion.div>
 
         <LoginForm />
 
-        <div className="text-center">
-          <p className="text-sm text-gray-600 dark:text-gray-300">
-            <Link
-              href="/register"
-              className="text-green-600 dark:text-green-600 hover:text-green-700 dark:hover:text-green-500 font-semibold underline"
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="text-center mt-6"
+        >
+          <p className="text-sm text-gray-300">
+            Don't have an account?{" "}
+            <Link 
+              href="/register" 
+              className="text-white font-semibold hover:text-gray-200"
             >
-              Don&apos;t have an account? Register
+              Create an account
             </Link>
           </p>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </div>
   );
-};
-
-export default LoginPage;
+}

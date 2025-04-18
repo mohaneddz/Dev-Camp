@@ -1,4 +1,4 @@
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@/lib/utils/supabase/server";
 import ProfileImageUploader from "@/components/profileuploader";
 import { IconArrowLeft } from '@tabler/icons-react';
 import Link from "next/link";

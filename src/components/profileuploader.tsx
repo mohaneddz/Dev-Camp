@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/lib/utils/supabase/client";
 
 export default function ProfileImageUploader({ userId }: { userId: string }) {
   const [uploading, setUploading] = useState(false);

@@ -26,7 +26,6 @@ const defaultValues: LoginValuesType = {
 
 const LoginForm = () => {
   const router = useRouter();
-
   const supabase = createClient();
 
   const form = useForm<LoginValuesType>({
@@ -39,34 +38,41 @@ const LoginForm = () => {
 
     if (error) return toast.error(error.message);
 
-    toast.success("Login successful");
-
-    router.refresh();
+    toast.success("Successfully signed in!");
+    router.replace("/dashboard");
   }
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleLogin)}
-        className="w-full flex flex-col gap-y-4"
+        className="w-full space-y-4"
       >
         <InputForm
-          label="Email"
+          label=""
           name="email"
-          placeholder="smth@mobilis.dz"
+          placeholder="e-mail"
           description=""
           required
+          className="bg-white/10 backdrop-blur-sm rounded-lg border-0 px-4 py-2.5 text-sm text-white placeholder:text-gray-300 focus:ring-1 focus:ring-white/50"
         />
 
         <InputForm
           type="password"
-          label="Password"
+          label=""
           name="password"
+          placeholder="password"
           description=""
           required
+          className="bg-white/10 backdrop-blur-sm rounded-lg border-0 px-4 py-2.5 text-sm text-white placeholder:text-gray-300 focus:ring-1 focus:ring-white/50"
         />
 
-        <Button>Login</Button>
+        <Button 
+          type="submit"
+          className="w-full bg-white hover:bg-gray-100 text-[#1E0E2F] rounded-lg py-2.5 text-sm font-semibold transition-colors mt-2"
+        >
+          Login
+        </Button>
       </form>
     </Form>
   );

@@ -102,12 +102,18 @@ const fbActivityData = [
 
 export default function Posts() {
   return (
+
     <div className="flex flex-1 flex-col w-full h-full">
+
       <div className="p-8 space-y-12 overflow-y-auto" style={{ height: 'calc(100vh - 100px)' }}>
+
         <div>
-          <div className="text-2xl font-bold mb-6">Instagram</div>
-          <div className="flex flex-col md:grid md:grid-cols-2 gap-8 mb-8">
+
+          <div className="text-2xl font-bold mb-6 dark:text-primary">Instagram</div>
+
+          <div className="flex flex-col md:grid md:grid-cols-2 gap-8 mb-8 bg-gradient-to-br from-card/20 via-card-light/20 to-card-dark/20 p-8 pt-10 rounded-md shadow-md border-2 border-card-dark ">
             <div className="h-[250px] sm:h-[300px]">
+              
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart
                   data={activityData}
@@ -119,9 +125,9 @@ export default function Posts() {
                   }}
                 >
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis yAxisId="left" />
-                  <YAxis yAxisId="right" orientation="right" />
+                  <XAxis dataKey="month" fontSize={12} />
+                  <YAxis yAxisId="left" fontSize={12} />
+                  <YAxis yAxisId="right" orientation="right" fontSize={12} />
                   <Tooltip />
                   <Legend />
                   <Line
@@ -135,14 +141,17 @@ export default function Posts() {
                     yAxisId="right"
                     type="monotone"
                     dataKey="posts"
-                    stroke="#82ca9d"
+                    stroke="#3b82f6"
                     name="Posts"
                   />
                 </LineChart>
               </ResponsiveContainer>
+              
             </div>
+
             <div className="overflow-x-auto">
               <Table>
+
                 <TableHeader>
                   <TableRow>
                     <TableHead className="w-[80px] sm:w-[100px]">Status</TableHead>
@@ -154,10 +163,10 @@ export default function Posts() {
                   {instagramPosts.map((post) => (
                     <TableRow key={post.id}>
                       <TableCell>
-                        <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium
-                          ${post.status === 'posted' ? 'bg-green-50 text-green-700' : 
-                            post.status === 'draft' ? 'bg-gray-50 text-gray-700' : 
-                            'bg-blue-50 text-blue-700'}`
+                        <span className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium border px-2
+                          ${post.status === 'posted' ? 'bg-primary/90 text-primary-dark' : 
+                            post.status === 'draft' ? 'bg-card-dark dark:bg-card-light text-white dark:bg-card-dark' : 
+                            'bg-tertiary-light tertiary-dark'}`
                         }>
                           {post.status}
                         </span>
@@ -172,11 +181,13 @@ export default function Posts() {
               </Table>
             </div>
           </div>
+
         </div>
 
         <div>
-          <div className="text-2xl font-bold mb-6">Facebook</div>
-          <div className="flex flex-col md:grid md:grid-cols-2 gap-8 mb-8">
+          <div className="text-2xl font-bold mb-6 dark:text-primary">Facebook</div>
+
+          <div className="flex flex-col md:grid md:grid-cols-2 gap-8  mb-8 bg-gradient-to-br from-card/20 via-card-light/20 to-card-dark/20 p-8 pt-10 rounded-md shadow-md border-2 border-card-dark">
             <div className="h-[250px] sm:h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart
@@ -189,9 +200,9 @@ export default function Posts() {
                   }}
                 >
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis yAxisId="left" />
-                  <YAxis yAxisId="right" orientation="right" />
+                  <XAxis dataKey="month" fontSize={12} />
+                  <YAxis yAxisId="left" fontSize={12} />
+                  <YAxis yAxisId="right" orientation="right" fontSize={12} />
                   <Tooltip />
                   <Legend />
                   <Line
@@ -226,8 +237,8 @@ export default function Posts() {
                       <TableCell>
                         <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium
                           ${post.status === 'posted' ? 'bg-green-50 text-green-700' : 
-                            post.status === 'draft' ? 'bg-gray-50 text-gray-700' : 
-                            'bg-blue-50 text-blue-700'}`
+                            post.status === 'draft' ? 'bg-gray-50 text-white' : 
+                            'bg-tertiary-light tertiary-dark'}`
                         }>
                           {post.status}
                         </span>
@@ -243,6 +254,7 @@ export default function Posts() {
             </div>
           </div>
         </div>
+
       </div>
     </div>
   );

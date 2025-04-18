@@ -228,7 +228,7 @@ export default function SalesForecast() {
   }
 
   return (
-    <div className="h-screen overflow-hidden bg-gray-50 dark:bg-gray-900">
+    <div className="flex flex-1 flex-col w-full h-full">
       <div className="h-full overflow-y-auto px-4 py-6 md:px-6">
         <div className="max-w-7xl mx-auto space-y-12 pb-20">
           {/* Key Metrics Grid */}

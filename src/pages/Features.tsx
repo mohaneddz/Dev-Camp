@@ -145,7 +145,7 @@ export default function Features() {
   const [isChatOpen, setIsChatOpen] = useState(false)
 
   return (
-    <div className="h-screen overflow-hidden bg-gray-50 dark:bg-gray-900">
+    <div className="flex flex-1 flex-col w-full h-full">
       <div className="h-full overflow-y-auto px-4 py-6 md:px-6">
         <div className="max-w-7xl mx-auto space-y-12 pb-20">
           {/* Header */}
@@ -186,7 +186,7 @@ export default function Features() {
                 </div>
               </div>
               <div className="h-[400px]">
-                <Bar data={featureData} options={chartOptions} />
+                <Bar data={featureData}  />
               </div>
             </div>
 

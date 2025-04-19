@@ -83,7 +83,7 @@ export default function LoginPage() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="text-center flex absolute -z-10 w-full h-[120vh] lg:h-[150vh] "
+          className="text-center flex absolute z-0 w-full h-[120vh] lg:h-[150vh] left-0"
         >
           <Image
             src="/small-login-shape.svg"

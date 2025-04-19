@@ -2,11 +2,12 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import SearchInput from '@/components/search-input'; // Adjust path
 import AlgeriaMap from '@/components/algeria-map';   // Adjust path - ENSURE THIS IS THE POPULATION-BASED VERSION
-import InfoContainer from '@/components/info-container'; // Adjust path
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+// import InfoContainer from '@/components/info-container'; // Adjust path
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { useTheme } from 'next-themes'; // Optional: for theme-based styling
 import { Button } from "@/components/ui/button";
-import { MapPin, Lock, Check, Hash } from 'lucide-react';
+import { MapPin, Lock, Check, Hash, X, User, Building2, Globe2, Tag, ChevronLeft, ChevronRight, Users, TrendingUp, Package } from 'lucide-react';
+import { Badge } from "@/components/ui/badge";
 
 interface LocationData {
     id: string;
@@ -15,16 +16,25 @@ interface LocationData {
     longitude: number;
     wilaya: string;
     status: 'normal' | 'warning' | 'alert';
-    items: string[];
-    date: string;
-    workers: number;
-    powerConsumption: number;
+    owner: {
+        name: string;
+        domains: string[];
+    };
 }
 
 // Helper function to generate mock data for the info panel
 const generateLocationData = (locationId: string, wilaya: string, status: 'normal' | 'warning' | 'alert'): LocationData => {
+    // Generate random business owner data
+    const owners = [
+        { name: "Ahmed Benali", domains: ["Electronics", "Home Appliances"] },
+        { name: "Fatima Zohra", domains: ["Clothing", "Accessories"] },
+        { name: "Karim Boudiaf", domains: ["Food", "Beverages"] },
+        { name: "Nadia Bouazza", domains: ["Furniture", "Home Decor"] },
+        { name: "Mohamed Chérif", domains: ["Automotive", "Parts"] }
+    ];
+    const randomOwner = owners[Math.floor(Math.random() * owners.length)];
+
     // Attempt to parse Lat/Lng from ID if needed for display, otherwise can ignore
-    // Example ID format: Delivery_30.1234_-0.5678
     let parsedLat = 0;
     let parsedLng = 0;
     
@@ -34,36 +44,14 @@ const generateLocationData = (locationId: string, wilaya: string, status: 'norma
         parsedLng = parseFloat(parts[2]);
     }
 
-    // Generate random delivery items
-    const items = [
-        'Electronics', 'Clothing', 'Food', 'Books', 'Furniture',
-        'Toys', 'Sports Equipment', 'Home Appliances', 'Jewelry',
-        'Automotive Parts', 'Office Supplies', 'Health Products'
-    ];
-    const itemCount = Math.floor(Math.random() * 3) + 1; // 1-3 items
-    const deliveryItems = [];
-    for (let i = 0; i < itemCount; i++) {
-        const randomIndex = Math.floor(Math.random() * items.length);
-        deliveryItems.push(items[randomIndex]);
-    }
-
-    // Generate random delivery date within last 30 days
-    const now = new Date();
-    const daysAgo = Math.floor(Math.random() * 30);
-    const deliveryDate = new Date(now);
-    deliveryDate.setDate(now.getDate() - daysAgo);
-
     return {
         id: locationId,
-        name: `Delivery #${locationId.split('_')[1].slice(0, 4)} (${wilaya})`,
+        name: `Business Location #${locationId.split('_')[1].slice(0, 4)}`,
         latitude: isNaN(parsedLat) ? 0 : parsedLat,
         longitude: isNaN(parsedLng) ? 0 : parsedLng,
         wilaya: wilaya,
         status: status,
-        items: deliveryItems,
-        date: deliveryDate.toISOString().split('T')[0],
-        workers: Math.floor(Math.random() * 180) + 20,
-        powerConsumption: parseFloat(((Math.random() * 8) + 1.5).toFixed(2)),
+        owner: randomOwner
     };
 };
 
@@ -95,6 +83,122 @@ const locationDetails = {
 // Update icons for latitude and longitude
 const LatitudeIcon = () => <Hash size={12} className="text-primary" />;
 const LongitudeIcon = () => <Hash size={12} className="text-primary" />;
+
+// Update the InfoContainer component to show the new data structure
+const InfoContainer = ({ data, onClear }: { data: LocationData, onClear: () => void }) => {
+    return (
+        <Card className="border w-full lg:w-[25vw] bg-card/50 text-card-foreground shadow-sm">
+            <CardHeader className="p-3">
+                <div className="flex justify-between items-center">
+                    <CardTitle className="text-sm font-medium flex items-center gap-2">
+                        <Building2 className="h-4 w-4 text-primary" />
+                        Location Details
+                    </CardTitle>
+                    <Button variant="ghost" size="sm" onClick={onClear} className="hover:bg-destructive/10">
+                        <X className="h-4 w-4" />
+                    </Button>
+                </div>
+            </CardHeader>
+            <CardContent className="p-3 space-y-4">
+                <div className="space-y-3">
+                    <div className="flex justify-between items-center p-2 rounded-lg bg-primary/5">
+                        <div className="flex items-center gap-2">
+                            <User className="h-4 w-4 text-primary" />
+                            <span className="text-sm font-medium">Business Owner</span>
+                        </div>
+                        <span className="text-sm font-semibold text-primary">{data.owner.name}</span>
+                    </div>
+                    
+                    <div className="flex justify-between items-center p-2 rounded-lg bg-secondary/5">
+                        <div className="flex items-center gap-2">
+                            <MapPin className="h-4 w-4 text-secondary" />
+                            <span className="text-sm font-medium">Wilaya</span>
+                        </div>
+                        <span className="text-sm font-semibold text-secondary">{data.wilaya}</span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2">
+                        <div className="flex justify-between items-center p-2 rounded-lg bg-tertiary/5">
+                            <div className="flex items-center gap-2">
+                                <Globe2 className="h-4 w-4 text-tertiary" />
+                                <span className="text-sm font-medium">Latitude</span>
+                            </div>
+                            <span className="text-sm font-semibold text-tertiary">{data.latitude.toFixed(4)}</span>
+                        </div>
+                        <div className="flex justify-between items-center p-2 rounded-lg bg-tertiary/5">
+                            <div className="flex items-center gap-2">
+                                <Globe2 className="h-4 w-4 text-tertiary" />
+                                <span className="text-sm font-medium">Longitude</span>
+                            </div>
+                            <span className="text-sm font-semibold text-tertiary">{data.longitude.toFixed(4)}</span>
+                        </div>
+                    </div>
+
+                    <div className="space-y-2 p-2 rounded-lg bg-primary/5">
+                        <div className="flex items-center gap-2">
+                            <Tag className="h-4 w-4 text-primary" />
+                            <span className="text-sm font-medium">Business Domains</span>
+                        </div>
+                        <div className="flex flex-wrap gap-1">
+                            {data.owner.domains.map((domain, index) => (
+                                <Badge 
+                                    key={index} 
+                                    variant="secondary" 
+                                    className="text-xs bg-primary/10 hover:bg-primary/20 text-primary"
+                                >
+                                    {domain}
+                                </Badge>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+                
+                {/* Additional Statistics */}
+                <div className="grid grid-cols-3 gap-2 mt-4">
+                    <div className="flex flex-col items-center p-2 rounded-lg bg-success/5">
+                        <Users className="h-4 w-4 text-success" />
+                        <span className="text-xs font-medium mt-1">Customers</span>
+                        <span className="text-sm font-semibold text-success">1.2K</span>
+                    </div>
+                    <div className="flex flex-col items-center p-2 rounded-lg bg-warning/5">
+                        <TrendingUp className="h-4 w-4 text-warning" />
+                        <span className="text-xs font-medium mt-1">Growth</span>
+                        <span className="text-sm font-semibold text-warning">+15%</span>
+                    </div>
+                    <div className="flex flex-col items-center p-2 rounded-lg bg-info/5">
+                        <Package className="h-4 w-4 text-info" />
+                        <span className="text-xs font-medium mt-1">Products</span>
+                        <span className="text-sm font-semibold text-info">45</span>
+                    </div>
+                </div>
+            </CardContent>
+            <CardFooter className="p-3 flex justify-between items-center border-t">
+                <Button variant="ghost" size="sm" className="hover:bg-primary/10">
+                    <ChevronLeft className="h-4 w-4 mr-1" />
+                    Previous
+                </Button>
+                <Button variant="ghost" size="sm" className="hover:bg-primary/10">
+                    Next
+                    <ChevronRight className="h-4 w-4 ml-1" />
+                </Button>
+            </CardFooter>
+        </Card>
+    );
+};
+
+// Update the marker colors in the AlgeriaMap component
+const getMarkerColor = (status: 'normal' | 'warning' | 'alert') => {
+    switch (status) {
+        case 'normal':
+            return 'var(--color-primary)';
+        case 'warning':
+            return 'var(--color-warning)';
+        case 'alert':
+            return 'var(--color-destructive)';
+        default:
+            return 'var(--color-primary)';
+    }
+};
 
 export default function Map() {
 

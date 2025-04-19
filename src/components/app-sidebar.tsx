@@ -1,18 +1,13 @@
 import * as React from "react"
 import {
-  IconEyeFilled,
-  IconEye,
+  IconBuildingStore,
   IconDashboard,
-  IconBrandAppleArcade,
   IconInnerShadowTop,
   IconReport,
-  IconIkosaedr,
   IconSettings,
   IconMap,
-  IconCloudFilled,
   IconBoltFilled,
   IconCloudComputingFilled,
-  IconShieldHalfFilled,
 } from "@tabler/icons-react"
 
 import { NavDocuments } from "@/components/nav-documents"
@@ -102,7 +97,7 @@ const data = {
     {
       name: "Market Exchange",
       url: "#",
-      icon: IconCloudComputingFilled,
+      icon: IconBuildingStore,
       id: "market",
     },
   ],

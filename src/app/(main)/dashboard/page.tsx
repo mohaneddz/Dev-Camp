@@ -11,7 +11,7 @@ const MediaPlan = dynamic(() => import("@/pages/MediaPlan"));
 const Settings = dynamic(() => import("@/pages/Settings"));
 const Sales = dynamic(() => import("@/pages/Sales"));
 const Features = dynamic(() => import("@/pages/Features"));
-const Market  = dynamic(() => import("@/pages/Market "));
+const Market  = dynamic(() => import("@/pages/Market"));
 
 export default function Page() {
 
@@ -26,6 +26,7 @@ export default function Page() {
         settings: Settings,
         sales: Sales,
         features: Features,
+        market: Market,
     };
 
     const PageComponent: React.ComponentType = pages[page] || Posts;

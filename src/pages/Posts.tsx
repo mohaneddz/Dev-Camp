@@ -103,15 +103,15 @@ const fbActivityData = [
 export default function Posts() {
   return (
 
-    <div className="flex flex-1 flex-col w-full h-full">
+    <div className="flex flex-col flex-1 w-full h-full">
 
       <div className="p-8 space-y-12 overflow-y-auto" style={{ height: 'calc(100vh - 100px)' }}>
 
         <div>
 
-          <div className="text-2xl font-bold mb-6 dark:text-primary text-center">Instagram</div>
+          <div className="mb-6 text-2xl font-bold text-center dark:text-primary">Instagram</div>
 
-          <div className="flex flex-col md:grid md:grid-cols-2 gap-8 mb-8 bg-gradient-to-br from-card/20 via-card-light/20 to-card-dark/20 p-8 pt-10 rounded-md shadow-md border-2 border-card-dark ">
+          <div className="flex flex-col gap-8 p-8 pt-10 mb-8 border-2 rounded-md shadow-md md:grid md:grid-cols-2 bg-gradient-to-br from-card via-card-light-1 to-card-dark-1 border-card-dark-1 ">
             <div className="h-[250px] sm:h-[300px]">
 
               <ResponsiveContainer width="100%" height="100%">
@@ -185,9 +185,9 @@ export default function Posts() {
         </div>
 
         <div>
-          <div className="text-2xl font-bold mb-6 dark:text-primary text-center">Facebook</div>
+          <div className="mb-6 text-2xl font-bold text-center dark:text-primary">Facebook</div>
 
-          <div className="flex flex-col md:grid md:grid-cols-2 gap-8  mb-8 bg-gradient-to-br from-card/20 via-card-light/20 to-card-dark/20 p-8 pt-10 rounded-md shadow-md border-2 border-card-dark">
+          <div className="flex flex-col gap-8 p-8 pt-10 mb-8 border-2 rounded-md shadow-md md:grid md:grid-cols-2 bg-gradient-to-br from-card via-card-light-1 to-card-dark-1 border-card-dark-1">
             <div className="h-[250px] sm:h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart

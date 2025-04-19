@@ -5,27 +5,29 @@ import dynamic from "next/dynamic";
 import { usePageContext } from "./layout";
 import { IconLoader } from "@tabler/icons-react";
 
-const Home = dynamic(() => import("@/pages/Posts"));
-const Logs = dynamic(() => import("@/pages/MediaPlan"));
+const Map = dynamic(() => import("@/pages/Map"));
+const Posts = dynamic(() => import("@/pages/Posts"));
+const MediaPlan = dynamic(() => import("@/pages/MediaPlan"));
 const Settings = dynamic(() => import("@/pages/Settings"));
-const Power = dynamic(() => import("@/pages/Sales"));
-const Server = dynamic(() => import("@/pages/Features"));
+const Sales = dynamic(() => import("@/pages/Sales"));
+const Features = dynamic(() => import("@/pages/Features"));
 
 export default function Page() {
 
     const { page }: any = usePageContext();
 
     const pages: any = {
-        dashboard: Home,
-        
-        mediaplan: Logs,
-        settings: Settings,
+
         map: Map,
-        sales: Power,
-        features: Server,
+        
+        dashboard: Posts,
+        mediaplan: MediaPlan,
+        settings: Settings,
+        sales: Sales,
+        features: Features,
     };
 
-    const PageComponent: React.ComponentType = pages[page] || Home;
+    const PageComponent: React.ComponentType = pages[page] || Posts;
 
     return (
 

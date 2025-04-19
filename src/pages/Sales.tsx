@@ -162,7 +162,7 @@ const performanceChartData = {
     {
       label: 'Conversion Rate (%)',
       data: metricsData.conversionRate,
-      borderColor: 'rgb(16, 185, 129)',
+      borderColor: '#8ed0d6',
       backgroundColor: 'rgba(16, 185, 129, 0.1)',
       tension: 0.4
     },

@@ -39,14 +39,19 @@ const featureData = {
   datasets: [{
     label: 'Feature Importance Score',
     data: [0.85, 0.72, 0.68, 0.65, 0.58, 0.45, 0.42],
+    // --chart-shade-1: #8fd1d8;
+    // --chart-shade-2: #a143fd;
+    // --chart-shade-3: #011133;
+    // --chart-shade-4: #55c2cb;
+    // --chart-shade-5: #c287ff;
+    // --chart-shade-6: #2a3a5a;
     backgroundColor: [
-      '#3B82F6', // blue-500
-      '#10B981', // emerald-500
-      '#8B5CF6', // violet-500
-      '#EC4899', // pink-500
-      '#F59E0B', // amber-500
-      '#6366F1', // indigo-500
-      '#14B8A6', // teal-500
+      '#8fd1d8',
+      '#a143fd',
+      '#293770',
+      '#55c2cb',
+      '#c287ff',
+      '#2a3a5a',
     ],
     borderWidth: 0,
     borderRadius: 6,
@@ -457,7 +462,7 @@ export default function Features() {
 
   return (
     <div className="flex flex-1 flex-col w-full h-full">
-      <div className="h-full overflow-y-auto px-4 py-6 md:px-6">
+      <div className="h-30 overflow-y-auto px-4 py-6 md:px-6">
         <div className="max-w-7xl mx-auto space-y-12 pb-20">
           {/* Header */}
           <div className="flex justify-between items-center">
@@ -496,7 +501,7 @@ export default function Features() {
                   <span>Higher score = More important</span>
                 </div>
               </div>
-              <div className="h-[400px]">
+              <div className="h-max">
                 <Bar data={featureData}  />
               </div>
             </div>
@@ -548,7 +553,7 @@ export default function Features() {
                         </div>
                         <div className="flex-1">
                           <div className="flex items-start justify-between">
-                            <h3 className="text-lg font-medium text-gray-900 dark:text-white">{rec.title}</h3>
+                            <h3 className="text-lg font-medium text-gray-900 dark:text-white whitespace-nowrap">{rec.title}</h3>
                             <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                               rec.impact === 'High' 
                                 ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'

@@ -35,7 +35,7 @@ export function ModeToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button  className=" hover:text-primary dark:hover:text-primary-light hover:scale-120 dark:bg-gray-900 transition duration-100">
+        <button  className=" hover:text-primary dark:hover:text-primary-light hover:scale-120 transition duration-100">
           {resolvedTheme === 'light' ? (
             <Sun className="h-[1.2rem] w-[1.2rem] text-black dark:text-white" />
           ) : (

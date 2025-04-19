@@ -39,10 +39,10 @@ const data = {
   },
   navMain: [
     {
-      title: "Guide",
+      title: "Map",
       url: "#",
       icon: IconMap,
-      id: "home",
+      id: "map",
     },
   ],
   // navClouds: [

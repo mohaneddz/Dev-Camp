@@ -20,6 +20,14 @@
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
 
+  --color-card-light-1: var(--color-card-light-1);
+  --color-card-light-2: var(--color-card-light-2);
+  --color-card-light-3: var(--color-card-light-3);
+
+  --color-card-dark-1: var(--color-card-dark-1);
+  --color-card-dark-2: var(--color-card-dark-2);
+  --color-card-dark-3: var(--color-card-dark-3);
+
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
 
@@ -35,8 +43,14 @@
   --color-primary-dark-3: var(--primary-dark-3);
 
   --color-secondary: var(--secondary);
-  --color-secondary-light: var(--secondary-light);
-  --color-secondary-dark: var(--secondary-dark);
+
+  --color-secondary-light-1: var(--secondary-light-1);
+  --color-secondary-light-2: var(--secondary-light-2);
+  --color-secondary-light-3: var(--secondary-light-3);
+
+  --color-secondary-dark-1: var(--secondary-dark-1);
+  --color-secondary-dark-2: var(--secondary-dark-2);
+  --color-secondary-dark-3: var(--secondary-dark-3);
 
   --color-tertiary: var(--tertiary);
   --color-tertiary-light: var(--tertiary-light);
@@ -123,10 +137,12 @@
 
   /* Card (Light Mode) */
   --color-card: #ffffff;
+  
   --color-card-foreground: #011133;
   --color-card-light-1: #ffffff;
   --color-card-light-2: #ffffff;
   --color-card-light-3: #ffffff;
+
   --color-card-dark-1: #f2f3f7;
   --color-card-dark-2: #e6e8f0;
   --color-card-dark-3: #d9dcea;
@@ -153,7 +169,7 @@
   /* Chart Colors (Mapping to old chart names) */
   --chart-shade-1: #8fd1d8;
   --chart-shade-2: #a143fd;
-  --chart-shade-3: #011133;
+  --chart-shade-3: #293770;
   --chart-shade-4: #55c2cb;
   --chart-shade-5: #c287ff;
   --chart-shade-6: #2a3a5a;
@@ -182,6 +198,14 @@
   --card: var(--color-card);
   --card-foreground: var(--color-card-foreground);
 
+  --card-light-1: var(--color-card-light-1);
+  --card-light-2: var(--color-card-light-2);
+  --card-light-3: var(--color-card-light-3);
+
+  --card-dark-1: var(--color-card-dark-1);
+  --card-dark-2: var(--color-card-dark-2);
+  --card-dark-3: var(--color-card-dark-3);
+
   --popover: var(--color-card); /* Mapping popover to card as no specific popover in new */
   --popover-foreground: var(--color-card-foreground);
 
@@ -197,8 +221,12 @@
   --primary-foreground: var(--color-primary-foreground);
 
   --secondary: var(--color-secondary);
-  --secondary-light: var(--color-secondary-light-1);
-  --secondary-dark: var(--color-secondary-dark-1);
+  --secondary-light-1: var(--color-secondary-light-1);
+  --secondary-light-2: var(--color-secondary-light-2);
+  --secondary-light-3: var(--color-secondary-light-3);
+  --secondary-dark-1: var(--color-secondary-dark-1);
+  --secondary-dark-2: var(--color-secondary-dark-2);
+  --secondary-dark-3: var(--color-secondary-dark-3);
   --secondary-foreground: var(--color-secondary-foreground);
 
   --tertiary: var(--color-tertiary);
@@ -343,6 +371,14 @@
 
   --card: var(--color-card);
   --card-foreground: var(--color-card-foreground);
+
+  --card-light-1: var(--color-card-light-1);
+  --card-light-2: var(--color-card-light-2);
+  --card-light-3: var(--color-card-light-3);
+
+  --card-dark-1: var(--color-card-dark-1);
+  --card-dark-2: var(--color-card-dark-2);
+  --card-dark-3: var(--color-card-dark-3);
 
   --popover: var(--color-card); /* Mapping popover to card */
   --popover-foreground: var(--color-card-foreground);

@@ -111,7 +111,7 @@ export default function Posts() {
 
           <div className="mb-6 text-2xl font-bold text-center dark:text-primary">Instagram</div>
 
-          <div className="flex flex-col gap-8 p-8 pt-10 mb-8 border-2 rounded-md shadow-md md:grid md:grid-cols-2 bg-gradient-to-br from-card via-card-light-1 to-card-dark-1 border-card-dark-1 ">
+          <div className="flex flex-col gap-8 p-8 pt-10 mb-8 border-2 rounded-md shadow-md md:grid md:grid-cols-2 bg-gradient-to-br from-card/40 via-card-light-1/40 to-card-dark-1/40 border-card-dark-1 hover:shadow-lg transition-all duration-300">
             <div className="h-[250px] sm:h-[300px]">
 
               <ResponsiveContainer width="100%" height="100%">
@@ -187,7 +187,7 @@ export default function Posts() {
         <div>
           <div className="mb-6 text-2xl font-bold text-center dark:text-primary">Facebook</div>
 
-          <div className="flex flex-col gap-8 p-8 pt-10 mb-8 border-2 rounded-md shadow-md md:grid md:grid-cols-2 bg-gradient-to-br from-card via-card-light-1 to-card-dark-1 border-card-dark-1">
+          <div className="flex flex-col gap-8 p-8 pt-10 mb-8 border-2 rounded-md shadow-md md:grid md:grid-cols-2 bg-gradient-to-br from-card/40 via-card-light-1/40 to-card-dark-1/40 border-card-dark-1 hover:shadow-lg transition-all duration-300">
             <div className="h-[250px] sm:h-[300px]">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart

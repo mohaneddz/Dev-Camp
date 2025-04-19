@@ -127,24 +127,24 @@ export default function MediaPlan() {
 
           <div className="grid grid-cols-[1.2fr,0.8fr] gap-8">
             <div className="min-[888px]:row-span-2">
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 h-full">
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 h-full bg-gradient-to-br from-card/40 via-card-light-1/40 to-card-dark-1/40 border-card-dark-1 hover:shadow-lg transition-all duration-300">
                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Content Calendar</h2>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-scroll">
                   <table className="w-full table-fixed divide-y divide-gray-200 dark:divide-gray-700">
                     <thead className="bg-gray-50 dark:bg-gray-700">
                       <tr>
-                        <th className="w-[80px] px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Validate</th>
-                        <th className="w-[120px] px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Date</th>
-                        <th className="w-[100px] px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Platform</th>
-                        <th className="w-[150px] px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Content Type</th>
-                        <th className="w-auto px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Description</th>
-                        <th className="w-[100px] px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
+                        <th className="w-20 px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider truncate">Validate</th>
+                        <th className="w-30 px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider truncate">Date</th>
+                        <th className="w-20 px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider truncate">Platform</th>
+                        <th className="w-20 px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider truncate">Content Type</th>
+                        <th className="w-max px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider truncate">Description</th>
+                        <th className="w-20 px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider truncate">Status</th>
                       </tr>
                     </thead>
                     <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                       {instagramPosts.map((post, index) => (
                         <tr key={index} className="hover:bg-gray-50 dark:hover:bg-gray-700">
-                          <td className="w-[80px] px-6 py-4 whitespace-nowrap">
+                          <td className="w-20 px-6 py-4 whitespace-nowrap">
                             <button
                               onClick={() => toggleValidation(post)}
                               className={`p-2 rounded-full ${
@@ -159,16 +159,16 @@ export default function MediaPlan() {
                               </svg>
                             </button>
                           </td>
-                          <td className="w-[120px] px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
+                          <td className="w-30 px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
                             {format(post.plannedDate, 'MMM dd, yyyy')}
                           </td>
                           <td className="w-[100px] px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
                             {post.type}
                           </td>
-                          <td className="w-[150px] px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+                          <td className="w-15 px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
                             {post.title}
                           </td>
-                          <td className="w-auto px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
+                          <td className="w-max min-w-80 px-6 py-4 text-sm text-gray-900 dark:text-gray-100 ">
                             {post.aiReasoning}
                           </td>
                           <td className="w-[100px] px-6 py-4 whitespace-nowrap">
@@ -189,7 +189,7 @@ export default function MediaPlan() {
             </div>
 
             <div>
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 bg-gradient-to-br from-card/40 via-card-light-1/40 to-card-dark-1/40 border-card-dark-1 hover:shadow-lg transition-all duration-300">
                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Calendar View</h2>
                 <div className="flex flex-row gap-12 justify-center">
                   <Calendar
@@ -232,7 +232,7 @@ export default function MediaPlan() {
             </div>
 
             <div>
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 bg-gradient-to-br from-card/40 via-card-light-1/40 to-card-dark-1/40 border-card-dark-1 hover:shadow-lg transition-all duration-300">
                 <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Validated Posts</h2>
                 <div className="space-y-4 max-h-[500px] overflow-y-auto">
                   {validatedPosts.map((post, index) => (

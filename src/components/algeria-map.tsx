@@ -358,14 +358,27 @@ const AlgeriaMap: React.FC<AlgeriaMapProps> = ({
                         return false;
                     }
                     
+                    // Check if point is in selected wilaya if one is selected
+                    if (selectedWilaya && !isPointInSelectedWilaya(point.position[0], point.position[1])) {
+                        return false;
+                    }
+                    
+                    // Check if point matches search query if one exists
+                    if (searchQuery) {
+                        const wilaya = findWilayaFromCoordinates(point.position[0], point.position[1]);
+                        if (!wilaya.toLowerCase().includes(searchQuery.toLowerCase())) {
+                            return false;
+                        }
+                    }
+                    
                     // Now it's safe to access position[0] and position[1]
                     return bounds.contains([point.position[0], point.position[1]]);
                 }
             );
         } catch (error) {
             console.error('Error filtering visible markers:', error);
-            // Fallback if there's an error
-            visibleMarkers = [];
+            // Fallback if there's an error - show all markers
+            visibleMarkers = fixedCoordinatesRef.current;
         }
 
         // Log information for debugging

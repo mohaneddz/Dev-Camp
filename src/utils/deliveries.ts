@@ -360,7 +360,7 @@ export async function generateCoordinatesForWilaya(wilaya: string, count: number
         while (!isValid) {
             const lat = getRandomLat({ minLat, maxLat });
             const lng = getRandomLng({ minLng, maxLng });
-            point = [lng, lat];
+            point = [lat, lng];
             isValid = isPointInWilaya(lng, lat, wilayaFeature);
         }
 

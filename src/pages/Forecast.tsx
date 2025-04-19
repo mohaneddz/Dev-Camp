@@ -234,7 +234,7 @@ export default function SalesForecast() {
           {/* Key Metrics Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {keyMetrics.map((metric, index) => (
-              <div key={index} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6">
+              <div key={index} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 bg-gradient-to-br from-card/40 via-card-light-1/40 to-card-dark-1/40 border-card-dark-1 hover:shadow-lg transition-all duration-300">
                 <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">{metric.title}</h3>
                 <div className="mt-2 flex items-baseline">
                   <p className="text-2xl font-semibold text-gray-900 dark:text-gray-100">{metric.value}</p>
@@ -252,9 +252,18 @@ export default function SalesForecast() {
           </div>
 
           {/* Time Series Chart */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 bg-gradient-to-br from-card/40 via-card-light-1/40 to-card-dark-1/40 border-card-dark-1 hover:shadow-lg transition-all duration-300">
             <div className="h-[400px]">
-              <Line options={chartOptions} data={chartData} />
+              <Line options={{
+                ...chartOptions,
+                plugins: {
+                  ...chartOptions.plugins,
+                  title: {
+                    ...chartOptions.plugins.title,
+                    color: 'rgb(255, 255, 255)'
+                  }
+                }
+              }} data={chartData} />
             </div>
           </div>
 
@@ -262,9 +271,9 @@ export default function SalesForecast() {
           <div className="grid grid-cols-1 min-[888px]:grid-cols-[1.2fr,0.8fr] gap-12 auto-rows-min">
             {/* Left Column - Sales Forecast */}
             <div className="space-y-8 min-[888px]:row-span-2">
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 h-full">
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-8 h-full bg-gradient-to-br from-card/40 via-card-light-1/40 to-card-dark-1/40 border-card-dark-1 hover:shadow-lg transition-all duration-300">
                 <h1 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-gray-100">AI Sales Forecast</h1>
-                <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg mb-8">
+                <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg mb-8 bg-gradient-to-br from-card/40 via-card-light-1/40 to-card-dark-1/40 border-card-dark-1 hover:shadow-lg transition-all duration-300">
                   <h2 className="text-lg font-medium text-blue-800 dark:text-blue-200 mb-3">Forecast Overview</h2>
                   <p className="text-sm text-blue-700 dark:text-blue-300 leading-relaxed">
                     Our AI analyzes market trends, seasonal patterns, and consumer behavior to predict sales performance. 

@@ -6,8 +6,8 @@ export default function DashboardCTA() {
     <div className="min-h-[50vh] dark:bg-gray-900">
       <div className="bg-primary-dark-1 dark:bg-primary-dark-2 w-[70vw] mx-auto rounded-lg overflow-hidden p-8 relative">
         {/* Decorative elements */}
-        <div className="absolute top-0 right-0 w-16 h-16 bg-destructive-light dark:bg-destructive rounded-bl-lg"></div>
-        <div className="absolute bottom-0 left-0 w-16 h-16 bg-destructive-light dark:bg-destructive rounded-tr-lg"></div>
+        <div className="absolute top-0 right-0 w-16 h-16 bg-destructive rounded-bl-lg"></div>
+        <div className="absolute bottom-0 left-0 w-16 h-16 bg-destructive rounded-tr-lg"></div>
         <div className="absolute bottom-16 left-16 w-24 h-24 bg-neutral-light-3 dark:bg-neutral-dark-3 rounded-full opacity-80"></div>
         <div className="absolute top-16 right-16 w-16 h-16 bg-neutral-light-3 dark:bg-neutral-dark-3 rounded-full opacity-50"></div>
 

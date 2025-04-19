@@ -15,8 +15,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Command",
-  description: "Command",
+  title: "Foreseen AI",
+  description: "Foreseen AI, your tool to predict what, when, and where to practice your businesses, to achieve the maximum results",
+  keywords: [
+    "AI",
+    "business intelligence",
+    "predictive analytics",
+    "data visualization",
+    "sales forecasting",
+    "market analysis",
+    "business optimization",
+    "AI predictions",
+    "business analytics",
+    "data-driven decisions",
+    "Foreseen AI",
+    "business planning",
+    "market trends",
+    "performance metrics",
+    "business dashboard"
+  ],
 };
 
 export default function RootLayout({
@@ -27,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
         <ThemeProvider
           attribute="class"

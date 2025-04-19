@@ -109,11 +109,11 @@ export default function Posts() {
 
         <div>
 
-          <div className="text-2xl font-bold mb-6 dark:text-primary">Instagram</div>
+          <div className="text-2xl font-bold mb-6 dark:text-primary text-center">Instagram</div>
 
           <div className="flex flex-col md:grid md:grid-cols-2 gap-8 mb-8 bg-gradient-to-br from-card/20 via-card-light/20 to-card-dark/20 p-8 pt-10 rounded-md shadow-md border-2 border-card-dark ">
             <div className="h-[250px] sm:h-[300px]">
-              
+
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart
                   data={activityData}
@@ -134,19 +134,19 @@ export default function Posts() {
                     yAxisId="left"
                     type="monotone"
                     dataKey="likes"
-                    stroke="#8884d8"
+                    stroke="#a143fd"
                     name="Likes"
                   />
                   <Line
                     yAxisId="right"
                     type="monotone"
                     dataKey="posts"
-                    stroke="#3b82f6"
+                    stroke="#8fd1d8"
                     name="Posts"
                   />
                 </LineChart>
               </ResponsiveContainer>
-              
+
             </div>
 
             <div className="overflow-x-auto">
@@ -164,9 +164,9 @@ export default function Posts() {
                     <TableRow key={post.id}>
                       <TableCell>
                         <span className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium border px-2
-                          ${post.status === 'posted' ? 'bg-primary/90 text-primary-dark' : 
-                            post.status === 'draft' ? 'bg-card-dark dark:bg-card-light text-white dark:bg-card-dark' : 
-                            'bg-tertiary-light tertiary-dark'}`
+                          ${post.status === 'posted' ? 'bg-good/90 text-white' :
+                            post.status === 'draft' ? 'bg-tertiary dark:bg-card-light-1 text-white dark:bg-tertiary' :
+                              'bg-secondary-light text-white'}`
                         }>
                           {post.status}
                         </span>
@@ -185,7 +185,7 @@ export default function Posts() {
         </div>
 
         <div>
-          <div className="text-2xl font-bold mb-6 dark:text-primary">Facebook</div>
+          <div className="text-2xl font-bold mb-6 dark:text-primary text-center">Facebook</div>
 
           <div className="flex flex-col md:grid md:grid-cols-2 gap-8  mb-8 bg-gradient-to-br from-card/20 via-card-light/20 to-card-dark/20 p-8 pt-10 rounded-md shadow-md border-2 border-card-dark">
             <div className="h-[250px] sm:h-[300px]">
@@ -209,14 +209,14 @@ export default function Posts() {
                     yAxisId="left"
                     type="monotone"
                     dataKey="likes"
-                    stroke="#8884d8"
+                    stroke="#a143fd"
                     name="Likes"
                   />
                   <Line
                     yAxisId="right"
                     type="monotone"
                     dataKey="posts"
-                    stroke="#82ca9d"
+                    stroke="#8fd1d8"
                     name="Posts"
                   />
                 </LineChart>
@@ -235,10 +235,10 @@ export default function Posts() {
                   {facebookPosts.map((post) => (
                     <TableRow key={post.id}>
                       <TableCell>
-                        <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium
-                          ${post.status === 'posted' ? 'bg-green-50 text-green-700' : 
-                            post.status === 'draft' ? 'bg-gray-50 text-white' : 
-                            'bg-tertiary-light tertiary-dark'}`
+                        <span className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium border px-2
+                          ${post.status === 'posted' ? 'bg-good/90 text-white' :
+                            post.status === 'draft' ? 'bg-tertiary dark:bg-card-light-1 text-white dark:bg-tertiary' :
+                              'bg-secondary-light text-white'}`
                         }>
                           {post.status}
                         </span>

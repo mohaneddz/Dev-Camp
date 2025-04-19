@@ -35,14 +35,14 @@ export function ModeToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className=" hover:text-primary dark:hover:text-primary-light hover:scale-105 dark:bg-gray-900">
+        <button  className=" hover:text-primary dark:hover:text-primary-light hover:scale-120 dark:bg-gray-900 transition duration-100">
           {resolvedTheme === 'light' ? (
             <Sun className="h-[1.2rem] w-[1.2rem] text-black dark:text-white" />
           ) : (
             <Moon className="h-[1.2rem] w-[1.2rem] text-black dark:text-white" />
           )}
           <span className="sr-only">Toggle theme</span>
-        </Button>
+        </button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" sideOffset={5} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">

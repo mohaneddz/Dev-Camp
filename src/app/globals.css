@@ -4,6 +4,87 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Base Radius Variables */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Theme Color Mapping (Mapping old variable names to new palette vars) */
+  --color-background: var(--background);
+  --color-background-dark: var(--background-dark);
+  --color-background-light: var(--background-light);
+
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  
+  --color-primary-light-1: var(--primary-light-1);
+  --color-primary-light-2: var(--primary-light-2);
+  --color-primary-light-3: var(--primary-light-3);
+
+  --color-primary-dark-1: var(--primary-dark-1);
+  --color-primary-dark-2: var(--primary-dark-2);
+  --color-primary-dark-3: var(--primary-dark-3);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-light: var(--secondary-light);
+  --color-secondary-dark: var(--secondary-dark);
+
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-light: var(--tertiary-light);
+  --color-tertiary-dark: var(--tertiary-dark);
+
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-checkbox: var(--checkbox);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-chart-6: var(--chart-6); /* Added from new shades */
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-bad: var(--bad); /* Mapping old status names to new */
+  --color-good: var(--good);
+  --color-neutral: var(--neutral);
+
+  /* --color-pink: var(--text-pink); -- Removed as not in new palette */
+}
+
+:root {
+  /* ===== Base Colors (from old CSS, kept for reference/mapping) ===== */
+  --text-light: #f9f9f9;
+  --text-dark: #242424;
+  --text-muted: #b3b3b3;
+  /* --text-pink: #ee1253; -- Removed as not in new palette */
+  /* --text-primary: #FEAE50; -- Removed as primary handled by new vars */
+
+  /* ===== New Palette Variables (Light Mode Values) ===== */
   /* Primary (Cyan) */
   --color-primary: #8fd1d8;
   --color-primary-light-1: #a2dbe1;
@@ -50,7 +131,7 @@
   --color-card-dark-2: #e6e8f0;
   --color-card-dark-3: #d9dcea;
 
-  /* Status Colors */
+  /* Status Colors (Mapping to old feedback names) */
   --color-destructive: #ff5a5f;
   --color-destructive-light: #ff8b8f;
   --color-destructive-dark: #e32f35;
@@ -61,7 +142,6 @@
   --color-success-dark: #059669;
   --color-success-foreground: #ffffff;
 
-  /* Neutral Colors */
   --color-neutral: #64748b;
   --color-neutral-light-1: #94a3b8;
   --color-neutral-light-2: #cbd5e1;
@@ -70,7 +150,7 @@
   --color-neutral-dark-2: #334155;
   --color-neutral-dark-3: #1e293b;
 
-  /* Chart Colors */
+  /* Chart Colors (Mapping to old chart names) */
   --chart-shade-1: #8fd1d8;
   --chart-shade-2: #a143fd;
   --chart-shade-3: #011133;
@@ -78,88 +158,292 @@
   --chart-shade-5: #c287ff;
   --chart-shade-6: #2a3a5a;
 
-  /* sidebar */
+  /* Sidebar (Light Mode) */
   --color-sidebar: #eaebef;
   --color-sidebar-foreground: #011133;
   --color-sidebar-primary: #8fd1d8;
   --color-sidebar-primary-foreground: #ffffff;
-  --color-sidebar-accent: #a143fd;
+  --color-sidebar-accent: #8fd1d8;
   --color-sidebar-accent-foreground: #ffffff;
   --color-sidebar-border: #e6e8f0;
-  --color-sidebar-ring: #a143fd;
+  --color-sidebar-ring: #c287ff;
 
-  --color-sidebar-background-dark  : #121a2c;
+  /* --color-sidebar-background-dark: #121a2c; -- Defined only in dark mode */
+
+  /* ===== Old Theme Variables (Mapping to New Palette Vars for Light Mode) ===== */
+  --radius: 0.625rem;
+
+  --background: var(--color-background);
+  --background-light: var(--color-background-light-1); /* Using new light variant */
+  --background-dark: var(--color-background-dark-1); /* Using new dark variant */
+
+  --foreground: var(--color-tertiary); /* New main foreground color */
+
+  --card: var(--color-card);
+  --card-foreground: var(--color-card-foreground);
+
+  --popover: var(--color-card); /* Mapping popover to card as no specific popover in new */
+  --popover-foreground: var(--color-card-foreground);
+
+  --primary: var(--color-primary);
+  --primary-light: var(--color-primary-light-1);
+  --primary-dark-1: var(--color-primary-dark-1);
+  --primary-dark-2: var(--color-primary-dark-2);
+  --primary-dark-3: var(--color-primary-dark-3);
+  --primary-light-1: var(--color-primary-light-1);
+  --primary-light-2: var(--color-primary-light-2);
+  --primary-light-3: var(--color-primary-light-3);  
+  
+  --primary-foreground: var(--color-primary-foreground);
+
+  --secondary: var(--color-secondary);
+  --secondary-light: var(--color-secondary-light-1);
+  --secondary-dark: var(--color-secondary-dark-1);
+  --secondary-foreground: var(--color-secondary-foreground);
+
+  --tertiary: var(--color-tertiary);
+  --tertiary-light: var(--color-tertiary-light-1);
+  --tertiary-dark: var(--color-tertiary-dark-1);
+  /* --secondary-foreground: already mapped above */
+
+  --muted: var(--color-neutral-light-3); /* Mapping muted to palest neutral */
+  --muted-foreground: var(--color-neutral); /* Mapping muted foreground to base neutral */
+
+  --accent: var(--color-secondary); /* Mapping accent to secondary as per new sidebar accent */
+  --accent-foreground: var(--color-secondary-foreground);
+
+  --destructive: var(--color-destructive);
+  /* No destructive-light/dark in old theme mapping, only base destructive */
+  /* --destructive-light: var(--color-destructive-light); */
+  /* --destructive-dark: var(--color-destructive-dark); */
+
+  --border: var(--color-neutral-light-2); /* Mapping border to a neutral shade */
+  --input: var(--color-background); /* Mapping input to background */
+  --checkbox: var(--color-secondary); /* Mapping checkbox to secondary */
+  --ring: var(--color-secondary); /* Mapping ring to secondary */
+
+  --chart-1: var(--chart-shade-1);
+  --chart-2: var(--chart-shade-2);
+  --chart-3: var(--chart-shade-3);
+  --chart-4: var(--chart-shade-4);
+  --chart-5: var(--chart-shade-5);
+  --chart-6: var(--chart-shade-6); /* Added */
+
+  --sidebar: var(--color-sidebar);
+  --sidebar-foreground: var(--color-sidebar-foreground);
+  --sidebar-primary: var(--color-sidebar-primary);
+  --sidebar-primary-foreground: var(--color-sidebar-primary-foreground);
+  --sidebar-accent: #8fd1d8;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: var(--color-sidebar-border);
+  --sidebar-ring: var(--color-sidebar-ring);
+
+  --bad: var(--color-destructive);
+  --good: var(--color-success);
+  --neutral: var(--color-neutral);
 }
 
 .dark {
+  /* ===== New Palette Variables (Dark Mode Values - Overrides) ===== */
+  /* Primary (Cyan) */
+  --color-primary: #8fd1d8; /* No change in base primary? Check new dark block */
+  --color-primary-light-1: #a2dbe1; /* No change? */
+  --color-primary-light-2: #b5e4e9; /* No change? */
+  --color-primary-light-3: #c8eef1; /* No change? */
+  --color-primary-dark-1: #75b4bb; /* Dark mode specific dark-1 */
+  --color-primary-dark-2: #5a989e; /* Dark mode specific dark-2 */
+  --color-primary-dark-3: #407b80; /* Dark mode specific dark-3 */
+
+  /* Secondary (Purple) */
+  --color-secondary: #a143fd; /* No change in base secondary? */
+  --color-secondary-light-1: #b167fd; /* No change? */
+  --color-secondary-light-2: #c28bfd; /* No change? */
+  --color-secondary-light-3: #d3affd; /* No change? */
+  --color-secondary-dark-1: #8c3ad9; /* Dark mode specific dark-1 */
+  --color-secondary-dark-2: #7730b8; /* Dark mode specific dark-2 */
+  --color-secondary-dark-3: #622697; /* Dark mode specific dark-3 */
+
+  /* Tertiary (Dark Blue) */
+  --color-tertiary: #1d2d5b; /* Dark mode specific tertiary */
+  --color-tertiary-light-1: #2a3a6e; /* Dark mode specific light-1 */
+  --color-tertiary-light-2: #364782; /* Dark mode specific light-2 */
+  --color-tertiary-light-3: #435595; /* Dark mode specific light-3 */
+  --color-tertiary-dark-1: #162048; /* Dark mode specific dark-1 */
+  --color-tertiary-dark-2: #0e1435; /* Dark mode specific dark-2 */
+  --color-tertiary-dark-3: #070a22; /* Dark mode specific dark-3 */
+
   /* Background (Dark Mode) */
-  --color-background: #101828;
-  --color-background-light-1: #111936;
-  --color-background-light-2: #192249;
-  --color-background-light-3: #212c5d;
-  --color-background-dark-1: #070c1a;
-  --color-background-dark-2: #040813;
-  --color-background-dark-3: #02040d;
+  --color-background: #101828; /* Dark mode specific background */
+  --color-background-light-1: #111936; /* Dark mode specific light-1 */
+  --color-background-light-2: #192249; /* Dark mode specific light-2 */
+  --color-background-light-3: #212c5d; /* Dark mode specific light-3 */
+  --color-background-dark-1: #070c1a; /* Dark mode specific dark-1 */
+  --color-background-dark-2: #040813; /* Dark mode specific dark-2 */
+  --color-background-dark-3: #02040d; /* Dark mode specific dark-3 */
 
   /* Card (Dark Mode) */
-  --color-card: #111936;
-  --color-card-foreground: #f8f9fc;
-  --color-card-light-1: #192249;
-  --color-card-light-2: #212c5d;
-  --color-card-light-3: #293770;
-  --color-card-dark-1: #0c122a;
-  --color-card-dark-2: #080c1d;
-  --color-card-dark-3: #040611;
+  --color-card: #111936; /* Dark mode specific card */
+  --color-card-foreground: #f8f9fc; /* Dark mode specific card-foreground */
+  --color-card-light-1: #192249; /* Dark mode specific light-1 */
+  --color-card-light-2: #212c5d; /* Dark mode specific light-2 */
+  --color-card-light-3: #293770; /* Dark mode specific light-3 */
+  --color-card-dark-1: #0c122a; /* Dark mode specific dark-1 */
+  --color-card-dark-2: #080c1d; /* Dark mode specific dark-2 */
+  --color-card-dark-3: #040611; /* Dark mode specific dark-3 */
 
-  /* Adjust primary colors for dark mode */
-  --color-primary: #8fd1d8;
-  --color-primary-light-1: #a2dbe1;
-  --color-primary-light-2: #b5e4e9;
-  --color-primary-light-3: #c8eef1;
-  --color-primary-dark-1: #75b4bb;
-  --color-primary-dark-2: #5a989e;
-  --color-primary-dark-3: #407b80;
+  /* Status Colors (Dark Mode Overrides) */
+  --color-destructive: #ff5a5f; /* No change in base destructive? */
+  --color-destructive-light: #ff8b8f; /* No change? */
+  --color-destructive-dark: #e32f35; /* No change? */
+  --color-destructive-foreground: #ffffff; /* No change? */
 
-  /* Adjust secondary colors for dark mode */
-  --color-secondary: #a143fd;
-  --color-secondary-light-1: #b167fd;
-  --color-secondary-light-2: #c28bfd;
-  --color-secondary-light-3: #d3affd;
-  --color-secondary-dark-1: #8c3ad9;
-  --color-secondary-dark-2: #7730b8;
-  --color-secondary-dark-3: #622697;
+  --color-success: #10b981; /* No change in base success? */
+  --color-success-light: #34d399; /* No change? */
+  --color-success-dark: #059669; /* No change? */
+  --color-success-foreground: #ffffff; /* No change? */
 
-  /* Adjust tertiary colors for dark mode */
-  --color-tertiary: #1d2d5b;
-  --color-tertiary-light-1: #2a3a6e;
-  --color-tertiary-light-2: #364782;
-  --color-tertiary-light-3: #435595;
-  --color-tertiary-dark-1: #162048;
-  --color-tertiary-dark-2: #0e1435;
-  --color-tertiary-dark-3: #070a22;
+  --color-neutral: #94a3b8; /* Dark mode specific neutral */
+  --color-neutral-light-1: #cbd5e1; /* Dark mode specific light-1 */
+  --color-neutral-light-2: #e2e8f0; /* Dark mode specific light-2 */
+  --color-neutral-light-3: #f8fafc; /* Dark mode specific light-3 */
+  --color-neutral-dark-1: #64748b; /* Dark mode specific dark-1 */
+  --color-neutral-dark-2: #475569; /* Dark mode specific dark-2 */
+  --color-neutral-dark-3: #334155; /* Dark mode specific dark-3 */
 
-  /* Adjust neutral colors for dark mode */
-  --color-neutral: #94a3b8;
-  --color-neutral-light-1: #cbd5e1;
-  --color-neutral-light-2: #e2e8f0;
-  --color-neutral-light-3: #f8fafc;
-  --color-neutral-dark-1: #64748b;
-  --color-neutral-dark-2: #475569;
-  --color-neutral-dark-3: #334155;
+  /* Chart Colors (Dark Mode Overrides) */
+  --chart-shade-1: #8fd1d8; /* No change? */
+  --chart-shade-2: #a143fd; /* No change? */
+  --chart-shade-3: #1d2d5b; /* Dark mode specific shade 3 */
+  --chart-shade-4: #55c2cb; /* No change? */
+  --chart-shade-5: #c287ff; /* No change? */
+  --chart-shade-6: #3a4d82; /* Dark mode specific shade 6 */
 
-  /* Adjust chart colors for dark mode */
-  --chart-shade-1: #8fd1d8;
-  --chart-shade-2: #a143fd;
-  --chart-shade-3: #1d2d5b;
-  --chart-shade-4: #55c2cb;
-  --chart-shade-5: #c287ff;
-  --chart-shade-6: #3a4d82;
+
+  /* Sidebar (Dark Mode Overrides) */
+  --color-sidebar: var(--color-sidebar-background-dark); /* Use dark specific sidebar background */
+  --color-sidebar-foreground: #f8f9fc; /* Dark mode specific sidebar foreground */
+  --color-sidebar-primary: #8fd1d8; /* No change? */
+  --color-sidebar-primary-foreground: #ffffff; /* No change? */
+  --color-sidebar-accent: #8fd1d8; /* Dark mode specific sidebar accent */
+  --color-sidebar-accent-foreground: #f8f9fc; /* Dark mode specific sidebar accent foreground */
+  --color-sidebar-border: #0c122a; /* Dark mode specific sidebar border */
+  --color-sidebar-ring: #a143fd; /* No change? */
+
+  --color-sidebar-background-dark: #121a2c; /* New variable specific to dark mode sidebar background */
+
+
+  /* ===== Old Theme Variables (Mapping to New Palette Vars for Dark Mode) ===== */
+  /* Radius variables don't change in dark mode, keep in :root */
+
+  --background: var(--color-background);
+  --background-light: var(--color-background-light-1);
+  --background-dark: var(--color-background-dark-1);
+
+  --foreground: var(--color-card-foreground); /* New main foreground color in dark mode */
+
+  --card: var(--color-card);
+  --card-foreground: var(--color-card-foreground);
+
+  --popover: var(--color-card); /* Mapping popover to card */
+  --popover-foreground: var(--color-card-foreground);
+
+  --primary: var(--color-primary);
+  --primary-light: var(--color-primary-light-1);
+  --primary-dark: var(--color-primary-dark-1);
+  --primary-foreground: var(--color-primary-foreground);
+
+  --secondary: var(--color-secondary);
+  --secondary-light: var(--color-secondary-light-1);
+  --secondary-dark: var(--color-secondary-dark-1);
+  --secondary-foreground: var(--color-secondary-foreground);
+
+  --tertiary: var(--color-tertiary);
+  --tertiary-light: var(--color-tertiary-light-1);
+  --tertiary-dark: var(--color-tertiary-dark-1);
+
+  --muted: var(--color-neutral-dark-2); /* Mapping muted to a darker neutral in dark mode */
+  --muted-foreground: var(--color-neutral-light-1); /* Mapping muted foreground to a lighter neutral */
+
+  --accent: var(--color-primary); /* Mapping accent to primary in dark mode as per new sidebar primary */
+  --accent-foreground: var(--color-primary-foreground);
+
+  --destructive: var(--color-destructive);
+  /* No destructive-light/dark in old theme mapping */
+
+  --border: var(--color-neutral-dark-1); /* Mapping border to a darker neutral shade */
+  --input: var(--color-background-light-1); /* Mapping input to a lighter background */
+  --checkbox: var(--color-secondary-dark-3); /* Mapping checkbox to darkest secondary */
+  --ring: var(--color-secondary); /* Mapping ring to secondary */
+
+  --chart-1: var(--chart-shade-1);
+  --chart-2: var(--chart-shade-2);
+  --chart-3: var(--chart-shade-3);
+  --chart-4: var(--chart-shade-4);
+  --chart-5: var(--chart-shade-5);
+  --chart-6: var(--chart-shade-6);
+
+  --sidebar: var(--color-sidebar); /* Refers to --color-sidebar-background-dark defined above in .dark */
+  --sidebar-foreground: var(--color-sidebar-foreground);
+  --sidebar-primary: var(--color-sidebar-primary);
+  --sidebar-primary-foreground: var(--color-sidebar-primary-foreground);
+  --sidebar-accent: #8fd1d8;
+  --sidebar-accent-foreground: var(--color-sidebar-accent-foreground);
+  --sidebar-border: var(--color-sidebar-border);
+  --sidebar-ring: var(--color-sidebar-ring);
+
+  /* bad/good/neutral already mapped above using new vars */
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50; /* Keep outline from first old layer base */
+  }
+
+  body {
+    @apply text-base bg-background text-foreground lg:text-xl; /* Keep text size utility */
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    mix-blend-mode: multiply;
+    z-index: 9999;
+    animation: grainShift 1s steps(2) infinite;
+  }
+
+  @keyframes grainShift {
+
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+
+    25% {
+      transform: translate(1px, -1px);
+    }
+
+    50% {
+      transform: translate(-1px, 1px);
+    }
+
+    75% {
+      transform: translate(1px, 1px);
+    }
+  }
 }
 
 /* Selection styling */
 ::selection {
-  background-color: var(--color-secondary);
-  color: #ffffff;
+  background-color: var(--color-secondary); /* Use new secondary color */
+  color: #ffffff; /* Use white text */
 }
 
 /* Scrollbar styling */
@@ -168,27 +452,27 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-tertiary-light-1);
+  background: var(--color-tertiary-light-1); /* Use new tertiary light */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-primary);
+  background: var(--color-primary); /* Use new primary color */
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary-dark-1);
+  background: var(--color-primary-dark-1); /* Use new primary dark */
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-primary) var(--color-tertiary-light-1);
+  scrollbar-color: var(--color-primary) var(--color-tertiary-light-1); /* Use new colors */
 }
 
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
-  @apply bg-background;
+  @apply bg-background; /* Ensure html background is set */
 }
 
 /* Gradient background */
@@ -226,7 +510,7 @@ html {
 }
 
 .dropdown-menu-item:hover {
-  background-color: var(--color-primary-light-2);
+  background-color: var(--color-primary-light-2); /* Use a lighter primary shade */
 }
 
 .theme-toggle-btn {
@@ -236,17 +520,17 @@ html {
 }
 
 .theme-toggle-btn:hover {
-  border-color: var(--color-secondary);
+  border-color: var(--color-secondary); /* Use new secondary color */
 }
 
 .theme-toggle-btn:focus-visible {
-  outline: 2px solid var(--color-secondary);
+  outline: 2px solid var(--color-secondary); /* Use new secondary color */
   outline-offset: 2px;
 }
 
 /* Navbar styling */
 .navbar::before {
-  content: none;
+  content: none; /* Keep this override */
 }
 
 .navbar {
@@ -259,8 +543,8 @@ html {
 
 /* Dark mode specific styles */
 .dark .dropdown-menu-item:hover {
-  background-color: var(--color-secondary-dark-1);
-  color: #ffffff;
+  background-color: var(--color-primary); /* Use a darker secondary shade */
+  color: #ffffff; /* Use white text */
 }
 
 /* Hide Next.js development server button */

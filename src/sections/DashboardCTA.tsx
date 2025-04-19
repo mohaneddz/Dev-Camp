@@ -12,15 +12,15 @@ export default function DashboardCTA() {
         <div className="absolute top-16 right-16 w-16 h-16 bg-[#f1f5f9] dark:bg-[#1e293b] rounded-full opacity-50"></div>
 
         {/* Content */}
-        <div className="flex flex-col items-center justify-center text-center relative z-10">
-          <h2 className="text-3xl font-bold text-white dark:text-white mb-4 leading-relaxed">Access Your Dashboard</h2>
+        <div className="relative z-10 flex flex-col items-center justify-center text-center">
+          <h2 className="mb-4 text-3xl font-bold leading-relaxed text-white dark:text-white">Access Your Dashboard</h2>
 
           <p className="text-[#c8eef1] dark:text-[#e0f2fe] mb-8 max-w-lg leading-relaxed">
             Get real-time insights, track your performance, and manage all your
             settings in one convenient location.
           </p>
 
-          <div className="w-full flex justify-center items-center max-w-lg">
+          <div className="flex items-center justify-center w-full max-w-lg">
             <Link
               href="/dashboard"
               className="hover:cursor-pointer w-max bg-[#a143fd] dark:bg-[#9333ea] hover:bg-[#b167fd] dark:hover:bg-[#a855f7] text-white font-medium py-3 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center"

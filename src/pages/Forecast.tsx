@@ -234,7 +234,7 @@ export default function SalesForecast() {
           {/* Key Metrics Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {keyMetrics.map((metric, index) => (
-              <div key={index} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 bg-gradient-to-br from-card/40 via-card-light-1/40 to-card-dark-1/40 border-card-dark-1 hover:shadow-lg transition-all duration-300">
+              <div key={index} className="hover:cursor-pointer hover:-translate-y-5 hover:scale-110 hover:-translate-x-2  bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 bg-gradient-to-br from-card/40 via-card-light-1/40 to-card-dark-1/40 border-card-dark-1 hover:shadow-lg transition-all duration-300">
                 <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">{metric.title}</h3>
                 <div className="mt-2 flex items-baseline">
                   <p className="text-2xl font-semibold text-gray-900 dark:text-gray-100">{metric.value}</p>

@@ -64,18 +64,27 @@ const COLORS = {
   tertiary: "var(--color-tertiary)",
   tertiaryLight: "var(--color-tertiary-light-1)",
   tertiaryDark: "var(--color-tertiary-dark-1)",
+  success: "var(--color-success)",
+  successLight: "var(--color-success-light)",
+  successDark: "var(--color-success-dark)",
+  destructive: "var(--color-destructive)",
+  destructiveLight: "var(--color-destructive-light)",
+  destructiveDark: "var(--color-destructive-dark)",
+  neutral: "var(--color-neutral)",
+  neutralLight: "var(--color-neutral-light-1)",
+  neutralDark: "var(--color-neutral-dark-1)",
 }
 
 // Dark mode styles for tooltips
 const tooltipStyle = {
-  backgroundColor: "var(--color-tertiary)",
-  border: "1px solid var(--color-tertiary-light-1)",
-  borderRadius: "0.5rem",
+  backgroundColor: "var(--color-card)",
+  border: "1px solid var(--color-border)",
+  borderRadius: "var(--radius)",
   padding: "0.5rem",
-  color: "var(--color-primary-light-1)",
+  color: "var(--color-foreground)",
 }
 
-// Sample data for metrics and charts
+// Enhanced sample data for metrics and charts
 const metricsData = {
   labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
   sales: [1200, 1350, 1500, 1650, 1800, 1950, 2100, 2250, 2400, 2550, 2700, 2850],
@@ -85,44 +94,84 @@ const metricsData = {
   conversionRate: [2.5, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7],
   returnRate: [8.5, 8.2, 8.0, 7.8, 7.5, 7.3, 7.0, 6.8, 6.5, 6.3, 6.0, 5.8],
   dailySales: [
-    { day: "Mon", sales: 1200 },
-    { day: "Tue", sales: 1500 },
-    { day: "Wed", sales: 1800 },
-    { day: "Thu", sales: 1400 },
-    { day: "Fri", sales: 2000 },
-    { day: "Sat", sales: 2500 },
-    { day: "Sun", sales: 2200 },
+    { day: "Mon", sales: 1200, expected: 1100 },
+    { day: "Tue", sales: 1500, expected: 1400 },
+    { day: "Wed", sales: 1800, expected: 1900 },
+    { day: "Thu", sales: 1400, expected: 1300 },
+    { day: "Fri", sales: 2000, expected: 2200 },
+    { day: "Sat", sales: 2500, expected: 2200 },
+    { day: "Sun", sales: 2200, expected: 2000 },
   ],
   revenueDistribution: [
-    { name: "Product A", value: 35 },
-    { name: "Product B", value: 25 },
-    { name: "Product C", value: 20 },
-    { name: "Product D", value: 15 },
-    { name: "Product E", value: 5 },
+    { name: "Product A", value: 35, growth: 12 },
+    { name: "Product B", value: 25, growth: 8 },
+    { name: "Product C", value: 20, growth: 15 },
+    { name: "Product D", value: 15, growth: 5 },
+    { name: "Product E", value: 5, growth: 3 },
   ],
   performanceMetrics: [
-    { metric: "Sales", value: 85 },
-    { metric: "Marketing", value: 75 },
-    { metric: "Customer Service", value: 90 },
-    { metric: "Operations", value: 80 },
-    { metric: "Finance", value: 70 },
+    { metric: "Sales", value: 85, expected: 80 },
+    { metric: "Marketing", value: 75, expected: 70 },
+    { metric: "Customer Service", value: 90, expected: 85 },
+    { metric: "Operations", value: 80, expected: 75 },
+    { metric: "Finance", value: 70, expected: 65 },
   ],
   customerSatisfaction: [
-    { name: "Satisfied", value: 75 },
-    { name: "Neutral", value: 15 },
-    { name: "Dissatisfied", value: 10 },
+    { name: "Dissatisfied", value: 10, trend: 60 },
+    { name: "Neutral", value: 25, trend: 5 },
+    { name: "Satisfied", value: 70, trend: -3-7 },
   ],
 }
 
 const revenueData = [
+  { month: "january", desktop: 186, mobile: 120, fill: "var(--color-chart-1)" },
+  { month: "february", desktop: 305, mobile: 180, fill: "var(--color-chart-2)" },
+  { month: "march", desktop: 237, mobile: 150, fill: "var(--color-chart-3)" },
+  { month: "april", desktop: 173, mobile: 110, fill: "var(--color-chart-4)" },
+  { month: "may", desktop: 209, mobile: 140, fill: "var(--color-chart-5)" },
+]
+
+const revenueConfig = {
+  visitors: {
+    label: "Visitors",
+  },
+  desktop: {
+    label: "Desktop",
+    color: "var(--color-chart-1)",
+  },
+  mobile: {
+    label: "Mobile",
+    color: "var(--color-chart-2)",
+  },
+  january: {
+    label: "January",
+    color: "var(--color-chart-1)",
+  },
+  february: {
+    label: "February",
+    color: "var(--color-chart-2)",
+  },
+  march: {
+    label: "March",
+    color: "var(--color-chart-3)",
+  },
+  april: {
+    label: "April",
+    color: "var(--color-chart-4)",
+  },
+  may: {
+    label: "May",
+    color: "var(--color-chart-5)",
+  },
+} satisfies ChartConfig
+const desktopData = [
   { month: "january", desktop: 186, fill: "var(--color-january)" },
   { month: "february", desktop: 305, fill: "var(--color-february)" },
   { month: "march", desktop: 237, fill: "var(--color-march)" },
   { month: "april", desktop: 173, fill: "var(--color-april)" },
   { month: "may", desktop: 209, fill: "var(--color-may)" },
 ]
-
-const revenueConfig = {
+const chartConfig = {
   visitors: {
     label: "Visitors",
   },
@@ -160,7 +209,16 @@ export default function Sales() {
     () => revenueData.findIndex((item) => item.month === activeMonth),
     [activeMonth]
   )
+  const chartData = [
+    { month: "January", sales: 2500, returns: -1200 },
+    { month: "February", sales: 2000, returns: -1500 },
+    { month: "March", sales: 2000, returns: -1600 },
+    { month: "April", sales: 1300, returns: -2000 },
+    { month: "May", sales: 2200, returns: -1500 },
+    { month: "June", sales: 2100, returns: -1500 },
+  ]
   const months = React.useMemo(() => revenueData.map((item) => item.month), [])
+  const id = "pie-interactive"
 
   return (
     <div className="flex flex-1 flex-col w-full h-full">
@@ -205,9 +263,8 @@ export default function Sales() {
                 <CardContent className="pb-4">
                   <div className="flex items-baseline">
                     <p className="text-2xl font-semibold">{metric.value}</p>
-                    <span className={`ml-2 text-sm font-medium ${
-                      metric.trend === 'up' ? 'text-green-600' : 'text-red-600'
-                    }`}>
+                    <span className={`ml-2 text-sm font-medium ${metric.trend === 'up' ? 'text-green-600' : 'text-red-600'
+                      }`}>
                       {metric.change}
                     </span>
                   </div>
@@ -232,10 +289,11 @@ export default function Sales() {
                     month: label,
                     actual: metricsData.sales[i],
                     forecast: metricsData.forecast[i],
+                    expected: metricsData.sales[i] * 0.9,
                   }))}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="var(--color-tertiary-light-1)" />
-                    <XAxis dataKey="month" stroke="var(--color-primary-light-1)" />
-                    <YAxis stroke="var(--color-primary-light-1)" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                    <XAxis dataKey="month" stroke="var(--color-foreground)" />
+                    <YAxis stroke="var(--color-foreground)" />
                     <Tooltip contentStyle={tooltipStyle} />
                     <Line
                       type="monotone"
@@ -252,6 +310,14 @@ export default function Sales() {
                       strokeWidth={2}
                       dot={{ r: 4, fill: COLORS.secondary }}
                     />
+                    <Line
+                      type="monotone"
+                      dataKey="expected"
+                      stroke={COLORS.neutral}
+                      strokeDasharray="3 3"
+                      strokeWidth={1}
+                      dot={false}
+                    />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -260,33 +326,47 @@ export default function Sales() {
 
           {/* Return Rate Chart - Negative Bar */}
           <Card className="p-6 bg-card/50">
-            <CardHeader className="pb-4">
-              <CardTitle>Return Rate Analysis</CardTitle>
-              <CardDescription>Monthly return rates with negative values</CardDescription>
+            <CardHeader>
+              <CardTitle>Sales & Returns Analysis</CardTitle>
+              <CardDescription>Monthly sales and return values for H1 2024</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="h-[300px]">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={metricsData.labels.map((label, i) => ({
-                    month: label,
-                    returnRate: -metricsData.returnRate[i],
-                  }))}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="var(--color-tertiary-light-1)" />
-                    <XAxis dataKey="month" stroke="var(--color-primary-light-1)" />
-                    <YAxis stroke="var(--color-primary-light-1)" />
-                    <Tooltip contentStyle={tooltipStyle} />
-                    <Bar dataKey="returnRate">
-                      {metricsData.returnRate.map((rate, index) => (
-                        <Cell
-                          key={`cell-${index}`}
-                          fill={rate > 7 ? COLORS.secondary : COLORS.primary}
-                        />
-                      ))}
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
+              <ChartContainer config={chartConfig}>
+                <BarChart accessibilityLayer data={chartData}>
+                  <CartesianGrid vertical={false} />
+                  <ChartTooltip
+                    cursor={false}
+                    content={<ChartTooltipContent hideLabel hideIndicator />}
+                  />
+                  <Bar dataKey="sales" name="Sales">
+                    <LabelList position="top" dataKey="sales" formatter={(value) => `$${value.toLocaleString()}`} fillOpacity={1} />
+                    {chartData.map((item) => (
+                      <Cell
+                        key={item.month}
+                        fill="var(--color-chart-1)"
+                      />
+                    ))}
+                  </Bar>
+                  <Bar dataKey="returns" name="Returns">
+                    <LabelList position="bottom" dataKey="returns" formatter={(value) => `$${value.toLocaleString()}`} fillOpacity={1} />
+                    {chartData.map((item) => (
+                      <Cell
+                        key={item.month}
+                        fill="var(--color-chart-2)"
+                      />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ChartContainer>
             </CardContent>
+            <CardFooter className="flex-col items-start gap-2 text-sm">
+              <div className="flex gap-2 font-medium leading-none mt-4">
+                Sales up by 5.2% this month <TrendingUp className="h-4 w-4" />
+              </div>
+              <div className="leading-none text-muted-foreground">
+                Showing total sales and returns for the first half of 2024
+              </div>
+            </CardFooter>
           </Card>
 
           {/* Daily Sales - Horizontal Bar */}
@@ -303,11 +383,19 @@ export default function Sales() {
                     layout="vertical"
                     margin={{ left: 20 }}
                   >
-                    <CartesianGrid strokeDasharray="3 3" stroke="var(--color-tertiary-light-1)" />
-                    <XAxis type="number" stroke="var(--color-primary-light-1)" />
-                    <YAxis dataKey="day" type="category" stroke="var(--color-primary-light-1)" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
+                    <XAxis type="number" stroke="#192249" />
+                    <YAxis dataKey="day" type="category" stroke="#192249" />
                     <Tooltip contentStyle={tooltipStyle} />
-                    <Bar dataKey="sales" fill={COLORS.primary} />
+                    <Bar dataKey="sales" fill={COLORS.primaryLight}>
+                      {metricsData.dailySales.map((entry, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={entry.sales >= entry.expected ? COLORS.primaryDark : COLORS.primaryLight}
+                        />
+                      ))}
+                    </Bar>
+                    <Bar dataKey="expected" fill={COLORS.secondaryLight} opacity={0.2} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -315,24 +403,26 @@ export default function Sales() {
           </Card>
 
           {/* Revenue Distribution - Interactive Pie Chart */}
-          <Card data-chart="revenue-pie" className="flex flex-col p-6 bg-card/50">
-            <ChartStyle id="revenue-pie" config={revenueConfig} />
-            <CardHeader className="flex-row items-start space-y-0 pb-4">
+          <Card data-chart="revenue-pie" className="flex flex-col p-6 bg-card/50 h-max">
+            <ChartStyle id={id} config={chartConfig} />
+            <CardHeader className="flex-row items-start space-y-0 pb-0">
               <div className="grid gap-1">
-                <CardTitle>Revenue Distribution</CardTitle>
-                <CardDescription>Monthly revenue breakdown</CardDescription>
+                <CardTitle>Pie Chart - Interactive</CardTitle>
+                <CardDescription>January - June 2024</CardDescription>
               </div>
               <Select value={activeMonth} onValueChange={setActiveMonth}>
                 <SelectTrigger
-                  className="ml-auto h-7 w-[130px] rounded-lg pl-2.5"
-                  aria-label="Select a month"
+                  className="ml-auto h-7 w-[130px]  h-max rounded-lg pl-2.5"
+                  aria-label="Select a value"
                 >
                   <SelectValue placeholder="Select month" />
                 </SelectTrigger>
                 <SelectContent align="end" className="rounded-xl">
                   {months.map((key) => {
-                    const config = revenueConfig[key as keyof typeof revenueConfig]
-                    if (!config) return null
+                    const config = chartConfig[key as keyof typeof chartConfig]
+                    if (!config) {
+                      return null
+                    }
                     return (
                       <SelectItem
                         key={key}
@@ -354,10 +444,10 @@ export default function Sales() {
                 </SelectContent>
               </Select>
             </CardHeader>
-            <CardContent className="flex flex-1 justify-center">
+            <CardContent className="flex flex-1 justify-center pb-0">
               <ChartContainer
-                id="revenue-pie"
-                config={revenueConfig}
+                id={id}
+                config={chartConfig}
                 className="mx-auto aspect-square w-full max-w-[300px]"
               >
                 <PieChart>
@@ -366,7 +456,7 @@ export default function Sales() {
                     content={<ChartTooltipContent hideLabel />}
                   />
                   <Pie
-                    data={revenueData}
+                    data={desktopData}
                     dataKey="desktop"
                     nameKey="month"
                     innerRadius={60}
@@ -386,40 +476,12 @@ export default function Sales() {
                       </g>
                     )}
                   >
-                    {revenueData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.fill} />
+                    {desktopData.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={`var(--color-chart-${(index % 5) + 1})`}
+                      />
                     ))}
-                    <Label
-                      content={({ viewBox }) => {
-                        if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                          return (
-                            <text
-                              x={viewBox.cx}
-                              y={viewBox.cy}
-                              textAnchor="middle"
-                              dominantBaseline="middle"
-                            >
-                              <tspan
-                                x={viewBox.cx}
-                                y={viewBox.cy}
-                                className="fill-foreground text-3xl font-bold"
-                                style={{ fill: "var(--color-primary-light-1)" }}
-                              >
-                                {revenueData[activeIndex].desktop.toLocaleString()}
-                              </tspan>
-                              <tspan
-                                x={viewBox.cx}
-                                y={(viewBox.cy || 0) + 24}
-                                className="fill-muted-foreground"
-                                style={{ fill: "var(--color-primary-light-2)" }}
-                              >
-                                Visitors
-                              </tspan>
-                            </text>
-                          )
-                        }
-                      }}
-                    />
                   </Pie>
                 </PieChart>
               </ChartContainer>
@@ -436,15 +498,22 @@ export default function Sales() {
               <div className="h-[300px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <RadarChart data={metricsData.performanceMetrics}>
-                    <PolarGrid stroke="var(--color-tertiary-light-1)" />
-                    <PolarAngleAxis dataKey="metric" stroke="var(--color-primary-light-1)" />
-                    <PolarRadiusAxis stroke="var(--color-primary-light-1)" />
+                    <PolarGrid stroke="var(--color-border)" />
+                    <PolarAngleAxis dataKey="metric" stroke="var(--color-foreground)" />
+                    <PolarRadiusAxis stroke="var(--color-foreground)" />
                     <Radar
                       name="Performance"
                       dataKey="value"
                       stroke={COLORS.primary}
                       fill={COLORS.primary}
                       fillOpacity={0.6}
+                    />
+                    <Radar
+                      name="expected"
+                      dataKey="expected"
+                      stroke={COLORS.neutral}
+                      fill={COLORS.neutral}
+                      fillOpacity={0.2}
                     />
                     <Tooltip contentStyle={tooltipStyle} />
                   </RadarChart>
@@ -470,7 +539,7 @@ export default function Sales() {
                     endAngle={0}
                   >
                     <RadialBar
-                      label={{ position: 'insideStart', fill: 'var(--color-primary-light-1)' }}
+                      label={{ position: 'insideStart', fill: 'var(--color-foreground)' }}
                       background
                       dataKey="value"
                     >
@@ -478,9 +547,9 @@ export default function Sales() {
                         <Cell
                           key={`cell-${index}`}
                           fill={[
-                            COLORS.primary,
+                            COLORS.destructive,
                             COLORS.secondary,
-                            COLORS.tertiaryLight,
+                            COLORS.primary,
                           ][index % 3]}
                         />
                       ))}

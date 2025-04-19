@@ -139,7 +139,7 @@ function SidebarProvider({
             } as React.CSSProperties
           }
           className={cn(
-            "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full overflow-x-hidden bg-background dark:bg-background-dark text-foreground dark:text-foreground-dark",
+            "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full overflow-x-hidden bg-background-dark dark:bg-background-dark text-foreground dark:text-foreground-dark",
             className
           )}
           {...props}
@@ -170,7 +170,7 @@ function Sidebar({
       <div
         data-slot="sidebar"
         className={cn(
-          "bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col bg-background dark:bg-background-dark text-foreground dark:text-foreground-dark",
+          "bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col bg-sidebar-background-dark dark:bg-background-dark text-foreground dark:text-foreground-dark",
           className
         )}
         {...props}
@@ -187,7 +187,7 @@ function Sidebar({
           data-sidebar="sidebar"
           data-slot="sidebar"
           data-mobile="true"
-          className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden bg-background dark:bg-background-dark text-foreground dark:text-foreground-dark"
+          className="bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden bg-sidebar-background-dark dark:bg-background-dark text-foreground dark:text-foreground-dark"
           style={
             {
               "--sidebar-width": SIDEBAR_WIDTH_MOBILE,

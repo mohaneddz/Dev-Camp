@@ -99,6 +99,12 @@ const data = {
       icon: IconCloudComputingFilled,
       id: "features",
     },
+    {
+      name: "Market Exchange",
+      url: "#",
+      icon: IconCloudComputingFilled,
+      id: "market",
+    },
   ],
 }
 

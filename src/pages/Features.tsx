@@ -462,7 +462,7 @@ export default function Features() {
 
   return (
     <div className="flex flex-1 flex-col w-full h-full">
-      <div className="h-30 overflow-y-auto px-4 py-6 md:px-6">
+      <div className="h-full overflow-y-auto px-4 py-6 md:px-6">
         <div className="max-w-7xl mx-auto space-y-12 pb-20">
           {/* Header */}
           <div className="flex justify-between items-center">

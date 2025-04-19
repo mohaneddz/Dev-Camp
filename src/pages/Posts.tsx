@@ -166,7 +166,7 @@ export default function Posts() {
                         <span className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium border px-2
                           ${post.status === 'posted' ? 'bg-good/90 text-white' :
                             post.status === 'draft' ? 'bg-tertiary dark:bg-card-light-1 text-white dark:bg-tertiary' :
-                              'bg-secondary-light text-white'}`
+                              'bg-secondary-light-1 text-white'}`
                         }>
                           {post.status}
                         </span>
@@ -238,7 +238,7 @@ export default function Posts() {
                         <span className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium border px-2
                           ${post.status === 'posted' ? 'bg-good/90 text-white' :
                             post.status === 'draft' ? 'bg-tertiary dark:bg-card-light-1 text-white dark:bg-tertiary' :
-                              'bg-secondary-light text-white'}`
+                              'bg-secondary-light-1 text-white'}`
                         }>
                           {post.status}
                         </span>

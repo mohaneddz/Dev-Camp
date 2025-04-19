@@ -51,7 +51,7 @@ const Navbar = async () => {
           <div className="hidden md:flex">
             {!user && (
               <Link href="/login">
-                <button className="text-black dark:text-white hover:text-slate-400 hover:cursor:pointer hover:scale-110">
+                <button className="text-black dark:text-white hover:text-slate-400 hover:cursor-pointer hover:scale-110">
                   Log In
                 </button>
               </Link>

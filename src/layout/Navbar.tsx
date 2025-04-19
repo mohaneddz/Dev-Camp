@@ -22,7 +22,7 @@ const Navbar = async () => {
   } = await supabase.auth.getUser();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-primary/50 dark:bg-primary-dark-1/70">
+    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm bg-gradient-to-b from-primary-dark-3/80 dark:from-primary-light/70 via-transparent-[90%] to-transparent ">
 
       <div className="py-4 px-6 flex justify-between items-center max-w-7xl mx-auto">
         <div className="flex items-center space-x-4">
@@ -36,13 +36,13 @@ const Navbar = async () => {
         </div>
 
         <nav className="hidden md:flex items-center space-x-8">
-          <Link href="/" className="text-sm text-tertiary dark:text-white hover:text-primary dark:hover:text-primary-light transition-colors">
-            Home
+          <Link href="/dashboard" className="text-sm text-tertiary dark:text-white/70 hover:text-primary dark:text-black dark:hover:text-primary-light transition-colors">
+            Dashboard
           </Link>
           <Link href="/about" className="text-sm text-tertiary dark:text-white hover:text-primary dark:hover:text-primary-light transition-colors">
             About
           </Link>
-          <Link href="/princing" className="text-sm text-tertiary dark:text-white hover:text-primary dark:hover:text-primary-light transition-colors">
+          <Link href="/pricing" className="text-sm text-tertiary dark:text-white hover:text-primary dark:hover:text-primary-light transition-colors">
             Pricings
           </Link>
         </nav>
@@ -51,25 +51,25 @@ const Navbar = async () => {
           <div className="hidden md:flex">
             {!user && (
               <Link href="/login">
-                <Button variant="ghost" className="text-tertiary dark:text-white hover:text-primary dark:hover:text-primary-light">
+                <button className="text-black dark:text-white hover:text-slate-400 hover:cursor:pointer hover:scale-110">
                   Log In
-                </Button>
+                </button>
               </Link>
             )}
           </div>
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button size="icon" variant="ghost" className="text-tertiary dark:text-white hover:text-primary dark:hover:text-primary-light">
+                <Button size="icon" variant="ghost" className="text-tertiary hover:text-primary dark:hover:text-primary-light">
                   <User />
                 </Button>
               </DropdownMenuTrigger>
 
               <DropdownMenuContent sideOffset={5} className="bg-background dark:bg-background-dark">
-                <DropdownMenuLabel className="text-tertiary dark:text-white">My Account</DropdownMenuLabel>
+                <DropdownMenuLabel className="text-tertiary dark:text-black">My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link className="cursor-pointer text-tertiary dark:text-white hover:text-primary dark:hover:text-primary-light" href="/profile">
+                  <Link className="cursor-pointer text-tertiary dark:text-black hover:text-primary dark:hover:text-primary-light" href="/profile">
                     Profile
                   </Link>
                 </DropdownMenuItem>

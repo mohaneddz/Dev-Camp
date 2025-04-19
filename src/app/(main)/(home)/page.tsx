@@ -8,6 +8,7 @@ import MidSection from '@/sections/MidSection';
 import MacbookScroll from '@/sections/Laptop'
 import DashboardCTA from '@/sections/DashboardCTA'
 import Globe from '@/sections/Globe'
+import Services from '@/sections/Services'
 
 // This is a Server Component. It fetches the user data on the server and renders the entire page.
 export default async function HomePage() {
@@ -28,6 +29,7 @@ export default async function HomePage() {
       <Hero />
       <MidSection />
       <MacbookScroll />
+      <Services />
       <Globe 
         globeConfig={{
           globeColor: "#1d072e",

@@ -52,6 +52,10 @@
   --color-secondary-dark-2: var(--secondary-dark-2);
   --color-secondary-dark-3: var(--secondary-dark-3);
 
+  --color-neutral-dark-1: var(--neutral-dark-1);
+  --color-neutral-dark-2: var(--neutral-dark-2);
+  --color-neutral-dark-3: var(--neutral-dark-3);
+
   --color-tertiary: var(--tertiary);
   --color-tertiary-light: var(--tertiary-light);
   --color-tertiary-dark: var(--tertiary-dark);

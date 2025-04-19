@@ -29,7 +29,7 @@ const itemVariants = {
 export default function Midsection() {
   return (
     <div className="bg-gray-50 dark:bg-gray-900 pt-20 pb-16 px-4 relative overflow-hidden min-h-screen flex justify-center items-center">
-      <div className="max-w-[90vw] mx-auto w-full">
+      <div className=" w-full max-w-[70rem] mx-auto">
         <motion.div 
           className="text-center mb-12"
           initial="hidden"
@@ -44,7 +44,7 @@ export default function Midsection() {
         </motion.div>
 
         <motion.div 
-          className="flex flex-col md:flex-row items-center justify-between gap-8"
+          className="flex flex-col md:flex-row items-center justify-between gap-8 "
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

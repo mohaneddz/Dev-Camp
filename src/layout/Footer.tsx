@@ -25,11 +25,10 @@ const Footer = () => {
                     Built by the{" "}
                     <a
                         href="#" // Replace with actual link
-                        target="_blank"
                         rel="noopener noreferrer"
                         className="underline hover:text-[--color-primary-light-2]"
                     >
-                        Data Wizards Team
+                        YAW Team
                     </a>.
                     © {new Date().getFullYear()} All rights reserved.
                 </p>

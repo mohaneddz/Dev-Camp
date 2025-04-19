@@ -10,7 +10,7 @@ export default function WorldMapDemo() {
       <div className="max-w-7xl mx-auto text-center">
         <p className="font-bold text-xl md:text-4xl dark:text-white text-black leading-relaxed">
           Remote{" "}
-          <span className="text-neutral-400 dark:text-neutral-500">
+          <span className="text-primary">
             {"Connectivity".split("").map((word, idx) => (
               <motion.span
                 key={idx}

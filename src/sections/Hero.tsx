@@ -11,6 +11,7 @@ import {
     IconCircle,
     IconDiamond
 } from '@tabler/icons-react';
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
     // Refs for the floating shapes
@@ -128,7 +129,7 @@ export default function Home() {
 
             <main className="relative w-full">
                 {/* Hero Section */}
-                <section className="relative px-4 md:px-12 lg:px-24 min-h-[80vh] mt-32 ">
+                <section className="relative px-4 md:px-12 lg:px-24 min-h-[80vh] mt-32 overflow-x-hidden">
                     {/* Floating shapes */}
                     <div
                         ref={triangleRef}
@@ -170,7 +171,7 @@ export default function Home() {
                         <IconDiamond size={24} stroke={1.5} />
                     </div>
 
-                    <div className="flex flex-col lg:flex-row items-center justify-center gap-16 max-w-8xl mx-auto">
+                    <div className="flex flex-col lg:flex-row items-center justify-center gap-16 max-w-8xl mx-auto lg:-mr-40 overflow-x-hidden">
                         {/* Left content with staggered animations */}
                         <motion.div
                             className="lg:w-1/2 relative z-20 lg:max-w-xl h-full flex justify-center flex-col"
@@ -182,7 +183,7 @@ export default function Home() {
                                 variants={itemVariants}
                                 className="text-primary font-medium tracking-wide mb-4"
                             >
-                                Stop Guessing, Start Foreseeing!
+                                Stop Guessing, Start Planning!
                             </motion.h3>
 
                             <motion.h2
@@ -200,18 +201,17 @@ export default function Home() {
                                 Stop relying on intuition, start predicting success. FORSEEN - AI empowers modern DTC brands with cutting-edge AI, transforming data into actionable intelligence. Optimize everything from inventory to marketing, unlock customer insights, and gain a decisive edge. Ready to foresee your future?
                             </motion.p>
 
-                            <motion.button
-                                variants={itemVariants}
+                            <Button
                                 onClick={handleScrollToNextSection}
                                 className="inline-block bg-secondary dark:bg-secondary-dark hover:bg-secondary-dark-1 dark:hover:bg-secondary-dark-2 text-white w-max rounded-md px-8 py-3 font-medium transition-colors duration-300"
                             >
                                 READ MORE
-                            </motion.button>
+                            </Button>
                         </motion.div>
 
                         {/* Right side grid gallery with fade-in animation */}
                         <motion.div
-                            className="lg:w-1/2 mt-12 lg:mt-0 justify-self-right xl:-mr-4"
+                            className="lg:w-1/2 mt-12 lg:mt-0 justify-self-right xl:-mr-16"
                             initial={{ opacity: 0, x: 50 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.6, delay: 0.8 }}
